@@ -1,103 +1,126 @@
 "use client";
 
-import React from "react";
-// Swiper React components & CSS
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules"; // 💡 Autoplay মডিউল যোগ করা হয়েছে
+import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
 export default function Testimonials() {
+  // 💡 State to track which video is currently playing
+  const [activeVideo, setActiveVideo] = useState(null);
+
   const testimonials = [
-    {
-      id: "Mp-BLqapneQ",
-      title: "Client Testimonial 1",
-    },
-    {
-      id: "rhpAwRLvegQ",
-      title: "Client Testimonial 2",
-    },
-    {
-      id: "75qukJQbkHs",
-      title: "Client Testimonial 3",
-    },
-    {
-      id: "vb1KiuZuFnQ",
-      title: "Client Testimonial 4",
-    },
+    { id: "Mp-BLqapneQ", title: "Client Testimonial 1" },
+    { id: "rhpAwRLvegQ", title: "Client Testimonial 2" },
+    { id: "75qukJQbkHs", title: "Client Testimonial 3" },
+    { id: "vb1KiuZuFnQ", title: "Client Testimonial 4" },
   ];
 
   return (
-    <section className="bg-slate-50 py-20 md:py-28 px-4 md:px-8 overflow-hidden font-sans">
-      <div className="max-w-7xl mx-auto">
+    <section className="bg-gradient-to-b from-slate-50 to-slate-100 py-20 md:py-28 px-4 md:px-8 overflow-hidden font-sans">
+      <div className="max-w-[1400px] mx-auto">
         {/* Section Heading */}
-        <div className="text-center mb-10 md:mb-16">
-          <h2 className="font-['Times_New_Roman',_sans-serif] text-3xl md:text-[40px] font-bold text-[#00063D] mb-4">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-['Times_New_Roman',_sans-serif] text-3xl md:text-4xl lg:text-5xl font-bold text-[#00063D] mb-5 tracking-tight">
             What Our Clients Say About Presswayy
           </h2>
-          <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto">
+          <p className="text-slate-500 text-sm md:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
             Hear directly from our partners about how our AI solutions have
             accelerated their growth and transformed their workflow.
           </p>
         </div>
 
         {/* Videos Slider Container */}
-        <div className="max-w-[1200px] mx-auto relative px-2 md:px-4">
+        <div className="relative px-2 md:px-6">
           <Swiper
-            modules={[Pagination, Autoplay]} // 💡 Autoplay মডিউল এখানে অ্যাড করা হয়েছে
-            spaceBetween={20}
+            modules={[Pagination]}
             pagination={{
               clickable: true,
               dynamicBullets: true,
             }}
-            // 🚀 Autoplay Configuration
-            autoplay={{
-              delay: 3500, 
-              disableOnInteraction: false, 
-              pauseOnMouseEnter: true,
-            }}
-            loop={true} 
+            loop={false} // Click-to-play এর ক্ষেত্রে loop=false রাখা ভালো
             grabCursor={true}
             breakpoints={{
               320: {
-                slidesPerView: 1.1,
+                slidesPerView: 1.15,
                 centeredSlides: true,
-                spaceBetween: 15,
+                spaceBetween: 16,
               },
-              640: {
-                slidesPerView: 2.2,
-                centeredSlides: false,
+              480: {
+                slidesPerView: 1.5,
+                centeredSlides: true,
                 spaceBetween: 20,
               },
-              1024: { slidesPerView: 4, spaceBetween: 24 },
+              768: {
+                slidesPerView: 2.5,
+                centeredSlides: false,
+                spaceBetween: 24,
+              },
+              1024: {
+                slidesPerView: 3.5,
+                centeredSlides: false,
+                spaceBetween: 30,
+              },
+              1280: {
+                slidesPerView: 4,
+                centeredSlides: false,
+                spaceBetween: 32,
+              },
             }}
-            className="w-full pb-14 testimonials-swiper"
+            className="w-full pb-16 pt-4 testimonials-swiper"
           >
             {testimonials.map((video, index) => (
               <SwiperSlide
                 key={index}
-                className="flex justify-center pb-4 pt-2"
+                className="flex justify-center pb-8 pt-2 transition-transform"
               >
-                <div
-                  className="w-full max-w-[280px] mx-auto rounded-xl overflow-hidden bg-gray-200 relative group transition-all duration-300 shadow-md hover:shadow-xl border border-gray-300"
-                  style={{ aspectRatio: "9/16" }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200 animate-pulse -z-10 flex items-center justify-center">
-                    <span className="text-gray-500 text-sm font-medium">
-                      Loading...
-                    </span>
-                  </div>
+                <div className="w-full max-w-[280px] sm:max-w-[300px] mx-auto rounded-2xl overflow-hidden bg-slate-900 relative group transition-all duration-300 shadow-lg hover:shadow-2xl hover:-translate-y-2 border border-slate-200/80 aspect-[9/16] cursor-pointer">
+                  {activeVideo === video.id ? (
+                    // 🎥 The actual iframe (Loads ONLY when clicked)
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1&controls=1`}
+                      title={video.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl bg-black"
+                    ></iframe>
+                  ) : (
+                    // 🖼️ The Thumbnail Cover (Fast loading & Swipe friendly)
+                    <div
+                      className="absolute inset-0 w-full h-full"
+                      onClick={() => setActiveVideo(video.id)}
+                    >
+                      {/* Thumbnail Image */}
+                      <img
+                        src={`https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`}
+                        alt={video.title}
+                        className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300"
+                      />
 
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${video.id}?rel=0&modestbranding=1&controls=1`}
-                    title={video.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="absolute top-0 left-0 w-full h-full object-cover"
-                  ></iframe>
+                      {/* Dark Gradient Overlay for better UI */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+
+                      {/* Custom Modern Play Button */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(0,0,0,0.2)]">
+                          <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center shadow-lg">
+                            {/* SVG Play Icon */}
+                            <svg
+                              className="w-5 h-5 text-white ml-1"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </SwiperSlide>
             ))}
@@ -107,20 +130,20 @@ export default function Testimonials() {
 
       <style>{`
         .testimonials-swiper {
-          padding-bottom: 60px !important; 
-          padding-top: 10px !important;
+          padding-bottom: 70px !important; 
         }
         .testimonials-swiper .swiper-pagination-bullet {
-          width: 8px;
-          height: 8px;
-          background-color: #cbd5e1;
-          opacity: 0.7;
+          width: 10px;
+          height: 10px;
+          background-color: #94a3b8;
+          opacity: 0.5;
           transition: all 0.3s ease;
         }
         .testimonials-swiper .swiper-pagination-bullet-active {
           background-color: #ff4e33 !important;
           opacity: 1;
-          transform: scale(1.3);
+          transform: scale(1.4);
+          box-shadow: 0 4px 10px rgba(255, 78, 51, 0.3);
         }
       `}</style>
     </section>

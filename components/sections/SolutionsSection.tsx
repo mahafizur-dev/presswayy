@@ -71,7 +71,7 @@ export default function SolutionsSection() {
           {/* Image */}
           <div className="w-full max-w-5xl mx-auto flex justify-center items-center px-2 sm:px-4 md:px-8">
             <Image
-              src="/solution.png"
+              src={"https://res.cloudinary.com/drchxbdit/image/upload/v1774606339/solution_wuwsem.png"}
               alt="Solution Presentation"
               width={1200}
               height={800}

@@ -33,13 +33,13 @@ const ResourcesSection = dynamic(
   () => import("@/components/sections/ResourcesSection"),
 );
 const FAQ = dynamic(() => import("@/components/sections/FAQ"));
+const NotunDinerPothe = dynamic(
+  () => import("@/components/sections/NotunDinerPothe"),
+);
 
 export default function Home() {
   return (
     <main className="flex flex-col w-full overflow-hidden">
-      {/* 💡 FIX: onOpenForm প্রপসগুলো রিমুভ করা হয়েছে */}
-
-      {/* Hero Section & Initial Logos */}
       <Hero />
       <TrustedCompanies />
 
@@ -54,6 +54,7 @@ export default function Home() {
       <CustomerStories />
       <Platform />
       <ResourcesSection />
+      <NotunDinerPothe />
       <FAQ />
     </main>
   );
