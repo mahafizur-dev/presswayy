@@ -7,8 +7,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 export default function Testimonials() {
-  // 💡 State to track which video is currently playing
-  const [activeVideo, setActiveVideo] = useState(null);
+  // 💡 TypeScript Error Fixed: Added <string | null>
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const testimonials = [
     { id: "Mp-BLqapneQ", title: "Client Testimonial 1" },
@@ -39,7 +39,7 @@ export default function Testimonials() {
               clickable: true,
               dynamicBullets: true,
             }}
-            loop={false} // Click-to-play এর ক্ষেত্রে loop=false রাখা ভালো
+            loop={false}
             grabCursor={true}
             breakpoints={{
               320: {
