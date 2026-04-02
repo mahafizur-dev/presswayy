@@ -6,22 +6,29 @@ export default function VideoExplanation() {
   const videoId = "btGLCgZlwCA";
 
   return (
-    <section className="bg-white py-10 md:py-12 px-4 sm:px-6">
+    <section className="bg-white py-20 md:py-28 px-4 sm:px-6">
+      {" "}
+      {/* 💡 Mobile py-10 -> py-20 */}
       <div className="max-w-7xl mx-auto text-center">
         {/* Section Heading */}
-        <h2 className="text-[28px] md:text-[36px] font-['Times_New_Roman',_sans-serif] font-semibold text-[#00063D] leading-[1.2] md:leading-tight mb-3 md:mb-4 tracking-tight">
-          Presswayy Explained Simply
-        </h2>
+        <div className="mb-10 md:mb-16">
+          <h2 className="text-[30px] md:text-[48px] font-['Times_New_Roman',_sans-serif] font-bold text-[#00063D] leading-[1.2] md:leading-tight mb-4 tracking-tight">
+            Presswayy Explained Simply
+          </h2>
 
-        {/* Subheading */}
-        <p className="text-[16px] md:text-[18px] text-[#324578] mb-8 md:mb-12 font-sans font-medium leading-[1.5] md:leading-normal">
-          We built Presswayy keeping{" "}
-          <span className="font-bold text-[#0d1c44]">you</span> in mind.
-        </p>
+          {/* Subheading */}
+          <p className="text-[17px] md:text-[20px] text-slate-600 mb-0 font-sans font-medium leading-[1.5] md:leading-normal">
+            We built Presswayy keeping{" "}
+            <span className="font-bold text-[#FF5733]">you</span> in mind.
+          </p>
+        </div>
 
-        {/* Video Container */}
-        <div className="max-w-5xl mx-auto">
-          <div className="relative w-full aspect-video overflow-hidden rounded-xl md:rounded-none border-[4px] md:border-[10px] border-white ring-1 ring-gray-200 bg-gray-100">
+        {/* Video Container Area */}
+        <div className="max-w-5xl mx-auto px-2 sm:px-0">
+          <div className="relative w-full aspect-video overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl border-[4px] md:border-[12px] border-white ring-1 ring-slate-100 bg-slate-50">
+            {/* 💡 Video Player with subtle overlay to match branding */}
+            <div className="absolute inset-0 bg-slate-900/5 pointer-events-none z-10"></div>
+
             {/* YouTube Embed Iframe */}
             <iframe
               width="100%"
@@ -31,8 +38,15 @@ export default function VideoExplanation() {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className="absolute top-0 left-0 w-full h-full"
+              className="absolute top-0 left-0 w-full h-full z-0"
             ></iframe>
+          </div>
+
+          {/* 💡 Optional: Mobile-only caption for extra spacing/context */}
+          <div className="mt-8 md:hidden">
+            <p className="text-slate-400 text-xs font-semibold tracking-widest uppercase">
+              How Presswayy Works
+            </p>
           </div>
         </div>
       </div>
