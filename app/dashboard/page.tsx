@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
@@ -12,7 +12,7 @@ import CalendarPanel from "@/components/portal/CalendarPanel";
 
 import "./portal.css";
 
-export default function ClientPortalPage() {
+function DashboardContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -48,12 +48,12 @@ export default function ClientPortalPage() {
 
     const payStatus = searchParams.get("payment");
 
-    // 💡 Defer state update to avoid cascading render error
+    // Defer state update to avoid cascading render error
     const timeoutId = setTimeout(() => {
       initializeData(payStatus);
     }, 0);
 
-    // 💡 Handle Toasts and URL Cleaning
+    // Handle Toasts and URL Cleaning
     if (payStatus === "success") {
       toast.success("Payment Successful! Your account is now active.", {
         id: "pay-success",
@@ -66,7 +66,7 @@ export default function ClientPortalPage() {
 
     return () => clearTimeout(timeoutId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMounted, searchParams, pathname, initializeData]); // router removed from dependency to avoid extra triggers
+  }, [isMounted, searchParams, pathname, initializeData]);
 
   const onLogoutClick = () => {
     logout();
@@ -260,5 +260,20 @@ export default function ClientPortalPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+
+export default function ClientPortalPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-slate-50 text-slate-500">
+          Loading Dashboard...
+        </div>
+      }
+    >
+      <DashboardContent />
+    </Suspense>
   );
 }
