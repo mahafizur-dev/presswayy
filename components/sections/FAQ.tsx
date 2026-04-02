@@ -43,14 +43,14 @@ export default function FAQ() {
   };
 
   return (
-    <section className="bg-[#fcfcff] py-12 sm:py-16 md:py-20 px-4 sm:px-6">
+    <section className="bg-[#fcfcff] py-10 sm:py-16 md:py-20 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-[26px] sm:text-[34px] md:text-[44px] font-bold text-[#0d1c44] mb-3 font-serif leading-tight">
+        <div className="text-center mb-6 sm:mb-12 md:mb-16">
+          <h2 className="text-[24px] sm:text-[34px] md:text-[44px] font-bold text-[#0d1c44] mb-3 font-serif leading-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-[14px] sm:text-[16px] md:text-[18px] text-[#324578] font-medium opacity-80 leading-relaxed">
+          <p className="text-[16px] sm:text-[16px] md:text-[18px] text-[#324578] font-medium opacity-80 leading-[1.5] md:leading-relaxed">
             Get answers to common questions about Presswayy
           </p>
         </div>
@@ -73,7 +73,7 @@ export default function FAQ() {
                   onClick={() => toggleAccordion(index)}
                   className="w-full flex items-start justify-between gap-3 p-4 sm:p-5 md:p-6 text-left"
                 >
-                  <span className="text-[15px] sm:text-[17px] md:text-[19px] font-bold text-[#0d1c44] font-sans leading-snug">
+                  <span className="text-[16px] sm:text-[17px] md:text-[19px] font-bold text-[#0d1c44] font-sans leading-snug">
                     {faq.question}
                   </span>
                   <span
@@ -106,7 +106,7 @@ export default function FAQ() {
                       : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="p-4 sm:p-5 md:p-6 text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed text-[#324578] font-normal font-sans">
+                  <div className="p-4 sm:p-5 md:p-6 text-[15px] sm:text-[15px] md:text-[16px] leading-[1.5] md:leading-relaxed text-[#324578] font-normal font-sans">
                     <p
                       dangerouslySetInnerHTML={{
                         __html: faq.answer.replace(

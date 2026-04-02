@@ -15,7 +15,7 @@ export default function ResourcesSection() {
 
   return (
     <div id="resources" className="min-h-screen w-full">
-      <section className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden py-16 sm:py-24">
+      <section className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden py-12 sm:py-24">
         <div
           className="absolute inset-0 pointer-events-none z-0 opacity-40"
           style={{
@@ -26,7 +26,7 @@ export default function ResourcesSection() {
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-8 items-center">
             {/* Left Column: Video Content Area */}
             <div
               className={`w-full flex justify-center lg:justify-start transition-all duration-1000 ease-out ${
@@ -50,29 +50,29 @@ export default function ResourcesSection() {
             </div>
 
             <div
-              className={`flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 transition-all duration-1000 delay-300 ease-out ${
+              className={`flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 sm:space-y-8 transition-all duration-1000 delay-300 ease-out ${
                 mounted
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
               }`}
             >
-              <h1 className="font-['Times_New_Roman',_sans-serif] text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0B1221] tracking-tight leading-[1.15]">
+              <h1 className="font-['Times_New_Roman',_sans-serif] text-[28px] sm:text-5xl lg:text-6xl font-bold text-[#0B1221] tracking-tight leading-[1.2] sm:leading-[1.15]">
                 Resources to help you automate faster and grow smarter.
               </h1>
 
-              <p className="text-lg sm:text-xl text-slate-600 max-w-2xl leading-relaxed">
+              <p className="text-[16px] sm:text-xl text-slate-600 max-w-2xl leading-[1.5] sm:leading-relaxed">
                 Explore our expert guides, video tutorials, templates, and tools
                 everything you need to launch, automate, and scale your business
                 with AI.
               </p>
 
-              <div className="pt-2">
+              <div className="pt-2 w-full sm:w-auto px-2 sm:px-0">
                 {/* 💡 FIX: Button 1 Updated */}
                 <button
                   onClick={() =>
                     window.dispatchEvent(new Event("openAuthModal"))
                   }
-                  className="px-8 py-3.5 bg-[#FF5733] hover:bg-[#E84E2D] text-white text-lg font-semibold rounded-md transition-all duration-300 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 bg-[#FF5733] hover:bg-[#E84E2D] text-white text-[16px] sm:text-lg font-semibold rounded-md transition-all duration-300 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5"
                 >
                   Get Started
                 </button>
@@ -82,7 +82,7 @@ export default function ResourcesSection() {
         </div>
       </section>
 
-      <section className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden py-16 sm:py-24">
+      <section className="relative min-h-screen bg-white flex items-center justify-center overflow-hidden py-12 sm:py-24">
         {/* Background Grid Pattern */}
         <div
           className="absolute inset-0 pointer-events-none z-0 opacity-40"
@@ -94,40 +94,38 @@ export default function ResourcesSection() {
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-8 items-center">
             {/* Left Column: Text Content Area */}
             <div
-              className={`flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 transition-all duration-1000 ease-out ${
+              className={`flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 sm:space-y-8 transition-all duration-1000 ease-out ${
                 mounted
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
               }`}
             >
-              <h2 className="font-['Times_New_Roman',_sans-serif] text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0B1221] tracking-tight leading-[1.15]">
+              <h2 className="font-['Times_New_Roman',_sans-serif] text-[28px] sm:text-5xl lg:text-6xl font-bold text-[#0B1221] tracking-tight leading-[1.2] sm:leading-[1.15]">
                 Seamless integration with your existing workflow.
               </h2>
 
-              <p className="text-lg sm:text-xl text-slate-600 max-w-2xl leading-relaxed">
+              <p className="text-[16px] sm:text-xl text-slate-600 max-w-2xl leading-[1.5] sm:leading-relaxed">
                 Connect effortlessly with the tools you already use. Our
                 platform is designed to fit right into your ecosystem, ensuring
                 smooth data flow and uninterrupted productivity without any
                 complex setups.
               </p>
 
-              <div className="pt-2">
-             
+              <div className="pt-2 w-full sm:w-auto px-2 sm:px-0">
                 <button
                   onClick={() =>
                     window.dispatchEvent(new Event("openAuthModal"))
                   }
-                  className="px-8 py-3.5 bg-[#FF5733] hover:bg-[#E84E2D] text-white text-lg font-semibold rounded-md transition-all duration-300 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5"
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3.5 bg-[#FF5733] hover:bg-[#E84E2D] text-white text-[16px] sm:text-lg font-semibold rounded-md transition-all duration-300 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5"
                 >
                   Get Started
                 </button>
               </div>
             </div>
 
-        
             <div
               className={`w-full flex justify-center lg:justify-end order-first lg:order-last transition-all duration-1000 delay-300 ease-out ${
                 mounted
@@ -165,7 +163,7 @@ export default function ResourcesSection() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
           <h2
-            className={`font-['Times_New_Roman',_sans-serif] text-3xl sm:text-3xl lg:text-5xl font-serif font-bold text-[#0B1221] tracking-tight leading-[1.1] mb-4 transition-all duration-1000 ease-out ${
+            className={`font-['Times_New_Roman',_sans-serif] text-[28px] sm:text-3xl lg:text-5xl font-serif font-bold text-[#0B1221] tracking-tight leading-[1.2] sm:leading-[1.1] mb-3 sm:mb-4 transition-all duration-1000 ease-out ${
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -173,7 +171,7 @@ export default function ResourcesSection() {
           </h2>
 
           <p
-            className={`text-lg sm:text-xl lg:text-2xl text-[#0B1221] max-w-3xl mx-auto mb-10 transition-all duration-1000 delay-300 ease-out ${
+            className={`text-[16px] sm:text-xl lg:text-2xl text-[#0B1221] max-w-3xl mx-auto mb-8 sm:mb-10 leading-[1.5] sm:leading-normal transition-all duration-1000 delay-300 ease-out ${
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -182,14 +180,14 @@ export default function ResourcesSection() {
           </p>
 
           <div
-            className={`transition-all duration-1000 delay-500 ease-out ${
+            className={`w-full sm:w-auto px-2 sm:px-0 transition-all duration-1000 delay-500 ease-out ${
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             {/* 💡 FIX: Button 3 Updated */}
             <button
               onClick={() => window.dispatchEvent(new Event("openAuthModal"))}
-              className="px-8 py-3.5 bg-[#FF5733] hover:bg-[#E84E2D] text-white text-lg font-semibold rounded-md transition-all duration-300 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3.5 bg-[#FF5733] hover:bg-[#E84E2D] text-white text-[16px] sm:text-lg font-semibold rounded-md transition-all duration-300 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5"
             >
               Get Started
             </button>

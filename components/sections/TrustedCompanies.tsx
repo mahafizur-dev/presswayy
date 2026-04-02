@@ -52,7 +52,7 @@ export default function TrustedCompanies() {
   ];
 
   return (
-    <section className="pt-4 pb-8 md:pt-8 md:pb-12 bg-white overflow-hidden">
+    <section className="pt-8 pb-10 md:pt-8 md:pb-12 bg-white overflow-hidden">
       <style>{`
         @keyframes logoScroll {
           0%   { transform: translateX(0); }
@@ -72,25 +72,33 @@ export default function TrustedCompanies() {
           -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
         .logo-item {
-          width: 180px;
-          height: 80px;
+          width: 140px;
+          height: 60px;
           flex-shrink: 0;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 8px 20px;
+          padding: 8px 12px;
           transition: transform 0.2s ease, opacity 0.2s ease;
         }
         .logo-item:hover {
           transform: scale(1.05);
           opacity: 0.75;
         }
+
+        /* Desktop o Tablet er jonno ager size thik rakha hoyeche */
+        @media (min-width: 768px) {
+          .logo-item {
+            width: 180px;
+            height: 80px;
+            padding: 8px 20px;
+          }
+        }
       `}</style>
 
-      {/* Heading */}
-      <div className="max-w-7xl mx-auto px-6 mb-8 text-center">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8 text-center">
         <h2
-          className="text-[32px] font-semibold text-[#00063D] tracking-tight"
+          className="text-[24px] md:text-[30px] font-semibold text-[#00063D] tracking-tight leading-[1.2] md:leading-normal"
           style={{ fontFamily: '"Times New Roman", Sans-serif' }}
         >
           Companies that trust us

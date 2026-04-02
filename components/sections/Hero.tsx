@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/effect-fade";
 
@@ -63,20 +64,20 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="bg-[#F2F2F3] pt-28 md:pt-36 lg:pt-40 pb-16 min-h-screen flex flex-col items-center overflow-hidden"
+      className="bg-[#F2F2F3] pt-24 md:pt-36 lg:pt-40 pb-12 md:pb-16 min-h-screen flex flex-col items-center overflow-hidden"
     >
       <div
         ref={textRef}
-        className="max-w-4xl mx-auto flex flex-col items-center px-6 md:px-8 text-center"
+        className="max-w-4xl mx-auto flex flex-col items-center px-4 sm:px-6 md:px-8 text-center"
       >
         {/* Top Text Banner */}
-        <div className="inline-block bg-white px-4 py-2 mb-8 text-[12px] md:text-[13px] text-[#0d1c44] font-medium leading-relaxed max-w-[550px] rounded-sm shadow-sm border border-gray-100">
+        <div className="inline-block bg-white px-3 md:px-4 py-2 mb-6 md:mb-8 text-[13px] md:text-[13px] text-[#0d1c44] font-medium leading-relaxed max-w-[550px] rounded-sm shadow-sm border border-gray-100">
           {bannerText}
         </div>
 
         {/* Main Heading */}
         <h1
-          className="text-4xl md:text-5xl lg:text-[60px] text-[#00063D] font-semibold leading-[1.1] tracking-tight mb-6"
+          className="text-[32px] md:text-5xl lg:text-[60px] text-[#00063D] font-semibold leading-[1.2] md:leading-[1.1] tracking-tight mb-5 md:mb-6"
           style={{ fontFamily: '"Times New Roman", Times, serif' }} // Fallback fonts added
         >
           Your business inbox, empowered
@@ -84,15 +85,15 @@ export default function Hero() {
         </h1>
 
         {/* Subheading */}
-        <p className="text-[17px] md:text-[18px] text-[#0d1c44] mb-10 max-w-2xl font-sans font-medium opacity-80">
+        <p className="text-[16px] md:text-[18px] text-[#0d1c44] mb-8 md:mb-10 max-w-2xl font-sans font-medium opacity-80 leading-[1.5] md:leading-normal">
           Works with Facebook pages, Instagram pages & soon with WhatsApp.
         </p>
 
         {/* CTA Button */}
-        <div className="mb-16 relative z-10">
+        <div className="mb-12 md:mb-16 relative z-10 w-full sm:w-auto px-2 sm:px-0">
           <button
             onClick={() => window.dispatchEvent(new Event("openAuthModal"))}
-            className="inline-block bg-[#ff4e33] text-white px-8 py-3.5 text-[16px] font-medium hover:bg-[#e63e26] transition-colors duration-300 rounded shadow-md hover:shadow-lg"
+            className="inline-block w-full sm:w-auto bg-[#ff4e33] text-white px-6 md:px-8 py-3.5 text-[16px] font-medium hover:bg-[#e63e26] transition-colors duration-300 rounded shadow-md hover:shadow-lg"
           >
             Connect with Presswayy
           </button>
@@ -120,7 +121,7 @@ export default function Hero() {
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                   className="object-cover object-center"
-                  priority={image.id === 1} 
+                  priority={image.id === 1}
                 />
               </SwiperSlide>
             ))}

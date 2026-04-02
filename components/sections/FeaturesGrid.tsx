@@ -327,7 +327,7 @@ export default function FeaturesGrid() {
       `}</style>
 
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-4 md:gap-5">
           {features.map((feature) => (
             <div
               key={feature.id}
@@ -336,7 +336,7 @@ export default function FeaturesGrid() {
             >
               {/* Title */}
               <div className="px-4 sm:px-5 pt-4 sm:pt-5 pb-1">
-                <h3 className="text-[15px] sm:text-[17px] md:text-[20px] font-serif font-bold text-[#0d1c44] leading-tight tracking-tight">
+                <h3 className="text-[16px] sm:text-[17px] md:text-[20px] font-serif font-bold text-[#0d1c44] leading-tight tracking-tight">
                   {feature.title}
                 </h3>
               </div>
@@ -350,7 +350,7 @@ export default function FeaturesGrid() {
 
               {/* Description + Arrow */}
               <div className="px-4 sm:px-5 pt-3 pb-4 sm:pb-5 flex justify-between items-end gap-2">
-                <p className="text-[11.5px] sm:text-[12.5px] md:text-[13.5px] font-sans font-medium text-[#0d1c44] leading-snug opacity-90">
+                <p className="text-[13px] sm:text-[12.5px] md:text-[13.5px] font-sans font-medium text-[#0d1c44] leading-[1.4] sm:leading-snug opacity-90">
                   {feature.desc}
                 </p>
                 <div className="shrink-0 text-[#0d1c44]">
