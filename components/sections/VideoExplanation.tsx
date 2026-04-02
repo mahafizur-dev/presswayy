@@ -3,8 +3,8 @@
 import React from "react";
 
 export default function VideoExplanation() {
-  // আপনার ভিডিওর আইডি (ইউটিউব লিংক থেকে পাওয়া)
-  const videoId = "btGLCgZlwCA"; // উদাহরণ হিসেবে একটি আইডি দেওয়া হয়েছে, আপনার ভিডিও আইডি এখানে বসাবেন
+
+  const videoId = "btGLCgZlwCA"; 
 
   return (
     <section className="bg-white py-8 md:py-12 px-6">

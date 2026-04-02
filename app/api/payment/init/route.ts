@@ -67,7 +67,7 @@ export async function POST(req: Request) {
       ship_city: "Dhaka",
       ship_postcode: "1000",
       ship_country: "Bangladesh",
-      value_a: phone, // 💡 Custom value হিসেবে ফোন নম্বর পাঠানো হলো
+      value_a: phone, 
     };
 
     const data = new URLSearchParams(payload);
@@ -87,7 +87,6 @@ export async function POST(req: Request) {
     const apiResponse = await response.json();
 
     if (apiResponse?.status === "SUCCESS" && apiResponse?.GatewayPageURL) {
-      // 💡 ফ্রন্টএন্ডের জন্য success: true পাঠানো হলো
       return NextResponse.json({
         success: true,
         url: apiResponse.GatewayPageURL,

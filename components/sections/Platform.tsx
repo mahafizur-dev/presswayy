@@ -50,7 +50,7 @@ export default function Platform() {
           className="font-serif-custom text-center font-semibold text-[#0a1128] tracking-tight leading-[1.3] w-full px-2
           text-[28px] sm:text-[38px] md:text-[50px] lg:text-[60px]"
         >
-          {/* Desktop: 3 explicit lines */}
+     
           <span className="hidden md:block">
             Presswayy is the AI platform that helps you
           </span>
@@ -68,7 +68,7 @@ export default function Platform() {
           </span>
           <span className="hidden md:block">all without hiring.</span>
 
-          {/* Mobile: single flow */}
+         
           <span className="md:hidden">
             Presswayy is the AI platform that helps you automate{" "}
             <span
@@ -89,7 +89,7 @@ export default function Platform() {
           </span>
         </h1>
 
-        {/* Subheadline */}
+    
         <p className="mt-6 sm:mt-8 text-[14px] sm:text-base md:text-lg lg:text-xl text-[#1e293b] max-w-xs sm:max-w-xl md:max-w-2xl font-medium leading-relaxed px-2">
           Scale faster, support smarter, and automate everything from first
           message to final sale with Presswayy all-in-one AI platform.

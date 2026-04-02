@@ -6,21 +6,20 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // শুধুমাত্র যে ভেরিয়েবলগুলো নিচে SSLCommerz বা লজিকের জন্য দরকার, সেগুলোই বের করবো
+  
     const { firstName, email, phone, address, plan, billingCycle } = body;
 
-    // ১. ডাইনামিক এমাউন্ট নির্ধারণ করা
+
     const amount = billingCycle === "yearly" ? 29500 : 3000;
 
-    // ইমেইলের জন্য পুরো body টাই payload-এ পাঠিয়ে দিচ্ছি (এতে businessName, courier সব আছে)
     const payload = { ...body, amount };
 
-    // ২. ব্যাকগ্রাউন্ডে ইমেইল পাঠানো (Asynchronous)
+    
     sendLeadEmail(payload).catch((error) => {
       console.error("Failed to send lead email:", error);
     });
 
-    // ৩. SSLCommerz পেমেন্ট ইনিশিয়ালাইজেশন
+ 
     const store_id = process.env.SSL_STORE_ID;
     const store_passwd = process.env.SSL_STORE_PASSWORD;
     const is_live = process.env.SSL_IS_LIVE === "true"; // .env থেকে লাইভ স্ট্যাটাস নিবে

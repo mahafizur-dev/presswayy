@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const N8N_WEBHOOK_URL =
       "https://server.presswayy.com/webhook/schedule-meeting";
 
-    // n8n এ ডেটা পাঠানো
+
     await fetch(N8N_WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

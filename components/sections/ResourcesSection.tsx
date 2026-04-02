@@ -115,7 +115,7 @@ export default function ResourcesSection() {
               </p>
 
               <div className="pt-2">
-                {/* 💡 FIX: Button 2 Updated */}
+             
                 <button
                   onClick={() =>
                     window.dispatchEvent(new Event("openAuthModal"))
@@ -127,8 +127,7 @@ export default function ResourcesSection() {
               </div>
             </div>
 
-            {/* Right Column: Video Content Area */}
-            {/* Note: 'order-first lg:order-last' ensures video stays below text on mobile devices */}
+        
             <div
               className={`w-full flex justify-center lg:justify-end order-first lg:order-last transition-all duration-1000 delay-300 ease-out ${
                 mounted

@@ -234,7 +234,7 @@ export default function PricingSection() {
               </div>
             </div>
 
-            {/* 💡 FIX: CTA Button (Here was the culprit!) */}
+         
             <button
               onClick={() => window.dispatchEvent(new Event("openAuthModal"))}
               className="w-full py-[9.5px] bg-[#F36525] hover:bg-[#C24E18] text-white font-['Sora',sans-serif] font-bold text-[14px] rounded-[9px] flex items-center justify-center gap-1.5 transition-all duration-200 active:scale-[.98] hover:shadow-lg border-none cursor-pointer"

@@ -22,7 +22,6 @@ import {
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-// --- Reusable UI Components ---
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon: React.ElementType;

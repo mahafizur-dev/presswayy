@@ -8,7 +8,7 @@ interface CalendarPanelProps {
   onSuccess: (desc: string) => void;
   isCompleted: boolean;
   meetingDesc: string;
-  meetingStatus?: string; // "Pending" | "Scheduled" | "Approved"
+  meetingStatus?: string;
 }
 
 export default function CalendarPanel({
@@ -22,15 +22,13 @@ export default function CalendarPanel({
   const [calYear, setCalYear] = useState(new Date().getFullYear());
   const [calDay, setCalDay] = useState<number | null>(null);
   const [calTime, setCalTime] = useState<string>("");
-
-  // 💡 FIX 1: API Loading State যুক্ত করা হলো (Double Click Prevention)
   const [isLoading, setIsLoading] = useState(false);
 
   const handleScheduleMeeting = async (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!calDay || !calTime || isLoading) return;
 
-    setIsLoading(true); // 💡 লোডিং শুরু
+    setIsLoading(true);
     try {
       const selectedDate = `${calDay} ${MONTHS[calMonth]} ${calYear}`;
       const res = await fetch("/api/meeting", {
@@ -53,7 +51,7 @@ export default function CalendarPanel({
       console.error(error);
       toast.error("Network Error! Please check your connection.");
     } finally {
-      setIsLoading(false); // 💡 লোডিং শেষ
+      setIsLoading(false);
     }
   };
 
@@ -61,7 +59,6 @@ export default function CalendarPanel({
   const firstDay = new Date(calYear, calMonth, 1).getDay();
   const today = new Date();
 
-  // --- Meeting Booked / Requested View ---
   if (isCompleted) {
     const isApproved = meetingStatus === "Approved";
 
@@ -85,7 +82,6 @@ export default function CalendarPanel({
               : "bg-orange-50 text-[#ff4e33] border border-orange-100"
           }`}
         >
-          {/* 💡 Fallback text added in case meetingDesc is empty during transition */}
           {meetingDesc || "Processing your request..."}
         </div>
 
@@ -98,7 +94,6 @@ export default function CalendarPanel({
     );
   }
 
-  // --- Calendar Selection View ---
   return (
     <div className="cal-panel" onClick={(e) => e.stopPropagation()}>
       <div className="cal-head">
@@ -191,7 +186,6 @@ export default function CalendarPanel({
           ))}
         </select>
 
-        {/* 💡 FIX 2: Button state dynamically handles loading & disabled states */}
         <button
           className={`cal-confirm-btn ${calDay && calTime && !isLoading ? "active" : ""}`}
           disabled={!calDay || !calTime || isLoading}

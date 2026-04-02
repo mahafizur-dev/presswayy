@@ -45,22 +45,19 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   // 1. Check Auth & Fetch User Data (Custom Auth)
   useEffect(() => {
     const checkAuthAndFetchProfile = () => {
-      // LocalStorage থেকে ইউজারের নাম চেক করা
+      
       const storedName = localStorage.getItem("user_name");
 
       if (!storedName) {
-        // যদি ইউজার লগইন করা না থাকে, তাহলে সরাসরি হোমপেজে পাঠিয়ে দেওয়া হবে
         window.location.href = "/";
         return;
       }
 
-      // ইউজার থাকলে তার প্রোফাইল সেট করা হবে
       setUserFullName(storedName);
       setUserInitial(storedName.charAt(0).toUpperCase());
-      setIsAuthLoading(false); // লোডিং শেষ, ড্যাশবোর্ড দেখাও
+      setIsAuthLoading(false); 
     };
 
-    // হালকা একটু ডিলে দিচ্ছি যেন UI ফ্লিকার না করে
     const timer = setTimeout(() => {
       checkAuthAndFetchProfile();
     }, 300);

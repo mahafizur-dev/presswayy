@@ -39,7 +39,6 @@ export default function LiveDemo() {
           </div>
         </div>
 
-        {/* Bottom Small Detail */}
       </div>
     </section>
   );

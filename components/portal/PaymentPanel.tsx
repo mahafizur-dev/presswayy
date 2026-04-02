@@ -19,7 +19,6 @@ export default function PaymentPanel({
   const handlePayment = async (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    // 💡 ডাবল ক্লিক প্রোটেকশন
     if (isPaying) return;
     setIsPaying(true);
 
@@ -34,14 +33,13 @@ export default function PaymentPanel({
         }),
       });
 
-      // 💡 FIX 1: API ক্র্যাশ করলে বা 404 আসলে আগেই এরর থ্রো করবে (HTML পার্স করবে না)
+
       if (!res.ok) {
         throw new Error(`Server returned status: ${res.status}`);
       }
 
       const data = await res.json();
 
-      // 💡 FIX 2: আমাদের নতুন API স্ট্রাকচার অনুযায়ী success এবং url চেক করা হচ্ছে
       if (data.success && data.url) {
         window.location.href = data.url;
       } else {
@@ -59,7 +57,6 @@ export default function PaymentPanel({
   };
 
   return (
-    // 💡 FIX 3: মূল কন্টেইনারে stopPropagation দেওয়া হলো, যাতে ক্লিক করলে অ্যাকর্ডিয়ন বন্ধ না হয়ে যায়
     <div className="ssl-panel" onClick={(e) => e.stopPropagation()}>
       <div className="ssl-head">
         <div className="ssl-head-title">

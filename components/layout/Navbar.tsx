@@ -51,14 +51,11 @@ export default function Navbar() {
     checkAuth();
   }, []);
 
-  // 💡 ৩. NEW: Global Event Listener (যেকোনো জায়গা থেকে Modal ওপেন করার জন্য)
+  
   useEffect(() => {
     const handleOpenAuth = () => setIsAuthModalOpen(true);
-
-    // 'openAuthModal' নামের সিগন্যাল আসলে পপআপ ওপেন হবে
     window.addEventListener("openAuthModal", handleOpenAuth);
 
-    // ক্লিনআপ ফাংশন
     return () => window.removeEventListener("openAuthModal", handleOpenAuth);
   }, []);
 

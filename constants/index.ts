@@ -1,4 +1,4 @@
-// টাইপ ডিফাইন করে দেওয়া হলো যাতে ভুল না হয়
+
 export interface LinkItem {
   label: string;
   href: string;
@@ -8,7 +8,7 @@ export const NAV_LINKS: LinkItem[] = [
   { label: "Platform", href: "/#platform" },
   { label: "Solutions", href: "/#solutions" },
   { label: "Resources", href: "/#resources" },
-  { label: "Pricing", href: "/#pricing" }, // 👈 3 রিমুভ করা হয়েছে
+  { label: "Pricing", href: "/#pricing" }, 
 ];
 
 export const COMPANY_LINKS: LinkItem[] = [

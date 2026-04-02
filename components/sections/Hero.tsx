@@ -44,7 +44,6 @@ export default function Hero() {
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-      // Text Section Animation (Staggered Fade In Up)
       tl.fromTo(
         textRef.current!.children,
         { y: 30, opacity: 0 },
@@ -100,7 +99,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* --- SWIPER CAROUSEL SECTION --- */}
       <div ref={carouselRef} className="w-full max-w-6xl mx-auto px-4 md:px-8">
         <div className="rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-gray-200/50 bg-white">
           <Swiper
@@ -122,7 +120,7 @@ export default function Hero() {
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
                   className="object-cover object-center"
-                  priority={image.id === 1} // Only LCP image gets priority
+                  priority={image.id === 1} 
                 />
               </SwiperSlide>
             ))}

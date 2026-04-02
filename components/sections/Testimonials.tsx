@@ -52,11 +52,11 @@ export default function Testimonials() {
             }}
             // 🚀 Autoplay Configuration
             autoplay={{
-              delay: 3500, // ৩.৫ সেকেন্ড পর পর স্লাইড চেঞ্জ হবে
-              disableOnInteraction: false, // ইউজার টাচ করার পরও অটো-প্লে বন্ধ হবে না
-              pauseOnMouseEnter: true, // মাউস উপরে রাখলে পজ হয়ে থাকবে (ইউজার ভিডিও দেখার সুবিধার জন্য)
+              delay: 3500, 
+              disableOnInteraction: false, 
+              pauseOnMouseEnter: true,
             }}
-            loop={true} // অটো-স্লাইড নিরবচ্ছিন্ন রাখতে লুপ অন করা হয়েছে
+            loop={true} 
             grabCursor={true}
             breakpoints={{
               320: {
