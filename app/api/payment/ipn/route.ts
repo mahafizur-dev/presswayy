@@ -25,7 +25,6 @@ export async function POST(req: Request) {
     const store_passwd = process.env.SSL_STORE_PASSWD as string;
     const is_live = process.env.SSL_IS_LIVE === "true";
 
-
     const validationUrl = is_live
       ? "https://securepay.sslcommerz.com/validator/api/validationserverAPI.php"
       : "https://sandbox.sslcommerz.com/validator/api/validationserverAPI.php";
@@ -46,21 +45,36 @@ export async function POST(req: Request) {
           card_type: verifyData.card_type,
           payment_status: "Paid",
           date: verifyData.tran_date,
-          source: "IPN", 
+          source: "IPN",
         };
 
-        const N8N_DB_WEBHOOK_URL =
-          "https://server.presswayy.com/webhook/payment-success";
+     
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-        await fetch(N8N_DB_WEBHOOK_URL, {
+        if (!baseUrl) {
+          throw new Error(
+            "Missing NEXT_PUBLIC_API_URL in environment variables.",
+          );
+        }
+
+       
+        const N8N_DB_WEBHOOK_URL = `${baseUrl}/payment-success`;
+
+        const n8nResponse = await fetch(N8N_DB_WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(paymentPayload),
         });
 
+       
+        if (!n8nResponse.ok) {
+          throw new Error(`n8n responded with status: ${n8nResponse.status}`);
+        }
+
         console.log("✅ IPN Processed: Payment Data successfully sent to n8n.");
       } catch (dbError) {
-        console.error("IPN Database save error:", dbError);
+      
+        console.error("IPN Database save error (n8n Issue):", dbError);
       }
 
       return NextResponse.json(

@@ -1,5 +1,3 @@
-// app/api/meeting/route.ts
-
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -7,12 +5,29 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { phone, date, time } = body;
 
+    if (!phone || !date || !time) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Missing required fields (phone, date, time)",
+        },
+        { status: 400 },
+      );
+    }
 
-    const N8N_WEBHOOK_URL =
-      "https://server.presswayy.com/webhook/schedule-meeting";
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
+    if (!baseUrl) {
+      console.error("Missing NEXT_PUBLIC_API_URL in environment variables.");
+      return NextResponse.json(
+        { success: false, error: "Server configuration missing" },
+        { status: 500 },
+      );
+    }
 
-    await fetch(N8N_WEBHOOK_URL, {
+    const N8N_WEBHOOK_URL = `${baseUrl}/schedule-meeting`;
+
+    const response = await fetch(N8N_WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -23,11 +38,18 @@ export async function POST(req: Request) {
       }),
     });
 
-    return NextResponse.json({ success: true, message: "Meeting scheduled" });
+    if (!response.ok) {
+      throw new Error(`n8n responded with status: ${response.status}`);
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Meeting scheduled successfully",
+    });
   } catch (error) {
     console.error("Meeting API Error:", error);
     return NextResponse.json(
-      { error: "Internal Server Error" },
+      { success: false, error: "Internal Server Error" },
       { status: 500 },
     );
   }

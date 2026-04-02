@@ -1,28 +1,17 @@
 // app/api/checkout/route.ts
 import { NextResponse } from "next/server";
-import { sendLeadEmail } from "@/lib/mail";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-  
     const { firstName, email, phone, address, plan, billingCycle } = body;
-
 
     const amount = billingCycle === "yearly" ? 29500 : 3000;
 
-    const payload = { ...body, amount };
-
-    
-    sendLeadEmail(payload).catch((error) => {
-      console.error("Failed to send lead email:", error);
-    });
-
- 
     const store_id = process.env.SSL_STORE_ID;
     const store_passwd = process.env.SSL_STORE_PASSWORD;
-    const is_live = process.env.SSL_IS_LIVE === "true"; // .env থেকে লাইভ স্ট্যাটাস নিবে
+    const is_live = process.env.SSL_IS_LIVE === "true"; 
 
     if (!store_id || !store_passwd) {
       throw new Error(
