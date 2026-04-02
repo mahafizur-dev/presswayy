@@ -12,9 +12,10 @@ export async function POST(req: Request) {
       return NextResponse.redirect(`${baseUrl}/dashboard?payment=failed`, 303);
     }
 
-    const store_id = process.env.SSL_STORE_ID as string;
-    const store_passwd = process.env.SSL_STORE_PASSWD as string;
-    const is_live = process.env.SSL_IS_LIVE === "true";
+    // Updated to match your .env file
+    const store_id = process.env.NEXT_PUBLIC_SSL_STORE_ID as string;
+    const store_passwd = process.env.NEXT_PUBLIC_SSL_STORE_PASSWD as string;
+    const is_live = process.env.NEXT_PUBLIC_SSL_IS_LIVE === "true";
 
     const validationUrl = is_live
       ? "https://securepay.sslcommerz.com/validator/api/validationserverAPI.php"
@@ -38,7 +39,6 @@ export async function POST(req: Request) {
           date: verifyData.tran_date,
         };
 
-     
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
         if (!apiUrl) {
@@ -47,7 +47,6 @@ export async function POST(req: Request) {
           );
         }
 
-      
         const N8N_DB_WEBHOOK_URL = `${apiUrl}/payment-success`;
 
         const n8nResponse = await fetch(N8N_DB_WEBHOOK_URL, {
@@ -56,7 +55,6 @@ export async function POST(req: Request) {
           body: JSON.stringify(paymentPayload),
         });
 
-      
         if (!n8nResponse.ok) {
           throw new Error(`n8n responded with status: ${n8nResponse.status}`);
         }

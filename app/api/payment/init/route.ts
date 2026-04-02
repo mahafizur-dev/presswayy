@@ -24,11 +24,13 @@ export async function POST(req: Request) {
       );
     }
 
-    const store_id = process.env.SSL_STORE_ID;
-    const store_passwd = process.env.SSL_STORE_PASSWD;
+    // Updated to match your .env file
+    const store_id = process.env.NEXT_PUBLIC_SSL_STORE_ID;
+    const store_passwd = process.env.NEXT_PUBLIC_SSL_STORE_PASSWD;
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-    const is_live = process.env.SSL_IS_LIVE === "true";
+    // Updated to match your .env file
+    const is_live = process.env.NEXT_PUBLIC_SSL_IS_LIVE === "true";
 
     if (!store_id || !store_passwd || !baseUrl) {
       console.error("Missing SSLCommerz Credentials in .env.local");
@@ -67,7 +69,7 @@ export async function POST(req: Request) {
       ship_city: "Dhaka",
       ship_postcode: "1000",
       ship_country: "Bangladesh",
-      value_a: phone, 
+      value_a: phone,
     };
 
     const data = new URLSearchParams(payload);

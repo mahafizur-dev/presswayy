@@ -5,6 +5,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { phone, date, time } = body;
 
+    // 1. Validate required fields
     if (!phone || !date || !time) {
       return NextResponse.json(
         {
@@ -15,6 +16,7 @@ export async function POST(req: Request) {
       );
     }
 
+    // 2. Fetch Base URL from environment variables
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
     if (!baseUrl) {
@@ -25,8 +27,10 @@ export async function POST(req: Request) {
       );
     }
 
+    // 3. Construct the Webhook URL
     const N8N_WEBHOOK_URL = `${baseUrl}/schedule-meeting`;
 
+    // 4. Send data to n8n webhook
     const response = await fetch(N8N_WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -42,6 +46,7 @@ export async function POST(req: Request) {
       throw new Error(`n8n responded with status: ${response.status}`);
     }
 
+    // 5. Return success response
     return NextResponse.json({
       success: true,
       message: "Meeting scheduled successfully",

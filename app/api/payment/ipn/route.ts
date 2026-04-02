@@ -21,9 +21,10 @@ export async function POST(req: Request) {
       );
     }
 
-    const store_id = process.env.SSL_STORE_ID as string;
-    const store_passwd = process.env.SSL_STORE_PASSWD as string;
-    const is_live = process.env.SSL_IS_LIVE === "true";
+    // Updated to match your .env file
+    const store_id = process.env.NEXT_PUBLIC_SSL_STORE_ID as string;
+    const store_passwd = process.env.NEXT_PUBLIC_SSL_STORE_PASSWD as string;
+    const is_live = process.env.NEXT_PUBLIC_SSL_IS_LIVE === "true";
 
     const validationUrl = is_live
       ? "https://securepay.sslcommerz.com/validator/api/validationserverAPI.php"
@@ -48,7 +49,7 @@ export async function POST(req: Request) {
           source: "IPN",
         };
 
-     
+        // Your n8n webhook configuration was already perfect here!
         const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
         if (!baseUrl) {
@@ -57,7 +58,6 @@ export async function POST(req: Request) {
           );
         }
 
-       
         const N8N_DB_WEBHOOK_URL = `${baseUrl}/payment-success`;
 
         const n8nResponse = await fetch(N8N_DB_WEBHOOK_URL, {
@@ -66,14 +66,12 @@ export async function POST(req: Request) {
           body: JSON.stringify(paymentPayload),
         });
 
-       
         if (!n8nResponse.ok) {
           throw new Error(`n8n responded with status: ${n8nResponse.status}`);
         }
 
         console.log("✅ IPN Processed: Payment Data successfully sent to n8n.");
       } catch (dbError) {
-      
         console.error("IPN Database save error (n8n Issue):", dbError);
       }
 

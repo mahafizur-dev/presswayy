@@ -1,226 +1,197 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Mail, Phone, CheckCircle2 } from "lucide-react";
-import { COMPANY_LINKS, LEGAL_LINKS } from "@/constants";
-
-// --- Custom Brand Icons ---
-const FacebookIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="white"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-  </svg>
-);
-
-const YoutubeIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="white"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
-    <polygon
-      points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"
-      fill="#ff4e33"
-    />
-  </svg>
-);
-
-const InstagramIcon = () => (
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="white"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-  </svg>
-);
-
-// --- Configuration Data ---
-const SOCIAL_LINKS = [
-  { id: "facebook", icon: FacebookIcon, href: "#", label: "Facebook" },
-  { id: "youtube", icon: YoutubeIcon, href: "#", label: "YouTube" },
-  { id: "instagram", icon: InstagramIcon, href: "#", label: "Instagram" },
-];
-
-const CONTACT_INFO = [
-  {
-    id: "address",
-    icon: MapPin,
-    content: "House 336, Lane 5, Baridhara DOHS, Dhaka, Bangladesh",
-    type: "text",
-  },
-  {
-    id: "email",
-    icon: Mail,
-    content: "hello@presswayy.com",
-    href: "mailto:hello@presswayy.com",
-    type: "link",
-  },
-  { id: "phone", icon: Phone, content: "01886168979", type: "text" },
-  {
-    id: "license",
-    icon: CheckCircle2,
-    content: "TRAD/DNCC/029884/2022",
-    type: "text",
-  },
-];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="bg-black text-white pt-16 pb-8 px-6 md:px-12 lg:px-20 font-sans">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-          {/* Left Column: Brand & Socials */}
-          <div className="space-y-8">
-            <div className="space-y-2">
-              <Link href="/" className="inline-block">
-                <Image
-                  src="https://res.cloudinary.com/drchxbdit/image/upload/v1774702469/presswayy-white_tu4s72.png"
-                  alt="Presswayy Logo"
-                  width={160}
-                  height={60}
-                  className="w-40 h-auto"
-                />
-              </Link>
-              <p className="text-sm font-medium text-white/90">
-                Powered by CLAREx Tech.
-              </p>
+    <footer className="bg-[#0a0a0a] text-white font-sans">
+      {/* ── MAIN FOOTER ── */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 pt-8 pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 lg:gap-12 items-start">
+          {/* ── COL 1: Brand ── */}
+          <div className="flex flex-col gap-2">
+            <div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://res.cloudinary.com/drchxbdit/image/upload/v1774702469/presswayy-white_tu4s72.png"
+                alt="Presswayy"
+                className="h-18 w-auto object-contain"
+              />
             </div>
 
-            {/* BASIS Member Badge */}
-            <div className="flex items-center bg-[#e5e7eb] overflow-hidden w-fit rounded-sm">
-              <div className="bg-[#8c94a3] text-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest">
-                MEMBER
-              </div>
-              <div className="bg-white px-3 py-1.5 flex items-center gap-1">
-                <Image
-                  src="https://res.cloudinary.com/drchxbdit/image/upload/v1774702345/basis_qipxnh.jpg"
-                  alt="BASIS Logo"
-                  width={20}
-                  height={20}
-                />
-                <div className="flex gap-0.5">
-                  <div className="w-1.5 h-1.5 bg-red-500 rotate-45"></div>
-                  <div className="w-1.5 h-1.5 bg-green-500 rotate-45"></div>
+            <p className="text-[12px] font-medium text-gray-400">
+              Powered by CLAREx Tech.
+            </p>
+
+            {/* BASIS badge */}
+            <div className="inline-flex w-fit mt-1">
+              <div className="bg-white rounded-sm px-2.5 py-1.5 inline-flex items-center gap-2">
+                <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wide">
+                  MEMBER
+                </span>
+                <div className="w-px h-5 bg-gray-300" />
+                <div className="text-[10px] font-bold text-[#0a3d8f] leading-tight">
+                  <div>BASIS</div>
+                  <div className="text-[8px] font-normal text-gray-400">
+                    Bangladesh Assoc. of Software
+                  </div>
                 </div>
+                <svg
+                  viewBox="0 0 24 24"
+                  className="w-4 h-4 text-[#ff5a36]"
+                  fill="currentColor"
+                >
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
               </div>
             </div>
 
-            {/* Social Icons */}
-            <div className="flex gap-4">
-              {SOCIAL_LINKS.map(({ id, icon: Icon, href, label }) => (
-                <Link
-                  key={id}
+            {/* Socials */}
+            <div className="flex gap-2.5">
+              {[
+                {
+                  href: "https://www.facebook.com/presswayy",
+                  svg: (
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  ),
+                },
+                {
+                  href: "https://www.youtube.com/@Presswayy/videos",
+                  svg: (
+                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" />
+                  ),
+                },
+                {
+                  href: "https://www.instagram.com/presswayy/",
+                  svg: (
+                    <>
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                      <circle cx="12" cy="12" r="4" fill="#0a0a0a" />
+                      <circle cx="17.5" cy="6.5" r="1" fill="#0a0a0a" />
+                    </>
+                  ),
+                },
+              ].map(({ href, svg }, i) => (
+                <a
+                  key={i}
                   href={href}
-                  aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-[#ff4e33] rounded-full flex items-center justify-center hover:bg-[#e63e26] transition-colors"
+                  className="w-8 h-8 rounded-full bg-[#ff5a36] hover:bg-[#e84d2b] flex items-center justify-center transition-colors"
                 >
-                  <Icon />
-                </Link>
+                  <svg className="w-4 h-4" fill="white" viewBox="0 0 24 24">
+                    {svg}
+                  </svg>
+                </a>
               ))}
             </div>
 
-            <p className="text-[13px] text-white/70">
-              Copyright © {currentYear} Presswayy | Powered by CLAREx Tech
+            <p className="text-[11px] text-gray-500">
+              Copyright © 2026 Presswayy | Powered by CLAREx Tech
             </p>
           </div>
 
-          {/* Middle Column: Company Links */}
-          <div className="space-y-6">
-            <h3 className="text-[#ff4e33] text-[18px] font-bold uppercase tracking-wide">
+          {/* ── COL 2: Company ── */}
+          <div className="pt-[24px]">
+            <h3 className="text-[#ff5a36] text-[12px] font-bold uppercase tracking-widest mb-4">
               Company
             </h3>
-            <ul className="space-y-4">
-              {COMPANY_LINKS.map((link) => (
-                <li key={link.label}>
+            <ul className="flex flex-col gap-2.5">
+              {["Pricing", "Platform", "Solutions", "Resources"].map((item) => (
+                <li key={item}>
                   <Link
-                    href={link.href}
-                    className="text-[17px] font-bold hover:text-[#ff4e33] transition-colors"
+                    href="#"
+                    className="text-[14px] font-medium text-white hover:text-[#ff5a36] transition-colors"
                   >
-                    {link.label}
+                    {item}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Right Column: Contact Us */}
-          <div className="space-y-6">
-            <h3 className="text-[#ff4e33] text-[18px] font-bold uppercase tracking-wide">
+          {/* ── COL 3: Contact ── */}
+          <div className="pt-[24px]">
+            <h3 className="text-[#ff5a36] text-[12px] font-bold uppercase tracking-widest mb-4">
               Contact Us
             </h3>
-            <ul className="space-y-5">
-              {CONTACT_INFO.map(({ id, icon: Icon, content, href, type }) => (
-                <li
-                  key={id}
-                  className={`flex ${id === "address" ? "items-start" : "items-center"} gap-4`}
-                >
-                  <Icon
-                    className={`text-[#ff4e33] shrink-0 ${id === "address" ? "mt-1" : ""}`}
-                    size={20}
-                  />
-                  {type === "link" ? (
-                    <Link
-                      href={href!}
-                      className="text-[15px] hover:text-[#ff4e33] transition-colors"
-                    >
-                      {content}
-                    </Link>
-                  ) : (
-                    <span
-                      className={`text-[15px] ${id === "address" ? "leading-relaxed" : ""}`}
-                    >
-                      {content}
-                    </span>
-                  )}
+            <ul className="flex flex-col gap-3">
+              {[
+                {
+                  icon: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z",
+                  text: "House 336, Lane 5, Baridhara DOHS, Dhaka",
+                  filled: true,
+                },
+                {
+                  icon: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6",
+                  text: "hello@presswayy.com",
+                  filled: false,
+                },
+                {
+                  icon: "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.19h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z",
+                  text: "01886168979",
+                  filled: false,
+                },
+                {
+                  icon: "M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4 12 14.01 9 11.01",
+                  text: "TRAD/DNCC/029884/2022",
+                  filled: false,
+                },
+              ].map(({ icon, text, filled }, i) => (
+                <li key={i} className="flex items-start gap-2.5">
+                  <svg
+                    className="w-4 h-4 text-[#ff5a36] flex-shrink-0 mt-0.5"
+                    fill={filled ? "currentColor" : "none"}
+                    stroke={filled ? "none" : "currentColor"}
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d={icon} />
+                  </svg>
+                  <span className="text-[13px] text-white leading-snug">
+                    {text}
+                  </span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar: Legal Links */}
-        <div className="pt-8 border-t border-white/10 flex flex-wrap gap-x-8 gap-y-4">
-          {LEGAL_LINKS.map((link) => (
+      {/* ── DIVIDER + LEGAL ── */}
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex flex-wrap gap-x-6 gap-y-2">
+          {[
+            "About Us",
+            "Contact Us",
+            "Privacy Policy",
+            "Terms & Conditions",
+          ].map((item) => (
             <Link
-              key={link.label}
-              href={link.href}
-              className="text-[15px] font-bold hover:text-[#ff4e33] transition-colors"
+              key={item}
+              href="#"
+              className="text-[12px] sm:text-[13px] font-semibold text-white hover:text-[#ff5a36] transition-colors"
             >
-              {link.label}
+              {item}
             </Link>
           ))}
         </div>
+      </div>
 
-        {/* Payment Banner */}
-        <div className="mt-12 flex justify-center">
+      {/* ── PAYMENT BANNER ── */}
+      <div className="border-t border-white/10">
+        <div className="w-full py-3">
           <Image
-            src="/Payment-Banner.png"
+            src={
+              "https://res.cloudinary.com/drchxbdit/image/upload/v1774606338/Payment-Banner_fuzpkv.png"
+            }
             alt="Accepted Payment Methods"
-            width={1200}
+            width={1920}
             height={120}
-            className="w-full h-auto max-w-[800px]"
-            sizes="(max-width: 1280px) 100vw, 1280px"
+            className="w-full h-auto"
+            sizes="100vw"
           />
         </div>
       </div>
