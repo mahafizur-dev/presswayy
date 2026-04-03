@@ -29,13 +29,13 @@ export default function PricingSection() {
   }
 
   const features = [
-    { label: "Instant reply — responds in under 2 seconds" },
-    { label: "24/7 Service — never offline, never tired" },
+    { label: "Instant reply responds in under 1 minute" },
+    { label: "24/7 Service never offline, never tired" },
     { label: "Trained on your business data & tone" },
     { label: "Connect your website & database" },
     { label: "100+ simultaneous customers", tag: "Concurrent" },
     { label: "Read images & voice messages" },
-    { label: "Manual pause — hand off to human anytime" },
+    { label: "Manual pause & hand off to human anytime" },
     { label: "Orders saved to Google Sheets", tag: "Auto" },
     { label: "Handle customer queries & FAQs" },
     { label: "Take orders on website & Messenger" },
@@ -126,7 +126,7 @@ export default function PricingSection() {
                 </span>
               </div>
               <div className="flex items-center gap-1 text-[13px] md:text-[12px] text-[#6B6B65]">
-                & Tk.0.89 per customer (AI cost)
+                & approx Tk.0.89 per customer (AI cost)
                 <span className="w-3 h-3 rounded-full bg-[#F36525] text-white text-[7.5px] font-bold flex items-center justify-center cursor-help">
                   i
                 </span>

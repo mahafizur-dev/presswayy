@@ -11,7 +11,7 @@ export const INITIAL_STEPS = [
   {
     key: "meeting",
     label: "Initial Meeting",
-    desc: "Discovery call — understanding your business & needs",
+    desc: "Discovery call understanding your business & needs",
     time: "After payment",
     detail: "Your onboarding call will be scheduled once payment is confirmed.",
     status: "pending",
@@ -20,7 +20,7 @@ export const INITIAL_STEPS = [
     key: "inventory",
     label: "Inventory",
     desc: "Audit of your tools, data sources & existing workflows",
-    time: "Estimated: Apr 4–7, 2026",
+    time: "Estimated: Day 1",
     detail:
       "After the initial meeting, our team will conduct a full audit of your tech stack and business workflows.",
     status: "pending",
@@ -29,7 +29,7 @@ export const INITIAL_STEPS = [
     key: "setup",
     label: "Setup",
     desc: "Building and configuring your automation workflows",
-    time: "Estimated: Apr 8–25, 2026",
+    time: "Estimated: Day 2",
     detail: "Complete automation setup per your requirements.",
     status: "pending",
   },
@@ -37,7 +37,7 @@ export const INITIAL_STEPS = [
     key: "testing",
     label: "Testing",
     desc: "QA, feedback round & final adjustments",
-    time: "Estimated: Apr 26–May 5",
+    time: "Estimated: Day 3",
     detail: "Multi-phase testing across all automation channels.",
     status: "pending",
   },
@@ -45,7 +45,7 @@ export const INITIAL_STEPS = [
     key: "live",
     label: "🎉 LIVE",
     desc: "Your AI automation is fully operational!",
-    time: "Estimated: May 10, 2026",
+    time: "Estimated: End of Day 3",
     detail:
       "Full launch with handover session and 30 days of Presswayy support.",
     status: "upcoming",
@@ -68,7 +68,6 @@ export const MONTHS = [
 ];
 export const DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 export const TIMES = [
-  ,
   "11:00 AM",
   "11:30 AM",
   "12:00 PM",
