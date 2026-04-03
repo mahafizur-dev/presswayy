@@ -143,10 +143,9 @@ function DashboardContent() {
         </div>
 
         <div className="section-label text-xl font-bold text-slate-800 mb-6">
-          Your Onboarding Journey
+          Your Onboarding Journey <br />
+          For any queries : +880 1886-168979
         </div>
-
-        <p>For any queries : +880 1886-168979 </p>
 
         {/* Timeline */}
         <div className="timeline space-y-4">
