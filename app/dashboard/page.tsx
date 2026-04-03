@@ -146,6 +146,8 @@ function DashboardContent() {
           Your Onboarding Journey
         </div>
 
+        <p>For any queries : +880 1886-168979 </p>
+
         {/* Timeline */}
         <div className="timeline space-y-4">
           {steps.map((step, i) => {

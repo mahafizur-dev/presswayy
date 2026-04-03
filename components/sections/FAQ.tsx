@@ -43,7 +43,7 @@ export default function FAQ() {
   };
 
   return (
-    <section className="bg-[#fcfcff] py-10 sm:py-16 md:py-20 px-4 sm:px-6">
+    <section className="bg-[#fcfcff] mb-16 py-10 sm:py-16 md:py-20 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-6 sm:mb-12 md:mb-16">

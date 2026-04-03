@@ -80,7 +80,7 @@ export default function PricingSection() {
             <span className="text-[#F36525]">actually use</span>
           </div>
           <div className="text-[14px] md:text-[11.5px] text-[#6B6B65] mt-1 md:mt-0.5 text-center md:text-left px-2 md:px-0">
-            Flat subscription + Tk.0.89 AI cost per customer. No surprises.
+            Flat subscription + Tk.0.89 AI cost per customer.
           </div>
         </div>
 
@@ -127,12 +127,9 @@ export default function PricingSection() {
               </div>
               <div className="flex items-center gap-1 text-[13px] md:text-[12px] text-[#6B6B65]">
                 & approx Tk.0.89 per customer (AI cost)
-                <span className="w-3 h-3 rounded-full bg-[#F36525] text-white text-[7.5px] font-bold flex items-center justify-center cursor-help">
-                  i
-                </span>
               </div>
               <div
-                className={`inline-flex items-center gap-1 mt-2 md:mt-1 px-2.5 py-1 md:px-2 md:py-[2px] rounded-full text-[11px] md:text-[10px] font-semibold text-green-500 md:text-green-400 bg-green-900/10 border border-green-800/20 transition-opacity duration-300 ${isYearly ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+                className={`inline-flex items-center gap-1 mt-2 md:mt-1 px-2.5 py-1 md:px-2 md:py-[2px] rounded-full text-[11px] md:text-[10px] font-semibold text-[#F36525] md:text-green-400 bg-green-900/10 border border-green-800/20 transition-opacity duration-300 ${isYearly ? "opacity-100" : "opacity-0 pointer-events-none"}`}
               >
                 <svg
                   width="10"
@@ -143,7 +140,7 @@ export default function PricingSection() {
                 >
                   <path
                     d="M1.5 5l2.3 2.3 4.7-4.7"
-                    stroke="#2ECC71"
+                    stroke="#0A6B49"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -344,7 +341,7 @@ export default function PricingSection() {
                 ))}
               </div>
               <div className="text-[13px] md:text-[11.5px] text-[#6B6B65] leading-snug ml-3 md:ml-3">
-                <strong className="text-[#111110]">72+ businesses</strong>{" "}
+                <strong className="text-[#111110]">112+ businesses</strong>{" "}
                 already running
                 <br />
                 on Presswayy automation.
