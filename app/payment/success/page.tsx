@@ -1,17 +1,18 @@
 "use client";
 
 import React, { Suspense } from "react";
-import { CheckCircle2, ArrowRight, Home } from "lucide-react";
+import { CheckCircle2, ArrowRight, Home, ShieldCheck } from "lucide-react";
 import Link from "next/link";
-
+import { useSearchParams } from "next/navigation";
 
 // 1. Payment Details Component
 function PaymentDetails() {
-  
+  const searchParams = useSearchParams();
+  const tranId = searchParams.get("tran_id") || "Check Email Receipt";
+  const amount = searchParams.get("amount");
 
   return (
     <div className="max-w-md w-full bg-white p-8 md:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100/50 text-center relative z-10 animate-in fade-in zoom-in-95 duration-500">
-      {/* Success Icon with Pulse Effect */}
       <div className="flex justify-center mb-6">
         <div className="relative">
           <div className="absolute inset-0 bg-green-100 rounded-full animate-ping opacity-75"></div>
@@ -27,32 +28,49 @@ function PaymentDetails() {
       </h1>
       <p className="text-gray-500 mb-8 text-[15px] leading-relaxed">
         Thank you for choosing Presswayy. Your account setup is currently in
-        progress.  sent a receipt to your email.
+        progress. We've sent a receipt to your email.
       </p>
 
       {/* Transaction Details Card */}
-      <div className="bg-gray-50/80 rounded-2xl p-6 mb-8 border border-gray-100 text-left space-y-4">
+      <div className="bg-gray-50/80 rounded-2xl p-6 mb-6 border border-gray-100 text-left space-y-4">
         {/* Transaction ID */}
         <div>
           <span className="text-xs text-gray-400 font-bold uppercase tracking-wider block mb-1">
             Transaction ID
           </span>
           <div className="text-[#0a1435] font-mono font-bold text-[15px] break-all bg-white px-3 py-2 rounded-lg border border-gray-100">
-            
+            {tranId}
           </div>
         </div>
 
-        {/* Amount Paid (If available) */}
-        
+        {/* Amount Paid (If available in URL) */}
+        {amount && (
+          <div>
+            <span className="text-xs text-gray-400 font-bold uppercase tracking-wider block mb-1">
+              Amount Paid
+            </span>
+            <div className="text-[#0a1435] font-bold text-[15px] bg-white px-3 py-2 rounded-lg border border-gray-100">
+              ৳ {amount}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* SSL Secured Badge */}
+      <div className="flex items-center justify-center gap-2 mb-8 bg-green-50/50 py-2.5 rounded-lg border border-green-100/50">
+        <ShieldCheck className="w-4 h-4 text-green-600" />
+        <span className="text-xs font-bold tracking-wider text-green-700">
+          100% SECURED BY SSLCOMMERZ
+        </span>
       </div>
 
       {/* Action Buttons */}
       <div className="space-y-3">
         <Link
-          href="/platform"
+          href="/dashboard"
           className="flex items-center justify-center gap-2 w-full bg-[#ff4e33] hover:bg-[#e63e26] text-white font-medium py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
         >
-          Go to Platform <ArrowRight className="w-4 h-4" />
+          Back to Dashboard <ArrowRight className="w-4 h-4" />
         </Link>
         <Link
           href="/"

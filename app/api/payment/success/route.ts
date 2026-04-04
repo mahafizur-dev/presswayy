@@ -59,14 +59,15 @@ export async function POST(req: Request) {
           throw new Error(`n8n responded with status: ${n8nResponse.status}`);
         }
 
-        console.log(
-          "✅ Payment Data successfully sent to n8n Database Webhook.",
-        );
+        console.log("✅ Payment Data successfully sent to Database.");
       } catch (dbError) {
         console.error("Database save error (n8n Issue):", dbError);
       }
 
-      return NextResponse.redirect(`${baseUrl}/dashboard?payment=success`, 303);
+      return NextResponse.redirect(
+        `${baseUrl}/payment/success?tran_id=${verifyData.tran_id}&amount=${verifyData.amount}`,
+        303,
+      );
     } else {
       console.error("Payment Validation Failed (Fraud Attempt):", verifyData);
       return NextResponse.redirect(`${baseUrl}/dashboard?payment=failed`, 303);
