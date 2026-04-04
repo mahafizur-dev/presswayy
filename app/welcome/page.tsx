@@ -19,8 +19,8 @@ function DashboardContent() {
   const [isMounted, setIsMounted] = useState(false);
 
   const {
-    userName,
-    userInitial,
+    userName, // ✅ নাম ফিরিয়ে আনা হলো
+    userInitial, // ✅ অবতার ফিরিয়ে আনা হলো
     userPhone,
     isPaid,
     meetingStatus,
@@ -35,12 +35,12 @@ function DashboardContent() {
 
   useEffect(() => {
     setIsMounted(true);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, []);
 
   useEffect(() => {
     if (!isMounted) return;
 
-    // Route Guard
     if (!Cookies.get("is_logged_in")) {
       router.push("/");
       return;
@@ -48,24 +48,22 @@ function DashboardContent() {
 
     const payStatus = searchParams.get("payment");
 
-    // Defer state update to avoid cascading render error
     const timeoutId = setTimeout(() => {
       initializeData(payStatus);
+      const activeStepIndex = steps.findIndex(
+        (step) => step.status === "active",
+      );
+      if (activeStepIndex !== -1) {
+        usePortalStore.setState({ openStepIndex: activeStepIndex });
+      }
     }, 0);
 
-    // Handle Toasts and URL Cleaning
     if (payStatus === "success") {
-      toast.success("Payment Successful! Your account is now active.", {
-        id: "pay-success",
-      });
-      router.replace(pathname);
-    } else if (payStatus === "failed") {
-      toast.error("Payment Failed. Please try again.", { id: "pay-failed" });
+      toast.success("Payment Successful!");
       router.replace(pathname);
     }
 
     return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted, searchParams, pathname, initializeData]);
 
   const onLogoutClick = () => {
@@ -75,7 +73,7 @@ function DashboardContent() {
 
   const onMeetingDone = (desc: string) => {
     handleMeetingSuccess(desc);
-    toast.success("Meeting request sent to Admin!");
+    toast.success("Meeting request sent!");
   };
 
   if (!isMounted) return null;
@@ -85,8 +83,8 @@ function DashboardContent() {
   const progressPct = Math.round((doneSteps / totalSteps) * 100);
 
   return (
-    // 💡 FIX: bg-slate-50 সরিয়ে bg-white করা হয়েছে পুরো ব্যাকগ্রাউন্ড সাদা করার জন্য
     <div className="client-portal animate-in fade-in duration-500 min-h-screen bg-white">
+      {/* --- Navbar --- */}
       <nav className="navbar border-b border-slate-800 px-6 py-4 flex justify-between items-center sticky top-0 z-50 bg-[#0a0a0a]">
         <div className="nav-logo">
           <Image
@@ -98,17 +96,20 @@ function DashboardContent() {
             priority
           />
         </div>
+
         <div className="nav-right flex items-center gap-4">
-          <div className="nav-client-pill flex items-center gap-2 bg-[#1a1a1a] border border-slate-800 px-3 py-1.5 rounded-full">
-            <div className="nav-avatar bg-[#ff4e33] text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+          {/* ✅ নাম এবং অবতার সেকশন আবার যুক্ত করা হলো */}
+          <div className="flex items-center gap-3 bg-[#1a1a1a] border border-slate-800 px-3 py-1.5 rounded-full">
+            <div className="w-8 h-8 rounded-full bg-[#ff4e33] flex items-center justify-center text-white font-bold text-sm shadow-inner">
               {userInitial}
             </div>
-            <div className="nav-client-name font-medium text-slate-200 hidden sm:block">
+            <div className="text-slate-200 font-medium text-sm hidden sm:block pr-1">
               {userName}
             </div>
           </div>
+
           <button
-            className="btn-logout text-sm font-medium text-slate-300 hover:text-white border border-slate-700 hover:border-slate-500 hover:bg-slate-800 transition-all px-4 py-2 rounded-lg"
+            className="btn-logout text-xs font-semibold text-slate-400 hover:text-white border border-slate-800 hover:border-slate-600 transition-all px-3 py-2 rounded-lg bg-transparent"
             onClick={onLogoutClick}
           >
             Sign out
@@ -117,12 +118,11 @@ function DashboardContent() {
       </nav>
 
       {/* --- Main Body --- */}
-      <div className="portal-body max-w-3xl mx-auto px-4 py-8">
+      <div className="portal-body max-w-3xl mx-auto px-4 py-8 bg-white">
         {/* Progress Tracker */}
-        {/* 💡 নোট: কার্ডগুলো অলরেডি সাদা (bg-white), এখন পুরো পেজও সাদা হওয়ায় এগুলো পেজের সাথে মিশে যাবে। বর্ডারগুলো (border-slate-100) হালকা সেপারেশন দেবে। */}
         <div className="progress-section bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8">
           <div className="progress-header flex justify-between items-end mb-4">
-            <div className="progress-title text-lg font-bold text-slate-800">
+            <div className="progress-title text-lg font-bold text-slate-800 tracking-tight">
               Overall Progress
             </div>
             <div className="progress-count text-sm font-medium text-slate-500">
@@ -132,7 +132,7 @@ function DashboardContent() {
               of {totalSteps} steps completed
             </div>
           </div>
-          <div className="prog-track w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+          <div className="prog-track w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
             <div
               className="prog-fill h-full bg-[#ff4e33] rounded-full transition-all duration-1000 ease-out"
               style={{ width: `${progressPct}%` }}
@@ -142,7 +142,7 @@ function DashboardContent() {
 
         <div className="section-label text-xl font-bold text-slate-800 mb-6">
           Your Onboarding Journey <br />
-          <span className="text-sm text-slate-500 font-normal">
+          <span className="text-sm text-slate-400 font-normal">
             For any queries: +880 1886-168979
           </span>
         </div>
@@ -153,105 +153,78 @@ function DashboardContent() {
             const isOpen = openStepIndex === i;
             const isLast = i === steps.length - 1;
 
-            const iconInner =
-              step.status === "done" ? (
-                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
-                  <circle cx="8" cy="8" r="8" fill="#F36525" />
-                  <path
-                    d="M4.5 8.2l2.3 2.3 4.7-4.7"
-                    stroke="#fff"
-                    strokeWidth="1.7"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              ) : step.status === "active" ? (
-                <div className="active-pulse w-3 h-3 bg-[#ff4e33] rounded-full animate-pulse" />
-              ) : (
-                <div className="pending-dot w-3 h-3 bg-slate-300 rounded-full" />
-              );
-
             return (
               <div
                 key={step.key}
-                // 💡 নোট: টাইমলাইন আইটেমগুলোও bg-white
-                className={`tl-item bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-all cursor-pointer hover:border-slate-300 ${isOpen ? "ring-2 ring-orange-50" : ""} ${step.status === "active" ? "shadow-md border-orange-100" : ""}`}
+                className={`tl-item bg-white border border-slate-100 rounded-2xl p-5 shadow-sm transition-all cursor-pointer hover:border-slate-200 ${isOpen ? "ring-2 ring-orange-50/50" : ""}`}
                 onClick={() => toggleStep(i)}
               >
                 <div className="flex gap-4">
                   <div className="tl-icon-col flex flex-col items-center pt-1">
-                    <div className="tl-icon z-10 bg-white">{iconInner}</div>
+                    <div className="tl-icon z-10 bg-white">
+                      {step.status === "done" ? (
+                        <svg
+                          width="15"
+                          height="15"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                        >
+                          <circle cx="8" cy="8" r="8" fill="#F36525" />
+                          <path
+                            d="M4.5 8.2l2.3 2.3 4.7-4.7"
+                            stroke="#fff"
+                            strokeWidth="1.7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      ) : (
+                        <div
+                          className={`w-3 h-3 rounded-full ${step.status === "active" ? "bg-[#ff4e33] animate-pulse" : "bg-slate-200"}`}
+                        />
+                      )}
+                    </div>
                     {!isLast && (
                       <div
-                        className={`tl-vline w-[2px] h-full mt-2 ${step.status === "done" ? "bg-[#ff4e33]" : "bg-slate-100"}`}
+                        className={`tl-vline w-[1.5px] h-full mt-2 ${step.status === "done" ? "bg-[#ff4e33]" : "bg-slate-100"}`}
                       />
                     )}
                   </div>
-
                   <div className="tl-body flex-1">
                     <div className="tl-top flex justify-between items-start mb-1">
-                      <div
-                        className={`tl-name font-bold text-lg ${step.status === "active" ? "text-slate-900" : "text-slate-700"}`}
-                      >
+                      <div className="font-bold text-lg text-slate-800 tracking-tight">
                         {step.label}
                       </div>
                       <div
-                        className={`tl-badge text-xs font-bold px-2.5 py-1 rounded-md ${
-                          step.status === "done"
-                            ? "bg-green-50 text-green-600"
-                            : step.customBadge
-                              ? "bg-yellow-50 text-yellow-600"
-                              : step.status === "active"
-                                ? "bg-orange-50 text-[#ff4e33]"
-                                : "bg-slate-100 text-slate-500"
-                        }`}
+                        className={`text-[10px] uppercase tracking-widest font-bold px-2 py-1 rounded ${step.status === "done" ? "bg-green-50 text-green-600" : "bg-orange-50 text-[#ff4e33]"}`}
                       >
-                        {step.customBadge ||
-                          (step.status === "done"
-                            ? "✓ Completed"
-                            : step.status === "active"
-                              ? "In Progress"
-                              : "Pending")}
+                        {step.status === "done" ? "Completed" : "In Progress"}
                       </div>
                     </div>
-                    <div className="tl-desc text-slate-500 text-sm mb-1">
+                    <div className="text-slate-500 text-sm leading-relaxed">
                       {step.desc}
                     </div>
-                    <div className="tl-time text-xs font-medium text-slate-400">
-                      {step.time}
-                    </div>
-
                     {isOpen && (
                       <div
-                        className="tl-expand mt-6 pt-4 border-t border-slate-100"
+                        className="mt-6 pt-6 border-t border-slate-50"
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <div className="mb-4 text-slate-600 text-sm leading-relaxed">
-                          {step.detail}
-                        </div>
-                        {step.key === "payment" &&
-                          (step.status === "active" ||
-                            step.status === "done") && (
-                            <PaymentPanel
-                              userName={userName}
-                              userPhone={userPhone}
-                              isPaid={isPaid}
-                            />
-                          )}
-                        {step.key === "meeting" &&
-                          (step.status === "active" ||
-                            step.status === "done") && (
-                            <CalendarPanel
-                              userPhone={userPhone}
-                              onSuccess={onMeetingDone}
-                              isCompleted={
-                                meetingStatus === "Scheduled" ||
-                                meetingStatus === "Approved"
-                              }
-                              meetingDesc={meetingDesc}
-                              meetingStatus={meetingStatus}
-                            />
-                          )}
+                        {step.key === "payment" && (
+                          <PaymentPanel
+                            userName={userName}
+                            userPhone={userPhone}
+                            isPaid={isPaid}
+                          />
+                        )}
+                        {step.key === "meeting" && (
+                          <CalendarPanel
+                            userPhone={userPhone}
+                            onSuccess={onMeetingDone}
+                            isCompleted={meetingStatus === "Scheduled"}
+                            meetingDesc={meetingDesc}
+                            meetingStatus={meetingStatus}
+                          />
+                        )}
                       </div>
                     )}
                   </div>
@@ -267,13 +240,7 @@ function DashboardContent() {
 
 export default function WelcomePage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center bg-white text-slate-500">
-          <div className="w-10 h-10 border-4 border-[#ff4e33] border-t-transparent rounded-full animate-spin mb-4"></div>
-        </div>
-      }
-    >
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
       <DashboardContent />
     </Suspense>
   );

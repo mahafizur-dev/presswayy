@@ -16,13 +16,10 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-
   const [isMounted, setIsMounted] = useState(false);
 
   // Auth States
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userFullName, setUserFullName] = useState("");
-  const [userInitial, setUserInitial] = useState("");
 
   // ১. Scroll Handler
   useEffect(() => {
@@ -39,23 +36,17 @@ export default function Navbar() {
       const storedName = Cookies.get("user_name");
       if (storedName) {
         setIsLoggedIn(true);
-        setUserFullName(storedName);
-        setUserInitial(storedName.charAt(0).toUpperCase());
       } else {
         setIsLoggedIn(false);
-        setUserFullName("");
-        setUserInitial("");
       }
       setIsMounted(true);
     };
     checkAuth();
   }, []);
 
-  
   useEffect(() => {
     const handleOpenAuth = () => setIsAuthModalOpen(true);
     window.addEventListener("openAuthModal", handleOpenAuth);
-
     return () => window.removeEventListener("openAuthModal", handleOpenAuth);
   }, []);
 
@@ -114,12 +105,12 @@ export default function Navbar() {
 
           {/* 3. Right Section (Auth) */}
           <div className="flex-1 flex justify-end items-center gap-4">
-            {/* Desktop Auth Section */}
             <div className="hidden md:flex items-center gap-4 min-w-[120px] justify-end">
               {!isMounted ? (
                 <div className="w-[100px] h-[40px] bg-gray-50 animate-pulse rounded-sm"></div>
               ) : isLoggedIn ? (
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-6">
+                  {/* Dashboard Link */}
                   <Link
                     href="/dashboard"
                     className="text-[#0a1435] font-medium hover:text-[#ff4e33] flex items-center gap-2 transition-colors"
@@ -127,23 +118,13 @@ export default function Navbar() {
                     <LayoutDashboard size={18} /> Dashboard
                   </Link>
 
-                  <div className="flex items-center gap-3 ml-2 border-l pl-4 border-gray-200">
-                    <div className="text-right">
-                      <p className="text-sm font-bold text-[#0a1435] leading-none">
-                        {userFullName}
-                      </p>
-                    </div>
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#2EC866] to-[#0a1435] flex items-center justify-center text-white font-bold text-lg shadow-sm">
-                      {userInitial}
-                    </div>
-                    <button
-                      onClick={handleLogout}
-                      className="text-gray-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-full transition-colors ml-1"
-                      title="Logout"
-                    >
-                      <LogOut size={20} />
-                    </button>
-                  </div>
+                  {/* 💡 প্রোফাইল সেকশন রিমুভ করা হয়েছে, শুধু লগআউট বাটন রাখা হয়েছে */}
+                  <button
+                    onClick={handleLogout}
+                    className="text-gray-500 font-medium hover:text-red-500 flex items-center gap-1.5 transition-colors text-sm border-l pl-5 border-gray-200"
+                  >
+                    <LogOut size={16} /> Logout
+                  </button>
                 </div>
               ) : (
                 <button
@@ -185,7 +166,6 @@ export default function Navbar() {
               </Link>
             ))}
 
-            {/* Mobile Auth Section */}
             {isMounted &&
               (isLoggedIn ? (
                 <div className="mt-2 border-t border-gray-100 pt-4 flex flex-col gap-3">
@@ -218,7 +198,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Auth Modal */}
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}

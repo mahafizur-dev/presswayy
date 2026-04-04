@@ -33,8 +33,11 @@ function DashboardContent() {
     logout,
   } = usePortalStore();
 
+  // ১. স্ক্রল টু টপ ফিক্স
   useEffect(() => {
     setIsMounted(true);
+    // পেজ লোড হওয়ার সাথে সাথে স্ক্রল একদম উপরে নিয়ে যাবে
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, []);
 
   useEffect(() => {
@@ -49,7 +52,17 @@ function DashboardContent() {
     const payStatus = searchParams.get("payment");
 
     const timeoutId = setTimeout(() => {
+      // ডেটা ইনিশিয়ালাইজ করা
       initializeData(payStatus);
+
+      // ২. বর্তমান বা লাস্ট একটিভ স্টেপ খুঁজে বের করা এবং সেটি অটো ওপেন করা
+      const activeStepIndex = steps.findIndex(
+        (step) => step.status === "active",
+      );
+      if (activeStepIndex !== -1) {
+        // সরাসরি Zustand স্টেট আপডেট করে ওই স্টেপটি ওপেন করা
+        usePortalStore.setState({ openStepIndex: activeStepIndex });
+      }
     }, 0);
 
     // Handle Toasts and URL Cleaning
@@ -64,6 +77,7 @@ function DashboardContent() {
     }
 
     return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted, searchParams, pathname, initializeData]);
 
   const onLogoutClick = () => {
@@ -142,7 +156,9 @@ function DashboardContent() {
 
         <div className="section-label text-xl font-bold text-slate-800 mb-6">
           Your Onboarding Journey <br />
-          For any queries : +880 1886-168979
+          <span className="text-sm font-normal text-slate-500">
+            For any queries : +880 1886-168979
+          </span>
         </div>
 
         {/* Timeline */}
@@ -262,13 +278,12 @@ function DashboardContent() {
   );
 }
 
-
 export default function ClientPortalPage() {
   return (
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center bg-slate-50 text-slate-500">
-          Loading Dashboard...
+          <div className="w-8 h-8 border-4 border-[#ff4e33] border-t-transparent rounded-full animate-spin"></div>
         </div>
       }
     >

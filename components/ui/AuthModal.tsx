@@ -199,7 +199,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     setTimeout(() => otpRefs.current[0]?.focus(), 100);
   };
 
-  // 💡 FIX 3: Forgot Password বাটনের জন্য ফাংশন
   const handleForgotPassword = async () => {
     setIsLoading(true);
     setErrorMessage("");

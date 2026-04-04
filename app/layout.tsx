@@ -8,8 +8,11 @@ import Footer from "@/components/layout/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Presswayy | Fast & Modern Platform",
+  title: "Presswayy | Your business inbox empowered",
   description: "Ultra-fast, modern and responsive service-based website.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
