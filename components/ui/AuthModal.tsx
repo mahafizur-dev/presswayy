@@ -22,7 +22,6 @@ import {
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon: React.ElementType;
   showPasswordToggle?: boolean;
@@ -68,19 +67,21 @@ interface AuthModalProps {
   onClose: () => void;
 }
 
-type ViewState = "phone" | "password" | "otp" | "signup";
+type ViewState = "phone" | "password" | "otp" | "signup" | "reset_password";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const [view, setView] = useState<ViewState>("phone");
+  const [otpPurpose, setOtpPurpose] = useState<"signup" | "forgot_password">(
+    "signup",
+  );
+
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // 💡 Hydration Fix
   const [isMounted, setIsMounted] = useState(false);
-
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -111,15 +112,12 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     setShowPassword(false);
   }, []);
 
-  // 💡 Hydration Logic
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Timer Logic
   useEffect(() => {
     if (!isMounted) return;
-
     let timerId: NodeJS.Timeout;
     if (timeLeft > 0 && view === "otp") {
       timerId = setTimeout(() => setTimeLeft((prev) => prev - 1), 1000);
@@ -129,20 +127,16 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     };
   }, [timeLeft, view, isMounted]);
 
-  // Keyboard and Mount Logic
   useEffect(() => {
     if (!isMounted) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && !isLoading) onClose();
     };
-
     if (isOpen) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.style.overflow = "unset";
-      // 💡 Safe reset when modal closes
       const timeoutId = setTimeout(resetForm, 300);
       return () => clearTimeout(timeoutId);
     }
@@ -175,6 +169,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       if (data.exists) {
         setView("password");
       } else {
+        setOtpPurpose("signup"); 
         await triggerSendOtp();
       }
     } catch (err) {
@@ -204,6 +199,20 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     setTimeout(() => otpRefs.current[0]?.focus(), 100);
   };
 
+  // 💡 FIX 3: Forgot Password বাটনের জন্য ফাংশন
+  const handleForgotPassword = async () => {
+    setIsLoading(true);
+    setErrorMessage("");
+    try {
+      setOtpPurpose("forgot_password");
+      await triggerSendOtp();
+    } catch (err) {
+      setErrorMessage("Failed to send reset code. Try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handlePasswordLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
@@ -225,12 +234,20 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           data.paymentStatus,
           data.meetingStatus,
           data.meetingDesc,
+          "/dashboard",
         );
       } else {
         throw new Error(data.message || "Incorrect password.");
       }
     } catch (err) {
-      setErrorMessage(err instanceof Error ? err.message : "Login failed.");
+      let errorMsg = err instanceof Error ? err.message : "Login failed.";
+      if (
+        errorMsg.includes("Error in workflow") ||
+        errorMsg.includes("workflow")
+      ) {
+        errorMsg = "Incorrect password. Please try again.";
+      }
+      setErrorMessage(errorMsg);
     } finally {
       setIsLoading(false);
     }
@@ -249,13 +266,50 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       });
       const data = await res.json();
       if (data.status === "verified" || data.success) {
-        setView("signup");
+        if (otpPurpose === "forgot_password") {
+          setView("reset_password");
+          setFormData((prev) => ({ ...prev, password: "" })); 
+        } else {
+          setView("signup");
+        }
       } else {
         throw new Error(data.message || "Invalid OTP.");
       }
     } catch (err) {
       setErrorMessage(
         err instanceof Error ? err.message : "Verification failed.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleResetPasswordSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+  ) => {
+    e.preventDefault();
+    if (formData.password.length < 6)
+      return setErrorMessage("Password must be at least 6 characters.");
+
+    setIsLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phone: formData.phone.trim(),
+          newPassword: formData.password.trim(),
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to reset password.");
+
+      toast.success("Password reset successful! Please log in.");
+      setView("password");
+      setFormData((prev) => ({ ...prev, password: "" }));
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error ? err.message : "Could not reset password.",
       );
     } finally {
       setIsLoading(false);
@@ -285,6 +339,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         "Unpaid",
         "Pending",
         "",
+        "/welcome",
       );
     } catch (err) {
       setErrorMessage(
@@ -301,17 +356,15 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     paymentStatus: string = "Unpaid",
     meetingStatus: string = "Pending",
     meetingDesc: string = "",
+    redirectUrl: string = "/dashboard",
   ) => {
     Cookies.set("is_logged_in", "true", { expires: 7 });
     Cookies.set("user_name", userName, { expires: 7 });
     Cookies.set("user_phone", formData.phone, { expires: 7 });
     if (bizName) Cookies.set("business_name", bizName, { expires: 7 });
-
     if (paymentStatus === "Paid") {
       Cookies.set("payment_status", "Paid", { expires: 30 });
     }
-
-    // 💡 FIX: Meeting status and desc properly set
     Cookies.set("meeting_status", meetingStatus, { expires: 30 });
     if (
       (meetingStatus === "Scheduled" || meetingStatus === "Approved") &&
@@ -319,14 +372,12 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     ) {
       Cookies.set("meeting_desc", meetingDesc, { expires: 30 });
     }
-
     toast.success(`Welcome, ${userName}!`);
+    onClose();
     setTimeout(() => {
-      router.push("/dashboard");
-    }, 1000);
+      router.push(redirectUrl);
+    }, 500);
   };
-
-  // --- OTP Input Helpers ---
 
   const handleOtpChange = (value: string, index: number) => {
     if (isNaN(Number(value))) return;
@@ -355,7 +406,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   const formatTime = (s: number) =>
     `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
 
-  if (!isMounted || !isOpen) return null; // 💡 Safe return after Hydration
+  if (!isMounted || !isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 font-sans">
@@ -381,6 +432,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
               {view === "password" && (
                 <Lock className="text-[#FF5733] -rotate-3" size={28} />
               )}
+              {view === "reset_password" && (
+                <Lock className="text-[#FF5733] -rotate-3" size={28} />
+              )}
               {view === "otp" && (
                 <ShieldCheck className="text-[#FF5733] -rotate-3" size={28} />
               )}
@@ -393,18 +447,22 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 ? "Presswayy Login"
                 : view === "password"
                   ? "Welcome Back!"
-                  : view === "otp"
-                    ? "Verify Code"
-                    : "Business Details"}
+                  : view === "reset_password"
+                    ? "Reset Password"
+                    : view === "otp"
+                      ? "Verify Code"
+                      : "Business Details"}
             </h2>
             <p className="text-slate-500 text-sm mt-2">
               {view === "phone"
                 ? "Enter mobile to continue"
                 : view === "password"
                   ? `Enter password for ${formData.phone}`
-                  : view === "otp"
-                    ? `Code sent to ${formData.phone}`
-                    : "Setup your workspace"}
+                  : view === "reset_password"
+                    ? "Create a new secure password"
+                    : view === "otp"
+                      ? `Code sent to ${formData.phone}`
+                      : "Setup your workspace"}
             </p>
           </div>
 
@@ -473,9 +531,12 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 >
                   <ArrowLeft size={14} /> Back
                 </button>
+                {/* 💡 FIX 6: Forgot Password বাটনে ক্লিক ইভেন্ট অ্যাড করা হলো */}
                 <button
                   type="button"
-                  className="text-sm text-[#ff4e33] font-semibold hover:underline"
+                  onClick={handleForgotPassword}
+                  disabled={isLoading}
+                  className="text-sm text-[#ff4e33] font-semibold hover:underline disabled:opacity-50"
                 >
                   Forgot?
                 </button>
@@ -489,6 +550,39 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                   <Loader2 className="w-5 h-5 animate-spin" />
                 ) : (
                   "Sign In"
+                )}
+              </button>
+            </form>
+          )}
+
+          {/* 💡 FIX 7: নতুন Reset Password ফর্ম */}
+          {view === "reset_password" && (
+            <form
+              onSubmit={handleResetPasswordSubmit}
+              className="space-y-4 animate-in slide-in-from-right-4 fade-in"
+            >
+              <CustomInput
+                icon={Lock}
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="New Password"
+                required
+                autoFocus
+                value={formData.password}
+                onChange={handleInputChange}
+                showPasswordToggle
+                onTogglePassword={() => setShowPassword(!showPassword)}
+                isPasswordVisible={showPassword}
+              />
+              <button
+                type="submit"
+                disabled={isLoading || formData.password.length < 6}
+                className="w-full bg-[#ff4e33] text-white font-bold py-4 rounded-xl shadow-lg active:scale-[0.98] transition-all disabled:opacity-60"
+              >
+                {isLoading ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  "Update Password"
                 )}
               </button>
             </form>

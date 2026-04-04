@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
     let amount = 0;
     if (plan === "monthly") {
-      amount = 3000;
+      amount = 10;
     } else if (plan === "yearly") {
       amount = 29500;
     } else {
