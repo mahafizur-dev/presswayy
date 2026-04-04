@@ -67,7 +67,7 @@ function PaymentDetails() {
       {/* Action Buttons */}
       <div className="space-y-3">
         <Link
-          href="/dashboard"
+          href="/dashboard?payment=success"
           className="flex items-center justify-center gap-2 w-full bg-[#ff4e33] hover:bg-[#e63e26] text-white font-medium py-3.5 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
         >
           Back to Dashboard <ArrowRight className="w-4 h-4" />

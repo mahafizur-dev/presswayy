@@ -48,7 +48,6 @@ function DashboardContent() {
 
     const payStatus = searchParams.get("payment");
 
-    // Defer state update to avoid cascading render error
     const timeoutId = setTimeout(() => {
       initializeData(payStatus);
     }, 0);
@@ -65,7 +64,6 @@ function DashboardContent() {
     }
 
     return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted, searchParams, pathname, initializeData]);
 
   const onLogoutClick = () => {
