@@ -678,7 +678,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 icon={Mail}
                 type="email"
                 name="email"
-                placeholder="Email (Optional)"
+                placeholder="Email Address"
                 value={formData.email}
                 onChange={handleInputChange}
               />
