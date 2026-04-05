@@ -64,7 +64,8 @@ export default function Navbar() {
     window.location.href = "/";
   };
 
-  if (pathname?.startsWith("/dashboard")) return null;
+  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/welcome"))
+    return null;
 
   return (
     <>
