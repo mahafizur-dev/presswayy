@@ -147,30 +147,56 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
   }, [isOpen, onClose, isLoading, resetForm, isMounted]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    let { name, value } = e.target;
+
+    // Only allow numbers and a single '+' at the beginning for the phone field
+    if (name === "phone") {
+      value = value.replace(/(?!^)\+/g, "").replace(/[^\d+]/g, "");
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   // --- API Handlers ---
 
   const handlePhoneSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (formData.phone.length < 11)
-      return setErrorMessage("Please enter a valid 11-digit number.");
+
+    const phoneStr = formData.phone.trim();
+
+    // Bangladeshi Phone Validation Regex: Matches 01..., 8801..., or +8801...
+    const bdPhoneRegex = /^(?:\+?88)?(01[3-9]\d{8})$/;
+    const match = phoneStr.match(bdPhoneRegex);
+
+    if (!match) {
+      return setErrorMessage(
+        "Please enter a valid Bangladeshi mobile number (e.g. 01XXXXXXXXX).",
+      );
+    }
+
+    // Normalize to standard +880 format for backend consistency
+    const formattedPhone = `+88${match[1]}`;
+
+    // Update the state so the rest of the application uses the normalized number
+    setFormData((prev) => ({ ...prev, phone: formattedPhone }));
+
     setIsLoading(true);
     setErrorMessage("");
+
     try {
       const res = await fetch(`${API_BASE}/check-user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: formData.phone.trim() }),
+        body: JSON.stringify({ phone: formattedPhone }),
       });
       const data = await res.json();
 
       if (data.exists) {
         setView("password");
       } else {
-        setOtpPurpose("signup"); 
-        await triggerSendOtp();
+        setOtpPurpose("signup");
+        // Pass the formattedPhone directly since React state update is asynchronous
+        await triggerSendOtp(false, formattedPhone);
       }
     } catch (err) {
       setErrorMessage(
@@ -183,12 +209,15 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     }
   };
 
-  const triggerSendOtp = async (isResend = false) => {
+  // Added phoneOverride parameter to handle race conditions during initial submit
+  const triggerSendOtp = async (isResend = false, phoneOverride?: string) => {
+    const targetPhone = phoneOverride || formData.phone.trim();
+
     const res = await fetch(`${API_BASE}/otp-send`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        phone: formData.phone.trim(),
+        phone: targetPhone,
         action: "send_otp",
       }),
     });
@@ -267,7 +296,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       if (data.status === "verified" || data.success) {
         if (otpPurpose === "forgot_password") {
           setView("reset_password");
-          setFormData((prev) => ({ ...prev, password: "" })); 
+          setFormData((prev) => ({ ...prev, password: "" }));
         } else {
           setView("signup");
         }
@@ -481,16 +510,18 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 icon={Phone}
                 type="tel"
                 name="phone"
-                placeholder="01XXXXXXXXX"
+                placeholder="+8801XXXXXXXXX"
                 required
                 autoFocus
-                maxLength={11}
+                maxLength={15}
                 value={formData.phone}
                 onChange={handleInputChange}
               />
               <button
                 type="submit"
-                disabled={isLoading || formData.phone.length < 11}
+                disabled={
+                  isLoading || formData.phone.replace(/\D/g, "").length < 11
+                }
                 className="w-full bg-[#ff4e33] hover:bg-[#e63e26] text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2 disabled:opacity-60 active:scale-[0.98]"
               >
                 {isLoading ? (
@@ -530,7 +561,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 >
                   <ArrowLeft size={14} /> Back
                 </button>
-                {/* 💡 FIX 6: Forgot Password বাটনে ক্লিক ইভেন্ট অ্যাড করা হলো */}
                 <button
                   type="button"
                   onClick={handleForgotPassword}
@@ -554,7 +584,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             </form>
           )}
 
-          {/* 💡 FIX 7: নতুন Reset Password ফর্ম */}
           {view === "reset_password" && (
             <form
               onSubmit={handleResetPasswordSubmit}
