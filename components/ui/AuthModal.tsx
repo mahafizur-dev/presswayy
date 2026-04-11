@@ -710,6 +710,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 value={formData.email}
                 onChange={handleInputChange}
               />
+                           
               <CustomInput
                 icon={Lock}
                 type={showPassword ? "text" : "password"}
