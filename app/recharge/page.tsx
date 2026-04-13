@@ -42,7 +42,7 @@ function RechargeForm() {
         body: JSON.stringify({
           client_id: clientId.trim(),
           amount: finalAmount,
-          plan_choice: "PAYG", // যেহেতু এখন একটাই অপশন
+          // plan_choice আর পাঠানোর দরকার নেই
         }),
       });
 
