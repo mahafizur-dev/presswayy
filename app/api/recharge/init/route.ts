@@ -9,7 +9,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           success: false,
-          error: "Missing required fields (client_id, amount)",
+          error: "Missing required fields: client_id or amount",
         },
         { status: 400 },
       );
@@ -18,13 +18,48 @@ export async function POST(req: Request) {
     const store_id = process.env.NEXT_PUBLIC_SSL_STORE_ID;
     const store_passwd = process.env.NEXT_PUBLIC_SSL_STORE_PASSWD;
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const n8nApiUrl = process.env.NEXT_PUBLIC_API_URL;
     const is_live = process.env.NEXT_PUBLIC_SSL_IS_LIVE === "true";
 
-    if (!store_id || !store_passwd || !baseUrl) {
-      console.error("Missing SSLCommerz Credentials in .env.local");
+    if (!store_id || !store_passwd || !baseUrl || !n8nApiUrl) {
+      console.error("Missing Environment Variables");
       return NextResponse.json(
         { success: false, error: "Server configuration missing" },
         { status: 500 },
+      );
+    }
+
+    let cusName = "Presswayy Client";
+    let cusEmail = "client@presswayy.com";
+    let cusPhone = "01700000000";
+
+    try {
+      const clientInfoUrl = `${n8nApiUrl}/get-client-info`;
+
+      const infoResponse = await fetch(clientInfoUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ client_id: client_id }),
+      });
+
+      if (infoResponse.ok) {
+        const clientData = await infoResponse.json();
+
+        if (clientData.name) cusName = clientData.name;
+        if (clientData.email) cusEmail = clientData.email;
+        if (clientData.phone) cusPhone = clientData.phone;
+
+        console.log(
+          "✅ Client data fetched successfully :",
+          clientData,
+        );
+      } else {
+        console.warn("⚠️fallback data error.");
+      }
+    } catch (infoError) {
+      console.error(
+        "❌ Error fetching client info , using fallback data.",
+        infoError,
       );
     }
 
@@ -41,25 +76,27 @@ export async function POST(req: Request) {
       cancel_url: `${baseUrl}/api/recharge/cancel`,
       ipn_url: `${baseUrl}/api/recharge/ipn`,
       shipping_method: "No",
-      product_name: "Presswayy Wallet Recharge", // ফিক্সড নাম দিয়ে দিলাম
+      product_name: "Presswayy Wallet Recharge",
       product_category: "Recharge",
       product_profile: "general",
-      cus_name: "Presswayy Client",
-      cus_email: "client@presswayy.com",
+      cus_name: cusName,
+      cus_email: cusEmail,
+      cus_phone: cusPhone,
       cus_add1: "Dhaka",
       cus_city: "Dhaka",
       cus_postcode: "1000",
       cus_country: "Bangladesh",
-      cus_phone: "01700000000",
-      value_a: client_id, // শুধু client_id টাই রাখলাম
+      value_a: client_id,
     };
 
-    const data = new URLSearchParams(payload);
-    const apiUrl = is_live
+    const data = new URLSearchParams(payload as Record<string, string>);
+
+    const sslUrl = is_live
       ? "https://securepay.sslcommerz.com/gwprocess/v4/api.php"
       : "https://sandbox.sslcommerz.com/gwprocess/v4/api.php";
 
-    const response = await fetch(apiUrl, {
+    // ৫. SSLCommerz-এ রিকোয়েস্ট পাঠানো
+    const response = await fetch(sslUrl, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: data.toString(),
@@ -73,6 +110,7 @@ export async function POST(req: Request) {
         redirect: apiResponse.GatewayPageURL,
       });
     } else {
+      console.error("SSLCommerz Init Error:", apiResponse);
       return NextResponse.json(
         {
           success: false,
@@ -82,6 +120,7 @@ export async function POST(req: Request) {
       );
     }
   } catch (error) {
+    console.error("Payment API Error:", error);
     return NextResponse.json(
       { success: false, error: "Internal Server Error" },
       { status: 500 },

@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
+    const amount = formData.get("amount");
     const tran_id = formData.get("tran_id");
     const client_id = formData.get("value_a");
 
@@ -12,7 +13,7 @@ export async function POST(req: Request) {
 
     // plan=... প্যারামিটারটি ইউআরএল থেকে বাদ দিয়ে দিলাম
     return NextResponse.redirect(
-      `${baseUrl}/recharge-success?tran_id=${tran_id}`,
+      `${baseUrl}/recharge-success?tran_id=${tran_id}&client_id=${client_id}&amount=${amount}`,
       303,
     );
   } catch (error) {

@@ -33,13 +33,25 @@ export async function POST(req: Request) {
 
     if (verifyData.status === "VALID" || verifyData.status === "VALIDATED") {
       try {
-        // ক্লিন এবং সিম্পল পেলোড
+        // 💡 আপডেট করা পেলোড: n8n-এ পাঠানোর জন্য প্রয়োজনীয় সব ইনফরমেশন যোগ করা হলো
         const ipnPayload = {
           client_id: verifyData.value_a,
           amount: verifyData.amount,
           tran_id: verifyData.tran_id,
           payment_status: "Paid",
           source: "Recharge",
+
+          // ইউজারের বিস্তারিত তথ্য (যেটা আমরা init ফাইল থেকে পাঠিয়েছিলাম)
+          cus_name: verifyData.cus_name || "N/A",
+          cus_email: verifyData.cus_email || "N/A",
+          cus_phone: verifyData.cus_phone || "N/A",
+
+          // ব্যাংকের ট্রানজেকশন তথ্য (হিসাব রাখার জন্য)
+          bank_tran_id: verifyData.bank_tran_id || "N/A",
+          card_type: verifyData.card_type || "N/A", // বিকাশ, নগদ, নাকি কার্ড তা বোঝার জন্য
+          tran_date: verifyData.tran_date || "N/A",
+          store_amount: verifyData.store_amount || verifyData.amount, // SSLCommerz ফি কাটার পর আপনার অ্যাকাউন্টে যে টাকাটা ঢুকবে
+          currency: verifyData.currency || "BDT",
         };
 
         const apiUrl = process.env.NEXT_PUBLIC_API_URL;
