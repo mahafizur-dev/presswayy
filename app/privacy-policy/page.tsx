@@ -14,25 +14,7 @@ import {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-700">
-      {/* --- Simple Navigation --- */}
-      <nav className="border-b border-slate-100 bg-white sticky top-0 z-50">
-        <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-slate-500 hover:text-[#ff4e33] transition-colors"
-          >
-            <ArrowLeft size={18} />
-            <span className="font-medium text-sm">Back to Home</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="text-[#ff4e33]" size={20} />
-            <span className="font-bold text-slate-900 tracking-tight">
-              Presswayy Privacy
-            </span>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-white font-sans text-slate-700 pt-24">
 
       {/* --- Hero Section --- */}
       <div className="bg-slate-50/50 border-b border-slate-100">
@@ -154,35 +136,11 @@ export default function PrivacyPolicy() {
             </section>
 
 
-            {/* 13. Contact */}
-            <section className="text-center py-12 border-t border-slate-100">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4">
-                Questions or Inquiries?
-              </h2>
-              <p className="text-slate-500 mb-8">
-                For any privacy-related inquiries, please contact Presswayy,
-                powered by CLAREx Tech Ltd.
-              </p>
-              <Link
-                href="mailto:hello@mediumturquoise-goldfinch-988825.hostingersite.com"
-                className="inline-flex items-center gap-2 bg-[#ff4e33] hover:bg-[#e63e26] text-white font-bold px-8 py-4 rounded-full transition-all shadow-lg shadow-orange-200"
-              >
-                Contact Privacy Team
-              </Link>
-            </section>
+            
           </div>
         </div>
       </div>
 
-      {/* --- Simple Footer --- */}
-      <footer className="bg-slate-50 border-t border-slate-100 py-12">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-sm text-slate-400">
-            © {new Date().getFullYear()} Presswayy. All rights reserved. <br />
-            Operated by CLAREx Tech Ltd.
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

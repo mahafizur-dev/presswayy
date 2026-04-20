@@ -99,13 +99,18 @@ export default function Footer() {
               Company
             </h3>
             <ul className="flex flex-col gap-2.5">
-              {["Pricing", "Platform", "Solutions", "Resources"].map((item) => (
-                <li key={item}>
+              {[
+                { name: "Pricing", href: "#pricing" },
+                { name: "Platform", href: "#platform" },
+                { name: "Solutions", href: "#solutions" },
+                { name: "Resources", href: "#resources" },
+              ].map((item) => (
+                <li key={item.name}>
                   <Link
-                    href="#"
+                    href={item.href}
                     className="text-[14px] font-medium text-white hover:text-[#ff5a36] transition-colors"
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </li>
               ))}
@@ -164,17 +169,17 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex flex-wrap gap-x-6 gap-y-2">
           {[
-            "About Us",
-            "Contact Us",
-            "Privacy Policy",
-            "Terms & Conditions",
+            { name: "About Us", href: "/about-us" },
+            { name: "Contact Us", href: "/contact" },
+            { name: "Privacy Policy", href: "/privacy-policy" },
+            { name: "Terms & Conditions", href: "/terms-conditions" },
           ].map((item) => (
             <Link
-              key={item}
-              href="#"
+              key={item.name}
+              href={item.href}
               className="text-[12px] sm:text-[13px] font-semibold text-white hover:text-[#ff5a36] transition-colors"
             >
-              {item}
+              {item.name}
             </Link>
           ))}
         </div>
