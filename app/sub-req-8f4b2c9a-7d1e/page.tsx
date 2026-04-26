@@ -36,6 +36,8 @@ export default function SubscriptionPage() {
       access_token: "",
       "per massage rate": "",
       "credit limit": "",
+      "order sheet url": "",
+      "database sheet url": "",
       "Business Type": "",
       Subcription: "",
       "Sales Channel": "",
@@ -156,6 +158,23 @@ export default function SubscriptionPage() {
                 placeholder="1000"
                 error={errors["credit limit"]?.message}
                 {...register("credit limit")}
+              />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <FormInput
+                label="Order Sheet URL"
+                type="url"
+                placeholder="https://docs.google.com/spreadsheets/..."
+                error={errors["order sheet url"]?.message}
+                {...register("order sheet url")}
+              />
+              <FormInput
+                label="Database Sheet URL"
+                type="url"
+                placeholder="https://docs.google.com/spreadsheets/..."
+                error={errors["database sheet url"]?.message}
+                {...register("database sheet url")}
               />
             </div>
 

@@ -12,6 +12,12 @@ export const subscriptionFormSchema = z.object({
   access_token: z.string().optional(),
   "per massage rate": z.string().optional(),
   "credit limit": z.string().optional(),
+  "order sheet url": z
+    .union([z.literal(""), z.string().url("Please enter a valid URL")])
+    .optional(),
+  "database sheet url": z
+    .union([z.literal(""), z.string().url("Please enter a valid URL")])
+    .optional(),
   "Business Type": z.string().min(1, "Please select a Business Type"),
   Subcription: z.string().min(1, "Please select a Subscription plan"), // cspell:disable-line
   "Sales Channel": z.string().min(1, "Please select a Sales Channel"),
