@@ -38,6 +38,7 @@ export default function SubscriptionPage() {
       "credit limit": "",
       "order sheet url": "",
       "database sheet url": "",
+      "cost sheet url": "",
       "Business Type": "",
       Subcription: "",
       "Sales Channel": "",
@@ -176,6 +177,15 @@ export default function SubscriptionPage() {
                 error={errors["database sheet url"]?.message}
                 {...register("database sheet url")}
               />
+              <div className="sm:col-span-2">
+                <FormInput
+                  label="Cost Sheet URL"
+                  type="url"
+                  placeholder="https://docs.google.com/spreadsheets/..."
+                  error={errors["cost sheet url"]?.message}
+                  {...register("cost sheet url")}
+                />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

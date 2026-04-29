@@ -69,8 +69,8 @@ export default function SolutionsSection() {
             ))}
           </div>
 
-          {/* Image */}
-          <div className="w-full max-w-5xl mx-auto flex justify-center items-center px-4 sm:px-4 md:px-8">
+          
+          {/* <div className="w-full max-w-5xl mx-auto flex justify-center items-center px-4 sm:px-4 md:px-8">
             <Image
               src={
                 "https://res.cloudinary.com/drchxbdit/image/upload/v1774606339/solution_wuwsem.png"
@@ -81,7 +81,7 @@ export default function SolutionsSection() {
               className="w-full h-auto object-contain"
               priority
             />
-          </div>
+          </div> */}
         </div>
       </section>
     </div>
