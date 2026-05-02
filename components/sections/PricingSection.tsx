@@ -7,7 +7,7 @@ export default function PricingSection() {
   const [customers, setCustomers] = useState<number>(0);
   const [sliderVal, setSliderVal] = useState<number>(0);
 
-  const AI = 0.89;
+  const AI = 1;
   const MO = 3000;
   const YR = 29500;
   const YMO = Math.round(YR / 12);
@@ -80,7 +80,7 @@ export default function PricingSection() {
             <span className="text-[#F36525]">actually use</span>
           </div>
           <div className="text-[14px] md:text-[11.5px] text-[#6B6B65] mt-1 md:mt-0.5 text-center md:text-left px-2 md:px-0">
-            Flat subscription + Tk.0.89 AI cost per customer.
+            Flat subscription + Tk.1 {"\u00B1"} AI cost per customer.
           </div>
         </div>
 
