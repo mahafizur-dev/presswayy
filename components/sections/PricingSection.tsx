@@ -126,7 +126,7 @@ export default function PricingSection() {
                 </span>
               </div>
               <div className="flex items-center gap-1 text-[13px] md:text-[12px] text-[#6B6B65]">
-                & approx Tk.0.89 per customer (AI cost)
+                & approx Tk.1 {"\u00B1"} per customer (AI cost)
               </div>
               <div
                 className={`inline-flex items-center gap-1 mt-2 md:mt-1 px-2.5 py-1 md:px-2 md:py-[2px] rounded-full text-[11px] md:text-[10px] font-semibold text-[#F36525] md:text-green-400 bg-green-900/10 border border-green-800/20 transition-opacity duration-300 ${isYearly ? "opacity-100" : "opacity-0 pointer-events-none"}`}
