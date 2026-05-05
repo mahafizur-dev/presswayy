@@ -15,12 +15,12 @@ import {
   Phone,
   CheckCircle2,
   XCircle,
+  Rocket,
 } from "lucide-react";
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-700 pt-24">
-      
       {/* --- Hero Section --- */}
       <div className="bg-slate-50/50 border-b border-slate-100">
         <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
@@ -188,14 +188,109 @@ export default function Page() {
               </section>
             </div>
 
-            {/* 5. Limitation of Liability */}
+            {/* 5. Implementation & Performance */}
+            <section className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 bg-purple-50 rounded-lg text-purple-600">
+                  <Rocket size={24} />
+                </div>
+                <h2 className="text-2xl font-bold text-slate-900 m-0">
+                  5. Implementation & Performance
+                </h2>
+              </div>
+              <div className="space-y-6 text-slate-600">
+                <p className="leading-relaxed">
+                  Once the client provides all required information, including
+                  but not limited to product details, FAQs, and brand
+                  guidelines, and Presswayy confirms receipt of complete and
+                  accurate data, the implementation timeline will begin.
+                </p>
+                <p className="leading-relaxed">
+                  An{" "}
+                  <strong className="text-slate-800">
+                    initial test version
+                  </strong>{" "}
+                  of the AI system will be delivered within{" "}
+                  <strong className="text-slate-800">7 working days</strong>{" "}
+                  from the date of receiving all required information.
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-6 mt-6">
+                  {/* Testing Phase Box */}
+                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <h3 className="font-bold text-slate-900 mb-3">
+                      After the initial test:
+                    </h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-2 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0"></div>
+                        <span>
+                          If the client confirms that everything is
+                          satisfactory, the AI system will be deployed (live) on
+                          the client’s business platform.
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0"></div>
+                        <span>
+                          If the client provides feedback or requests changes,
+                          Presswayy will continue working on those feedback
+                          points and provide updated testing versions
+                          accordingly until the system reaches an acceptable
+                          standard.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Expectations Box */}
+                  <div className="bg-orange-50/50 p-5 rounded-2xl border border-orange-100">
+                    <h3 className="font-bold text-slate-900 mb-3">
+                      The client acknowledges and agrees that:
+                    </h3>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-2 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#ff4e33] mt-2 shrink-0"></div>
+                        <span>
+                          The AI system may not perform perfectly on the first
+                          day of deployment.
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#ff4e33] mt-2 shrink-0"></div>
+                        <span>
+                          Minor errors, inconsistencies, or unexpected responses
+                          may occur initially.
+                        </span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#ff4e33] mt-2 shrink-0"></div>
+                        <span>
+                          Continuous improvement and training are required to
+                          optimize performance.
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 text-sm text-blue-900 mt-4">
+                  Typically, the AI system may take approximately{" "}
+                  <strong>1 to 3 months</strong> of ongoing training and
+                  refinement to achieve optimal and stable performance,
+                  depending on usage, feedback, and data quality.
+                </div>
+              </div>
+            </section>
+
+            {/* 6. Limitation of Liability */}
             <section className="bg-[#0a1435] text-white p-8 rounded-3xl shadow-xl">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 bg-white/10 rounded-lg text-[#ff4e33]">
                   <AlertTriangle size={24} />
                 </div>
                 <h2 className="text-2xl font-bold m-0 text-white">
-                  5. Limitation of Liability
+                  6. Limitation of Liability
                 </h2>
               </div>
               <ul className="space-y-4">
@@ -216,14 +311,14 @@ export default function Page() {
               </ul>
             </section>
 
-            {/* 6. Prohibited Activities */}
+            {/* 7. Prohibited Activities */}
             <section className="border border-red-100 bg-red-50/30 p-6 md:p-8 rounded-3xl">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-red-100 rounded-lg text-red-600">
                   <Ban size={20} />
                 </div>
                 <h2 className="text-2xl font-bold text-slate-900 m-0">
-                  6. Prohibited Activities
+                  7. Prohibited Activities
                 </h2>
               </div>
               <p className="text-slate-700 font-medium mb-4">
@@ -246,49 +341,83 @@ export default function Page() {
               </ul>
             </section>
 
-            {/* Termination & Amendments */}
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Termination */}
-              <section className="bg-slate-50 p-6 rounded-2xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <Power className="text-slate-700" size={20} />
-                  <h2 className="text-xl font-bold text-slate-900 m-0">
-                    Termination
-                  </h2>
+            {/* 8. Suspension & Termination (NEW SECTION) */}
+            <section className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 bg-rose-50 rounded-lg text-rose-600">
+                  <Power size={24} />
                 </div>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-2 text-sm text-slate-600">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
-                    <span>
-                      Either party may terminate services with thirty (30) days’
-                      written notice.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm text-slate-600">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
-                    <span>
-                      Presswayy may suspend or terminate services immediately in
-                      case of misuse or breach of terms.
-                    </span>
-                  </li>
-                </ul>
-              </section>
+                <h2 className="text-2xl font-bold text-slate-900 m-0">
+                  8. Suspension & Termination
+                </h2>
+              </div>
 
-              {/* Amendments */}
-              <section className="bg-slate-50 p-6 rounded-2xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <RefreshCw className="text-slate-700" size={20} />
-                  <h2 className="text-xl font-bold text-slate-900 m-0">
-                    Amendments
-                  </h2>
+              <div className="space-y-6 text-slate-600">
+                <p className="leading-relaxed">
+                  Presswayy reserves the right to suspend or terminate services
+                  at any time, without prior notice, if the client engages in
+                  misconduct or violates applicable laws or these Terms &
+                  Conditions.
+                </p>
+
+                <div className="bg-rose-50/40 p-5 rounded-2xl border border-rose-100">
+                  <h3 className="font-bold text-slate-900 mb-3">
+                    This includes, but is not limited to:
+                  </h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-2 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0"></div>
+                      <span>
+                        Providing false, misleading, or illegal information
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0"></div>
+                      <span>
+                        Engaging in abusive, unethical, or inappropriate
+                        behavior
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-2 shrink-0"></div>
+                      <span>
+                        Using the platform for unlawful activities, fraud, or
+                        policy violations
+                      </span>
+                    </li>
+                  </ul>
                 </div>
-                <p className="text-sm text-slate-600 leading-relaxed">
+
+                <div className="flex items-start gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                  <ShieldCheck
+                    className="text-slate-400 shrink-0 mt-0.5"
+                    size={20}
+                  />
+                  <p className="text-sm font-medium text-slate-700 m-0 leading-relaxed">
+                    In such cases, Presswayy may immediately discontinue
+                    services and close the agreement without any further
+                    obligation.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Amendments */}
+            <section className="bg-slate-50 p-6 md:p-8 rounded-3xl text-center md:text-left md:flex items-center gap-6 border border-slate-100">
+              <div className="p-4 bg-white rounded-full inline-flex text-slate-600 mb-4 md:mb-0 shadow-sm shrink-0">
+                <RefreshCw size={24} />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 mb-2 m-0">
+                  Amendments
+                </h2>
+                <p className="text-sm md:text-base text-slate-600 leading-relaxed m-0">
                   Presswayy reserves the right to amend these Terms & Conditions
                   at any time. Updates will be published on our website and
                   effective immediately upon posting.
                 </p>
-              </section>
-            </div>
+              </div>
+            </section>
 
             {/* Contact Us */}
             <section className="text-center py-12 mt-4 border-t border-slate-100">
