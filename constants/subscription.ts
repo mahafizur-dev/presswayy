@@ -19,6 +19,7 @@ export const FORM_OPTIONS = {
     "Bilkis Khatun",
     "Sadia Afroz",
     "Jannatul Nuria Mohona",
+    "Website",
   ],
   INTEGRATORS: [
     "Ruman Sarder",
@@ -28,5 +29,7 @@ export const FORM_OPTIONS = {
     "Md Sakib Hasan Rabbi",
     "Hamim Kazi",
     "Md Mahafizur Rahman",
+    "Shafiq Rahim",
+    "Tabassum Tunan",
   ],
 };
