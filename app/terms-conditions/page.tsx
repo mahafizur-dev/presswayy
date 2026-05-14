@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   XCircle,
   Rocket,
+  Clock,
 } from "lucide-react";
 
 export default function Page() {
@@ -181,7 +182,22 @@ export default function Page() {
                     />
                     <span>
                       Clients agree to pay the service fees as per the agreed
-                      pricing.
+                      pricing. For each page, the monthly service fee is BDT
+                      3,000. If the client wants to implement the same
+                      automation setup on another page without requiring any new
+                      training, business data update, service details change,
+                      price update, or workflow modification, Presswayy may
+                      allow the same setup based on feasibility. However, if the
+                      new page requires separate training, product/service
+                      information, pricing, FAQs, business rules, brand
+                      guidelines, or any other customization, it will be treated
+                      as a separate page setup and charged separately. Each page
+                      requiring setup, training, data, or customization will be
+                      charged BDT 3,000 per month. The client’s subscription
+                      period will start from the date the AI system goes live on
+                      the client’s page. All payments are non-refundable once
+                      the service, setup, training, or implementation process
+                      has started.
                     </span>
                   </li>
                 </ul>
@@ -201,84 +217,106 @@ export default function Page() {
               <div className="space-y-6 text-slate-600">
                 <p className="leading-relaxed">
                   Once the client provides all required information, including
-                  but not limited to product details, FAQs, and brand
-                  guidelines, and Presswayy confirms receipt of complete and
-                  accurate data, the implementation timeline will begin.
+                  but not limited to product/service details, FAQs, pricing,
+                  brand guidelines, policies, and required platform access, and
+                  Presswayy confirms receipt of complete and accurate data, the
+                  implementation timeline will begin.
                 </p>
                 <p className="leading-relaxed">
-                  An{" "}
+                  The{" "}
                   <strong className="text-slate-800">
-                    initial test version
+                    initial AI testing setup and live deployment
                   </strong>{" "}
-                  of the AI system will be delivered within{" "}
+                  on the client’s business page will be completed within{" "}
                   <strong className="text-slate-800">7 working days</strong>{" "}
                   from the date of receiving all required information.
                 </p>
 
-                <div className="grid md:grid-cols-2 gap-6 mt-6">
-                  {/* Testing Phase Box */}
-                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                    <h3 className="font-bold text-slate-900 mb-3">
-                      After the initial test:
-                    </h3>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0"></div>
-                        <span>
-                          If the client confirms that everything is
-                          satisfactory, the AI system will be deployed (live) on
-                          the client’s business platform.
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 shrink-0"></div>
-                        <span>
-                          If the client provides feedback or requests changes,
-                          Presswayy will continue working on those feedback
-                          points and provide updated testing versions
-                          accordingly until the system reaches an acceptable
-                          standard.
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Expectations Box */}
-                  <div className="bg-orange-50/50 p-5 rounded-2xl border border-orange-100">
-                    <h3 className="font-bold text-slate-900 mb-3">
-                      The client acknowledges and agrees that:
-                    </h3>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#ff4e33] mt-2 shrink-0"></div>
-                        <span>
-                          The AI system may not perform perfectly on the first
-                          day of deployment.
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#ff4e33] mt-2 shrink-0"></div>
-                        <span>
-                          Minor errors, inconsistencies, or unexpected responses
-                          may occur initially.
-                        </span>
-                      </li>
-                      <li className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#ff4e33] mt-2 shrink-0"></div>
-                        <span>
-                          Continuous improvement and training are required to
-                          optimize performance.
-                        </span>
-                      </li>
-                    </ul>
+                <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100 mt-6">
+                  <h3 className="font-bold text-slate-900 mb-5">
+                    After going live, the AI system will go through the
+                    following improvement phases:
+                  </h3>
+                  <div className="space-y-5">
+                    {/* Phase 1 */}
+                    <div className="flex flex-col sm:flex-row sm:items-start gap-3">
+                      <div className="bg-purple-100 text-purple-700 font-bold text-xs px-3 py-1.5 rounded shrink-0 sm:mt-0.5 w-max sm:w-24 text-center">
+                        Day 1–7
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-800 text-sm mb-1">
+                          Initial Training & Setup Phase
+                        </h4>
+                        <p className="text-sm m-0 text-slate-600 leading-relaxed">
+                          During this period, the AI system will be monitored,
+                          tested, and adjusted based on real customer
+                          conversations.
+                        </p>
+                      </div>
+                    </div>
+                    {/* Phase 2 */}
+                    <div className="flex flex-col sm:flex-row sm:items-start gap-3">
+                      <div className="bg-purple-100 text-purple-700 font-bold text-xs px-3 py-1.5 rounded shrink-0 sm:mt-0.5 w-max sm:w-24 text-center">
+                        Day 7–14
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-800 text-sm mb-1">
+                          Training & Learning Phase
+                        </h4>
+                        <p className="text-sm m-0 text-slate-600 leading-relaxed">
+                          During this period, the AI will continue learning from
+                          customer interactions, client feedback, and
+                          business-specific requirements.
+                        </p>
+                      </div>
+                    </div>
+                    {/* Phase 3 */}
+                    <div className="flex flex-col sm:flex-row sm:items-start gap-3">
+                      <div className="bg-purple-100 text-purple-700 font-bold text-xs px-3 py-1.5 rounded shrink-0 sm:mt-0.5 w-max sm:w-24 text-center">
+                        Day 14–21
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-slate-800 text-sm mb-1">
+                          Refinement Phase
+                        </h4>
+                        <p className="text-sm m-0 text-slate-600 leading-relaxed">
+                          During this period, Presswayy will refine responses,
+                          improve accuracy, and optimize the AI system for
+                          better performance.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 text-sm text-blue-900 mt-4">
-                  Typically, the AI system may take approximately{" "}
-                  <strong>1 to 3 months</strong> of ongoing training and
-                  refinement to achieve optimal and stable performance,
-                  depending on usage, feedback, and data quality.
+                {/* Expectations Box */}
+                <div className="bg-orange-50/50 p-5 rounded-2xl border border-orange-100 mt-6">
+                  <p className="text-sm text-slate-700 m-0 leading-relaxed">
+                    <strong className="text-slate-900 font-bold">
+                      The client acknowledges and agrees
+                    </strong>{" "}
+                    that the AI system may not perform perfectly from the first
+                    day of deployment. Minor errors, inconsistencies, or
+                    unexpected responses may occur initially.
+                  </p>
+                </div>
+
+                {/* Note Box */}
+                <div className="bg-blue-50/50 p-5 rounded-xl border border-blue-100 text-sm text-blue-900 mt-4 flex gap-3 items-start">
+                  <Lightbulb
+                    className="shrink-0 text-blue-500 mt-0.5"
+                    size={20}
+                  />
+                  <p className="m-0 leading-relaxed">
+                    <strong className="font-bold text-blue-950">Note:</strong>{" "}
+                    AI can never guarantee 100% perfect performance. However,
+                    with continuous training, monitoring, and refinement, the
+                    system can reach up to approximately{" "}
+                    <strong className="font-bold text-blue-950">
+                      90% accuracy
+                    </strong>{" "}
+                    depending on data quality, feedback, and usage.
+                  </p>
                 </div>
               </div>
             </section>
@@ -341,7 +379,7 @@ export default function Page() {
               </ul>
             </section>
 
-            {/* 8. Suspension & Termination (NEW SECTION) */}
+            {/* 8. Suspension & Termination */}
             <section className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-2 bg-rose-50 rounded-lg text-rose-600">
@@ -398,6 +436,55 @@ export default function Page() {
                     services and close the agreement without any further
                     obligation.
                   </p>
+                </div>
+              </div>
+            </section>
+
+            {/* 9. Updates, Corrections & Feedback */}
+            <section className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2 bg-teal-50 rounded-lg text-teal-600">
+                  <Clock size={24} />
+                </div>
+                <h2 className="text-2xl font-bold text-slate-900 m-0">
+                  9. Updates, Corrections & Feedback
+                </h2>
+              </div>
+
+              <div className="space-y-5 text-slate-600">
+                <p className="leading-relaxed">
+                  If the client provides any update, correction, or feedback
+                  after implementation, Presswayy will review and address it
+                  within{" "}
+                  <strong className="text-slate-800">1 business hour</strong>{" "}
+                  where possible.
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-6 mt-4">
+                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <h3 className="font-bold text-slate-900 mb-2 text-sm flex items-center gap-2">
+                      <CheckCircle2 size={16} className="text-teal-500" />
+                      Minor Corrections
+                    </h3>
+                    <p className="text-sm m-0 leading-relaxed">
+                      Minor corrections, such as response adjustments, spelling
+                      fixes, small information updates, or simple instruction
+                      changes, will usually be handled within this timeframe.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <h3 className="font-bold text-slate-900 mb-2 text-sm flex items-center gap-2">
+                      <RefreshCw size={16} className="text-amber-500" />
+                      Major Updates
+                    </h3>
+                    <p className="text-sm m-0 leading-relaxed">
+                      For major updates, such as new product/service training,
+                      pricing structure changes, workflow changes, policy
+                      updates, or large data modifications, additional time may
+                      be required depending on the complexity of the update.
+                    </p>
+                  </div>
                 </div>
               </div>
             </section>
