@@ -129,7 +129,7 @@ export default function App() {
             </div>
 
             {/* 3. Intellectual Property - Now spans full width */}
-            <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+            <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow w-full block">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-yellow-50 rounded-lg text-yellow-600">
                   <Lightbulb size={20} />
@@ -162,8 +162,8 @@ export default function App() {
               </ul>
             </section>
 
-            {/* 4. Payment Terms - Now spans full width on its own row */}
-            <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+            {/* 4. Payment Terms - ALWAYS on a separate row for every device */}
+            <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow w-full col-span-full block">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-green-50 rounded-lg text-green-600">
                   <CreditCard size={20} />
