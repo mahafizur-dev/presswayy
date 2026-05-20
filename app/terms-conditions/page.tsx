@@ -19,7 +19,7 @@ import {
   Clock,
 } from "lucide-react";
 
-export default function Page() {
+export default function App() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-700 pt-24">
       {/* --- Hero Section --- */}
@@ -128,81 +128,77 @@ export default function Page() {
               </section>
             </div>
 
-            {/* 3. Intellectual Property & 4. Payment Terms */}
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* 3. Intellectual Property */}
-              <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-yellow-50 rounded-lg text-yellow-600">
-                    <Lightbulb size={20} />
-                  </div>
-                  <h2 className="text-xl font-bold text-slate-900 m-0">
-                    3. Intellectual Property
-                  </h2>
+            {/* 3. Intellectual Property - Now spans full width */}
+            <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-yellow-50 rounded-lg text-yellow-600">
+                  <Lightbulb size={20} />
                 </div>
-                <ul className="space-y-3 mt-4">
-                  <li className="flex items-start gap-2 text-sm text-slate-600">
-                    <CheckCircle2
-                      className="text-emerald-500 mt-0.5 shrink-0"
-                      size={18}
-                    />
-                    <span>
-                      All AI tools, engines, and templates remain the property
-                      of Presswayy / CLAREx Tech.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm text-slate-600">
-                    <CheckCircle2
-                      className="text-emerald-500 mt-0.5 shrink-0"
-                      size={18}
-                    />
-                    <span>
-                      Any content or data provided by the client remains their
-                      sole property.
-                    </span>
-                  </li>
-                </ul>
-              </section>
+                <h2 className="text-xl font-bold text-slate-900 m-0">
+                  3. Intellectual Property
+                </h2>
+              </div>
+              <ul className="space-y-3 mt-4">
+                <li className="flex items-start gap-2 text-sm text-slate-600">
+                  <CheckCircle2
+                    className="text-emerald-500 mt-0.5 shrink-0"
+                    size={18}
+                  />
+                  <span>
+                    All AI tools, engines, and templates remain the property of
+                    Presswayy / CLAREx Tech.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-slate-600">
+                  <CheckCircle2
+                    className="text-emerald-500 mt-0.5 shrink-0"
+                    size={18}
+                  />
+                  <span>
+                    Any content or data provided by the client remains their
+                    sole property.
+                  </span>
+                </li>
+              </ul>
+            </section>
 
-              {/* 4. Payment Terms */}
-              <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-green-50 rounded-lg text-green-600">
-                    <CreditCard size={20} />
-                  </div>
-                  <h2 className="text-xl font-bold text-slate-900 m-0">
-                    4. Payment Terms
-                  </h2>
+            {/* 4. Payment Terms - Now spans full width on its own row */}
+            <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-green-50 rounded-lg text-green-600">
+                  <CreditCard size={20} />
                 </div>
-                <ul className="space-y-3 mt-4">
-                  <li className="flex items-start gap-2 text-sm text-slate-600">
-                    <CheckCircle2
-                      className="text-emerald-500 mt-0.5 shrink-0"
-                      size={18}
-                    />
-                    <span>
-                      Clients agree to pay the service fees as per the agreed
-                      pricing. For each page, the monthly service fee is BDT
-                      3,000. If the client wants to implement the same
-                      automation setup on another page without requiring any new
-                      training, business data update, service details change,
-                      price update, or workflow modification, Presswayy may
-                      allow the same setup based on feasibility. However, if the
-                      new page requires separate training, product/service
-                      information, pricing, FAQs, business rules, brand
-                      guidelines, or any other customization, it will be treated
-                      as a separate page setup and charged separately. Each page
-                      requiring setup, training, data, or customization will be
-                      charged BDT 3,000 per month. The client’s subscription
-                      period will start from the date the AI system goes live on
-                      the client’s page. All payments are non-refundable once
-                      the service, setup, training, or implementation process
-                      has started.
-                    </span>
-                  </li>
-                </ul>
-              </section>
-            </div>
+                <h2 className="text-xl font-bold text-slate-900 m-0">
+                  4. Payment Terms
+                </h2>
+              </div>
+              <ul className="space-y-3 mt-4">
+                <li className="flex items-start gap-2 text-sm text-slate-600">
+                  <CheckCircle2
+                    className="text-emerald-500 mt-0.5 shrink-0"
+                    size={18}
+                  />
+                  <span>
+                    Clients agree to pay the service fees as per the agreed
+                    pricing. For each page, the monthly service fee is BDT
+                    3,000. If the client wants to implement the same automation
+                    setup on another page without requiring any new training,
+                    business data update, service details change, price update,
+                    or workflow modification, Presswayy may allow the same setup
+                    based on feasibility. However, if the new page requires
+                    separate training, product/service information, pricing,
+                    FAQs, business rules, brand guidelines, or any other
+                    customization, it will be treated as a separate page setup
+                    and charged separately. Each page requiring setup, training,
+                    data, or customization will be charged BDT 3,000 per month.
+                    The client’s subscription period will start from the date
+                    the AI system goes live on the client’s page. All payments
+                    are non-refundable once the service, setup, training, or
+                    implementation process has started.
+                  </span>
+                </li>
+              </ul>
+            </section>
 
             {/* 5. Implementation & Performance */}
             <section className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
