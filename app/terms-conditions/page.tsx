@@ -128,7 +128,7 @@ export default function App() {
               </section>
             </div>
 
-            {/* 3. Intellectual Property - Now spans full width */}
+            {/* 3. Intellectual Property */}
             <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow w-full block">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-yellow-50 rounded-lg text-yellow-600">
@@ -162,43 +162,79 @@ export default function App() {
               </ul>
             </section>
 
-            {/* 4. Payment Terms - ALWAYS on a separate row for every device */}
-            <section className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow w-full col-span-full block">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 bg-green-50 rounded-lg text-green-600">
-                  <CreditCard size={20} />
+            {/* ==============================================
+                4. Payment Terms - DIVIDED DESIGN
+                ============================================== */}
+            <section className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm w-full block col-span-full">
+              {/* Header block aligned like the screenshot */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className="p-2.5 bg-green-50 rounded-xl text-green-700">
+                  <CreditCard size={24} strokeWidth={2} />
                 </div>
-                <h2 className="text-xl font-bold text-slate-900 m-0">
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900 m-0 tracking-tight">
                   4. Payment Terms
                 </h2>
               </div>
-              <ul className="space-y-3 mt-4">
-                <li className="flex items-start gap-2 text-sm text-slate-600">
+
+              {/* Content block broken into list items for better readability */}
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3 md:gap-4">
                   <CheckCircle2
                     className="text-emerald-500 mt-0.5 shrink-0"
-                    size={18}
+                    size={20}
+                    strokeWidth={2}
                   />
-                  <span>
+                  <p className="text-[15px] md:text-base text-slate-600 leading-relaxed m-0">
                     Clients agree to pay the service fees as per the agreed
                     pricing. For each page, the monthly service fee is BDT
-                    3,000. If the client wants to implement the same automation
-                    setup on another page without requiring any new training,
-                    business data update, service details change, price update,
-                    or workflow modification, Presswayy may allow the same setup
-                    based on feasibility. However, if the new page requires
-                    separate training, product/service information, pricing,
-                    FAQs, business rules, brand guidelines, or any other
-                    customization, it will be treated as a separate page setup
-                    and charged separately. Each page requiring setup, training,
-                    data, or customization will be charged BDT 3,000 per month.
+                    3,000.
+                  </p>
+                </li>
+                <li className="flex items-start gap-3 md:gap-4">
+                  <CheckCircle2
+                    className="text-emerald-500 mt-0.5 shrink-0"
+                    size={20}
+                    strokeWidth={2}
+                  />
+                  <p className="text-[15px] md:text-base text-slate-600 leading-relaxed m-0">
+                    If the client wants to implement the same automation setup
+                    on another page without requiring any new training, business
+                    data update, service details change, price update, or
+                    workflow modification, Presswayy may allow the same setup
+                    based on feasibility.
+                  </p>
+                </li>
+                <li className="flex items-start gap-3 md:gap-4">
+                  <CheckCircle2
+                    className="text-emerald-500 mt-0.5 shrink-0"
+                    size={20}
+                    strokeWidth={2}
+                  />
+                  <p className="text-[15px] md:text-base text-slate-600 leading-relaxed m-0">
+                    However, if the new page requires separate training,
+                    product/service information, pricing, FAQs, business rules,
+                    brand guidelines, or any other customization, it will be
+                    treated as a separate page setup and charged separately.
+                    Each page requiring setup, training, data, or customization
+                    will be charged BDT 3,000 per month.
+                  </p>
+                </li>
+                <li className="flex items-start gap-3 md:gap-4">
+                  <CheckCircle2
+                    className="text-emerald-500 mt-0.5 shrink-0"
+                    size={20}
+                    strokeWidth={2}
+                  />
+                  <p className="text-[15px] md:text-base text-slate-600 leading-relaxed m-0">
                     The client’s subscription period will start from the date
                     the AI system goes live on the client’s page. All payments
                     are non-refundable once the service, setup, training, or
                     implementation process has started.
-                  </span>
+                  </p>
                 </li>
               </ul>
             </section>
+            {/* ============================================== */}
 
             {/* 5. Implementation & Performance */}
             <section className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
