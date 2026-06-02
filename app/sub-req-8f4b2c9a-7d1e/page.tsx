@@ -39,6 +39,7 @@ export default function SubscriptionPage() {
       "order sheet url": "",
       "database sheet url": "",
       "cost sheet url": "",
+      "company site url": "",
       "Business Type": "",
       Subcription: "",
       "Sales Channel": "",
@@ -184,6 +185,15 @@ export default function SubscriptionPage() {
                   placeholder="https://docs.google.com/spreadsheets/..."
                   error={errors["cost sheet url"]?.message}
                   {...register("cost sheet url")}
+                />
+              </div>
+              <div className="sm:col-span-2">
+                <FormInput
+                  label="Company Site URL"
+                  type="url"
+                  placeholder="https://example.com"
+                  error={errors["company site url"]?.message}
+                  {...register("company site url")}
                 />
               </div>
             </div>
