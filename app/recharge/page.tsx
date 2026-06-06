@@ -27,8 +27,9 @@ function RechargeForm() {
     }
 
     const val = Number(paygAmount.trim());
-    if (!val || val < 500) {
-      alert("Please enter at least ৳500 for recharge.");
+    // Update 1: Change validation to 10
+    if (!val || val < 10) {
+      alert("Please enter at least ৳10 for recharge.");
       return;
     }
 
@@ -73,8 +74,9 @@ function RechargeForm() {
             Recharge Balance
           </h1>
           <p className="text-sm text-slate-500">
+            {/* Update 2: Change description text to 10 */}
             Recharge any amount. Charges apply per AI reply. Minimum recharge
-            ৳500.
+            ৳10.
           </p>
         </div>
 
@@ -115,20 +117,21 @@ function RechargeForm() {
               <input
                 type="number"
                 id="amount"
-                min="500"
+                min="10" // Update 3: Change min attribute to 10
                 step="1"
                 required
                 inputMode="numeric"
-                placeholder="500, 1000, 2000..."
+                placeholder="10, 50, 100..." // Update 4: Change placeholder values
                 value={paygAmount}
                 onChange={(e) => setPaygAmount(e.target.value)}
                 className="w-full pl-9 pr-4 py-3.5 rounded-xl border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#5a4cc2]/20 focus:border-[#5a4cc2] transition-colors text-lg font-medium bg-slate-50 focus:bg-white"
               />
             </div>
-            <p className="mt-2 text-xs text-slate-500 text-right">Min: ৳500</p>
+            {/* Update 5: Change helper text to 10 */}
+            <p className="mt-2 text-xs text-slate-500 text-right">Min: ৳10</p>
           </div>
 
-          {/* Features List (Optional, just to look good) */}
+          {/* Features List */}
           <div className="bg-slate-50 rounded-xl p-4 border border-slate-100">
             <ul className="space-y-2">
               <li className="flex items-center text-[13px] text-slate-600">
