@@ -6,7 +6,7 @@ const faqData = [
   {
     question: "What is Presswayy?",
     answer:
-      "Pressway is a modern AI platform that builds **AI automation** and **smart business solutions** for small, medium, and large businesses. It handles customer inbox replies, order collection, courier tracking, complaint management, and real-time updates through Google Sheets, Excel, or your website.",
+      "Presswayy is a modern AI platform that builds **AI automation** and **smart business solutions** for small, medium, and large businesses. It handles customer inbox replies, order collection, courier tracking, complaint management, and real-time updates through Google Sheets, Excel, or your website.",
   },
   {
     question: "How does Presswayy work for businesses?",
