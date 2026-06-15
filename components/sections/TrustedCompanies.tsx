@@ -49,6 +49,106 @@ export default function TrustedCompanies() {
       name: "Clarex Accounting",
       src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774608210/CLAREx-accounting_bdaqtc.png",
     },
+    {
+      id: 10,
+      name: "Arno Fashion",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497992/Arno_Fashion_Gallery_rdmmkv.jpg",
+    },
+    {
+      id: 11,
+      name: "ABC Shop",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497991/ABC_Shop_blc9kh.jpg",
+    },
+    {
+      id: 12,
+      name: "Arveda",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497991/Arveda_tntvkm.jpg",
+    },
+    {
+      id: 13,
+      name: "Deshi Event Abgen",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497991/Deshi_Event_Abgen_yrtgho.jpg",
+    },
+    {
+      id: 14,
+      name: "Clever mart bd",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497991/Clever_mart_bd_lmvng5.jpg",
+    },
+    {
+      id: 15,
+      name: "JolGhuddi",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497990/JolGhuddi_-_%E0%A6%9C%E0%A6%B2%E0%A6%98%E0%A7%81%E0%A6%A1%E0%A7%8D%E0%A6%A1%E0%A6%BF_adisfz.jpg",
+    },
+    {
+      id: 16,
+      name: "ES Trading BD",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497990/ES_Trading_BD__ci8mz0.jpg",
+    },
+    {
+      id: 18,
+      name: "Hairence",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497990/Hairence_dcrdkf.jpg",
+    },
+    {
+      id: 19,
+      name: "MHN SHOPS",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497990/MHN_SHOPS_hm9whv.jpg",
+    },
+    {
+      id: 20,
+      name: "Milkberry",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497989/Milkberry-%E0%A6%AE%E0%A6%BF%E0%A6%B2%E0%A7%8D%E0%A6%95%E0%A6%AC%E0%A7%87%E0%A6%B0%E0%A7%80_-%D9%85%D9%8A%D9%84%D9%83%D8%A8%D9%8A%D8%B1%D9%8A_pqwtr7.jpg",
+    },
+    {
+      id: 21,
+      name: "Safar Hub",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497989/Safar_Hub_jfcxmy.jpg",
+    },
+    {
+      id: 22,
+      name: "Muslimshopbd",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497989/Muslimshopbd.com__nojbk4.jpg",
+    },
+    {
+      id: 23,
+      name: "Optimart",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497989/Optimart_fgx01e.jpg",
+    },
+    {
+      id: 24,
+      name: "ZAVA",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497988/ZAVA_n26jii.jpg",
+    },
+    {
+      id: 25,
+      name: "Islami Book Store",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497987/%E0%A6%87%E0%A6%B8%E0%A6%B2%E0%A6%BE%E0%A6%B9%E0%A7%80_%E0%A6%AC%E0%A6%87_%E0%A6%98%E0%A6%B0_xoh87p.jpg",
+    },
+    {
+      id: 26,
+      name: "Sajo Bangladesh",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497988/Sajo_Bangladesh_%E0%A6%B8%E0%A6%BE%E0%A6%9C%E0%A7%8B_%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6_zponjq.jpg",
+    },
+    {
+      id: 27,
+      name: "Yameni Khalta",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497987/Yameni_Khalta_-_%E0%A6%87%E0%A7%9F%E0%A6%BE%E0%A6%AE%E0%A7%87%E0%A6%A8%E0%A6%BF_%E0%A6%96%E0%A6%BE%E0%A6%B2%E0%A6%A4%E0%A6%BE_we4i1w.jpg",
+    },
+    {
+      id: 28,
+      name: "Travel Bilash Tourism",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497988/Travel_Bilash_Tourism_lc3vmm.jpg",
+    },
+    {
+      id: 29,
+      name: "Milki Mom",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497988/%E0%A6%AE%E0%A6%BF%E0%A6%B2%E0%A7%8D%E0%A6%95%E0%A6%BF%E0%A6%AE%E0%A6%AE_iz6ncq.jpg",
+    },
+    {
+      id: 30,
+      name: "PriyoStore",
+      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1781497989/PriyoStore.xyz_ctuiwv.jpg",
+    },
   ];
 
   return (
