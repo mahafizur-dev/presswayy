@@ -174,8 +174,8 @@ export default function TrustedCompanies() {
         
         /* Default (Mobile/Small Screen) sizes increased */
         .logo-item {
-          width: 180px;  /* Increased from 140px */
-          height: 80px;  /* Increased from 60px */
+          width: 180px;
+          height: 80px;
           flex-shrink: 0;
           display: flex;
           align-items: center;
@@ -191,8 +191,8 @@ export default function TrustedCompanies() {
         /* Desktop and Tablet sizes */
         @media (min-width: 768px) {
           .logo-item {
-            width: 220px; /* Increased to maintain proportion */
-            height: 100px; /* Increased to maintain proportion */
+            width: 220px;
+            height: 100px;
             padding: 8px 24px;
           }
         }
@@ -206,8 +206,6 @@ export default function TrustedCompanies() {
           <span className="relative z-10 bg-white px-4">
             Companies that trust us
           </span>
-          {/* Optional: adding the lines on the side to match your screenshot */}
-          
         </h2>
       </div>
 
@@ -226,8 +224,8 @@ export default function TrustedCompanies() {
                 <Image
                   src={logo.src}
                   alt={isDuplicate ? "" : logo.name}
-                  width={220} // Adjusting the internal Image width to match max container
-                  height={100} // Adjusting the internal Image height to match max container
+                  width={220}
+                  height={100}
                   style={{
                     width: "100%",
                     height: "100%",
