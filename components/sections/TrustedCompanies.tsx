@@ -4,11 +4,11 @@ import Image from "next/image";
 
 export default function TrustedCompanies() {
   const companyLogos = [
-    {
-      id: 1,
-      name: "Lever n Gear",
-      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774606337/lng_vtgxm5.jpg",
-    },
+    // {
+    //   id: 1,
+    //   name: "Lever n Gear",
+    //   src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774606337/lng_vtgxm5.jpg",
+    // },
     {
       id: 2,
       name: "FLEX",
@@ -39,16 +39,16 @@ export default function TrustedCompanies() {
       name: "Clarex Tech",
       src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774606336/clrextech_nrb0c4.jpg",
     },
-    {
-      id: 8,
-      name: "Bizstori",
-      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774608210/biztori_u3tppv.png",
-    },
-    {
-      id: 9,
-      name: "Clarex Accounting",
-      src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774608210/CLAREx-accounting_bdaqtc.png",
-    },
+    // {
+    //   id: 8,
+    //   name: "Bizstori",
+    //   src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774608210/biztori_u3tppv.png",
+    // },
+    // {
+    //   id: 9,
+    //   name: "Clarex Accounting",
+    //   src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774608210/CLAREx-accounting_bdaqtc.png",
+    // },
     {
       id: 10,
       name: "Arno Fashion",
@@ -151,93 +151,185 @@ export default function TrustedCompanies() {
     },
   ];
 
+  const row1 = companyLogos.slice(0, Math.ceil(companyLogos.length / 2));
+  const row2 = companyLogos.slice(Math.ceil(companyLogos.length / 2));
+
+  const duplicatedRow1 = [...row1, ...row1];
+  const duplicatedRow2 = [...row2, ...row2];
+
   return (
-    <section className="pt-8 pb-10 md:pt-8 md:pb-12 bg-white overflow-hidden">
-      <style>{`
-        @keyframes logoScroll {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .logo-track {
-          animation: logoScroll 35s linear infinite;
-          display: flex;
-          width: max-content;
-          align-items: center;
-        }
-        .logo-track:hover {
-          animation-play-state: paused;
-        }
-        .logo-mask {
-          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
-        
-        /* Default (Mobile/Small Screen) sizes increased */
-        .logo-item {
-          width: 180px;
-          height: 80px;
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 8px 12px;
-          transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-        .logo-item:hover {
-          transform: scale(1.05);
-          opacity: 0.75;
-        }
-
-        /* Desktop and Tablet sizes */
-        @media (min-width: 768px) {
-          .logo-item {
-            width: 220px;
-            height: 100px;
-            padding: 8px 24px;
-          }
-        }
-      `}</style>
-
-      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-6 md:mb-8 text-center">
-        <h2
-          className="text-[24px] md:text-[30px] font-semibold text-[#00063D] tracking-tight leading-[1.2] md:leading-normal relative inline-block"
-          style={{ fontFamily: '"Times New Roman", Sans-serif' }}
-        >
-          <span className="relative z-10 bg-white px-4">
-            Companies that trust us
+    <section className="pt-12 pb-16 bg-white overflow-hidden">
+      {/* Heading */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mb-10 text-center">
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <span className="block w-8 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+          <span className="text-xs font-medium tracking-[0.125em] uppercase text-gray-500">
+            Trusted by leading brands
           </span>
+          <span className="block w-8 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+        </div>
+        <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight">
+          Companies that trust us
         </h2>
       </div>
 
-      {/* Marquee */}
-      <div className="w-full relative logo-mask">
-        <div className="logo-track">
-          {[...companyLogos, ...companyLogos].map((logo, index) => {
-            const isDuplicate = index >= companyLogos.length;
+      {/* Two Row Circular Marquee - Reduced Size */}
+      <div className="space-y-12 md:space-y-14">
+        {/* Row 1 */}
+        <div className="relative">
+          <div className="logo-mask">
+            <div className="logo-track track1">
+              {duplicatedRow1.map((logo, index) => (
+                <div key={`${logo.id}-r1-${index}`} className="logo-item">
+                  <div className="circle-wrapper">
+                    <Image
+                      src={logo.src}
+                      alt={logo.name}
+                      width={140}
+                      height={140}
+                      className="logo-image"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
 
-            return (
-              <div
-                key={index}
-                className="logo-item"
-                aria-hidden={isDuplicate ? "true" : "false"}
-              >
-                <Image
-                  src={logo.src}
-                  alt={isDuplicate ? "" : logo.name}
-                  width={220}
-                  height={100}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    objectPosition: "center",
-                  }}
-                />
-              </div>
-            );
-          })}
+        {/* Row 2 */}
+        <div className="relative">
+          <div className="logo-mask">
+            <div className="logo-track track2">
+              {duplicatedRow2.map((logo, index) => (
+                <div key={`${logo.id}-r2-${index}`} className="logo-item">
+                  <div className="circle-wrapper">
+                    <Image
+                      src={logo.src}
+                      alt={logo.name}
+                      width={140}
+                      height={140}
+                      className="logo-image"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes scrollLeft {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        @keyframes scrollRight {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        .logo-mask {
+          mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 6%,
+            black 94%,
+            transparent 100%
+          );
+          -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 6%,
+            black 94%,
+            transparent 100%
+          );
+        }
+
+        .logo-track {
+          display: flex;
+          width: max-content;
+          align-items: center;
+          gap: 48px; /* Reduced Gap */
+        }
+
+        .track1 {
+          animation: scrollLeft 52s linear infinite;
+        }
+        .track2 {
+          animation: scrollRight 45s linear infinite;
+        }
+
+        .logo-track:hover {
+          animation-play-state: paused;
+        }
+
+        /* Reduced Circular Size */
+        .logo-item {
+          flex-shrink: 0;
+          width: 120px;
+          height: 120px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .circle-wrapper {
+          width: 105px;
+          height: 105px;
+          border-radius: 9999px;
+          overflow: hidden;
+          border: 3px solid #f3f3f3;
+          box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          background: white;
+        }
+
+        .logo-item:hover .circle-wrapper {
+          transform: scale(1.14);
+          border-color: #e5e5e5;
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo-image {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+          padding: 12px;
+          filter: grayscale(85%) opacity(78%);
+          transition: all 0.4s ease;
+        }
+
+        .logo-item:hover .logo-image {
+          filter: grayscale(0%) opacity(100%);
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+          .logo-item {
+            width: 138px;
+            height: 138px;
+          }
+          .circle-wrapper {
+            width: 122px;
+            height: 122px;
+          }
+          .logo-track {
+            gap: 64px; /* Reduced desktop gap */
+          }
+        }
+      `}</style>
     </section>
   );
 }
