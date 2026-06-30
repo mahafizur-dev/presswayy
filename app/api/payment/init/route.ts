@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { plan, name, phone } = body;
+    const { plan, client_id, name, phone } = body;
 
-    if (!plan || !phone) {
+    if (!plan || !client_id) {
       return NextResponse.json(
-        { success: false, error: "Missing required fields (plan, phone)" },
+        { success: false, error: "Missing required fields (plan, client_id)" },
         { status: 400 },
       );
     }
@@ -25,18 +25,59 @@ export async function POST(req: Request) {
     }
 
     // Updated to match your .env file
-    const store_id = process.env.NEXT_PUBLIC_SSL_STORE_ID;
-    const store_passwd = process.env.NEXT_PUBLIC_SSL_STORE_PASSWD;
+    const store_id = process.env.SSL_STORE_ID;
+    const store_passwd = process.env.SSL_STORE_PASSWD;
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const n8nApiUrl = process.env.API_URL;
 
     // Updated to match your .env file
-    const is_live = process.env.NEXT_PUBLIC_SSL_IS_LIVE === "true";
+    const is_live = process.env.SSL_IS_LIVE === "true";
 
-    if (!store_id || !store_passwd || !baseUrl) {
+    if (!store_id || !store_passwd || !baseUrl || !n8nApiUrl) {
       console.error("Missing SSLCommerz Credentials in .env.local");
       return NextResponse.json(
         { success: false, error: "Server configuration missing" },
         { status: 500 },
+      );
+    }
+
+    // Fallbacks: use whatever the client sent in body first,
+    // then overwrite with fetched info if available
+    let cusName = name || "Presswayy Client";
+    let cusEmail = "client@presswayy.com";
+    let cusPhone = phone || "01700000000";
+
+    try {
+      const clientInfoUrl = `${n8nApiUrl}/get-client-info`;
+
+      const infoResponse = await fetch(clientInfoUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ client_id: client_id }),
+      });
+
+      if (infoResponse.ok) {
+        const clientData = await infoResponse.json();
+
+        if (clientData.name) cusName = clientData.name;
+        if (clientData.email) cusEmail = clientData.email;
+        if (clientData.phone) cusPhone = clientData.phone;
+
+        console.log("✅ Client data fetched successfully:", clientData);
+      } else {
+        console.warn("⚠️ Client info fetch failed, using fallback data.");
+      }
+    } catch (infoError) {
+      console.error(
+        "❌ Error fetching client info, using fallback data.",
+        infoError,
+      );
+    }
+
+    if (!cusPhone) {
+      return NextResponse.json(
+        { success: false, error: "Phone number missing for this client" },
+        { status: 400 },
       );
     }
 
@@ -56,23 +97,23 @@ export async function POST(req: Request) {
       product_name: `Presswayy ${plan === "monthly" ? "Monthly" : "Yearly"} Plan`,
       product_category: "Software Subscription",
       product_profile: "general",
-      cus_name: name || "Presswayy Client",
-      cus_email: "client@presswayy.com",
+      cus_name: cusName,
+      cus_email: cusEmail,
       cus_add1: "Dhaka",
       cus_city: "Dhaka",
       cus_postcode: "1000",
       cus_country: "Bangladesh",
-      cus_phone: phone,
-      cus_fax: phone,
-      ship_name: name || "Presswayy Client",
+      cus_phone: cusPhone,
+      cus_fax: cusPhone,
+      ship_name: cusName,
       ship_add1: "Dhaka",
       ship_city: "Dhaka",
       ship_postcode: "1000",
       ship_country: "Bangladesh",
-      value_a: phone,
+      value_a: client_id,
     };
 
-    const data = new URLSearchParams(payload);
+    const data = new URLSearchParams(payload as Record<string, string>);
 
     const apiUrl = is_live
       ? "https://securepay.sslcommerz.com/gwprocess/v4/api.php" // Live API
