@@ -6,19 +6,21 @@ export async function POST(req: Request) {
     const amount = formData.get("amount");
     const tran_id = formData.get("tran_id");
     const client_id = formData.get("value_a");
-    const plan = formData.get("value_b");
+    const page_name = formData.get("value_c");
 
-    console.log("Subscription Payment Success for Client:", client_id);
+    console.log("Onboarding Payment Success for Client:", client_id);
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
     return NextResponse.redirect(
-      `${baseUrl}/subscription-success?tran_id=${tran_id}&client_id=${client_id}&amount=${amount}&plan=${plan}`,
+      `${baseUrl}/onboarding-success?tran_id=${tran_id}&client_id=${client_id}&amount=${amount}&page_name=${encodeURIComponent(
+        (page_name as string) || "",
+      )}`,
       303,
     );
   } catch (error) {
-    console.error("Subscription Success API Error:", error);
+    console.error("Onboarding Success API Error:", error);
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-    return NextResponse.redirect(`${baseUrl}/subscription?payment=error`, 303);
+    return NextResponse.redirect(`${baseUrl}/onboarding?payment=error`, 303);
   }
 }
