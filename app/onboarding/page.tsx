@@ -99,7 +99,7 @@ export default function OnboardingPage() {
           </span>
 
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2 tracking-tight">
-            Onboarding Form
+            Set Up Your Business
           </h1>
 
           <p className="text-sm text-slate-500">
@@ -217,8 +217,6 @@ export default function OnboardingPage() {
               <p className={errClass}>{errors.page_name.message}</p>
             )}
           </div>
-
-          
 
           {/* Submit / Pay Now */}
           <div className="pt-2">
