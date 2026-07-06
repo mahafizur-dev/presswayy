@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-// ── One-time onboarding fee (must match the frontend) ──
 const ONBOARDING_FEE = 3000;
 
 export async function POST(req: Request) {
@@ -78,6 +77,8 @@ export async function POST(req: Request) {
       value_a: client_id,
       value_b: "onboarding",
       value_c: page_name,
+      // Extra company fields that SSLCommerz doesn't carry natively
+      value_d: JSON.stringify({ name, business_type }),
     };
 
     const data = new URLSearchParams(payload as Record<string, string>);

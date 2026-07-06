@@ -33,11 +33,21 @@ export async function POST(req: Request) {
 
     if (verifyData.status === "VALID" || verifyData.status === "VALIDATED") {
       try {
-        // 💡 অনবোর্ডিং পেলোড: n8n-এ অনবোর্ডিং ফি "Paid" হিসেবে মার্ক করার জন্য
+        // value_d-তে পাঠানো অতিরিক্ত company fields parse করা
+        let extra: { name?: string; business_type?: string } = {};
+        try {
+          extra = verifyData.value_d ? JSON.parse(verifyData.value_d) : {};
+        } catch {
+          extra = {};
+        }
+
+        // 💡 অনবোর্ডিং পেলোড: n8n-এ company তৈরি + ফি "Paid" মার্ক করার জন্য
         const ipnPayload = {
           client_id: verifyData.value_a,
           type: verifyData.value_b || "onboarding",
           page_name: verifyData.value_c || "N/A",
+          name: extra.name || "N/A",
+          business_type: extra.business_type || "N/A",
           amount: verifyData.amount,
           tran_id: verifyData.tran_id,
           payment_status: "Paid",
