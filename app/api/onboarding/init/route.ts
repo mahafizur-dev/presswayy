@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 // ── One-time onboarding fee (must match the frontend) ──
-const ONBOARDING_FEE = 10;
+const ONBOARDING_FEE = 3000;
 
 export async function POST(req: Request) {
   try {
