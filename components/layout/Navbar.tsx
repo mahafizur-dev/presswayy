@@ -81,7 +81,7 @@ export default function Navbar() {
           <div className="flex-1 flex justify-start items-center">
             <Link href="/" className="flex items-center flex-shrink-0">
               <Image
-                src="/PRESSWAYY-.png"
+                src={isScrolled ? "/PRESSWAYY-.png" : "/logo.png"}
                 alt="Presswayy Logo"
                 width={150}
                 height={50}
@@ -97,7 +97,9 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-[#0a1435] text-[16px] font-medium hover:text-[#ff4e33] transition-colors duration-200"
+                className={`text-[16px] font-medium hover:text-[#ff4e33] transition-colors duration-200 ${
+                  isScrolled ? "text-[#0a1435]" : "text-white"
+                }`}
               >
                 {link.label}
               </Link>
