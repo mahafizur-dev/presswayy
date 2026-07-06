@@ -168,8 +168,11 @@ export default function TrustedCompanies() {
           </span>
           <span className="block w-8 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
         </div>
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 tracking-tight">
-          Companies that trust us
+        <h2
+          className="font-semibold text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] leading-[1.2] md:leading-[1.1] tracking-[-0.5px] sm:tracking-[-2px] md:tracking-[-3px] text-[#00063D] mb-4 md:mb-6 max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto"
+          style={{ fontFamily: '"Times New Roman", sans-serif' }}
+        >
+          Trusted by <span className="font-bold text-[#FF5733]">112+</span> Companies
         </h2>
       </div>
 

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Geist } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={cn("font-sans", geist.variable)}>
       <Script id="google-tag-manager" strategy="afterInteractive">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

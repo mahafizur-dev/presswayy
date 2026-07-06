@@ -26,7 +26,7 @@ export default function Testimonials() {
         {/* Section Heading */}
         <div className="text-center mb-8 md:mb-16 px-4">
           <h2 className="font-serif text-[28px] md:text-4xl lg:text-5xl font-bold text-[#00063D] mb-3 tracking-tight leading-tight">
-            What Our Clients Say
+            People Say About Presswayy
           </h2>
           <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
             Hear directly from our partners about how our AI solutions have
