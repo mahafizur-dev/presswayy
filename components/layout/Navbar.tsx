@@ -67,11 +67,15 @@ export default function Navbar() {
   if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/welcome"))
     return null;
 
+  // শুধু homepage-এ transparent (white) variant, বাকি সব পেজে dark variant
+  const isHome = pathname === "/";
+  const showDark = isScrolled || !isHome;
+
   return (
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-          isScrolled
+          showDark
             ? "bg-white/80 backdrop-blur-[15px] border-b border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
             : "bg-transparent border-b border-transparent"
         }`}
@@ -81,7 +85,7 @@ export default function Navbar() {
           <div className="flex-1 flex justify-start items-center">
             <Link href="/" className="flex items-center flex-shrink-0">
               <Image
-                src={isScrolled ? "/PRESSWAYY-.png" : "/logo.png"}
+                src={showDark ? "/PRESSWAYY-.png" : "/logo.png"}
                 alt="Presswayy Logo"
                 width={150}
                 height={50}
@@ -98,7 +102,7 @@ export default function Navbar() {
                 key={link.label}
                 href={link.href}
                 className={`text-[16px] font-medium hover:text-[#ff4e33] transition-colors duration-200 ${
-                  isScrolled ? "text-[#0a1435]" : "text-white"
+                  showDark ? "text-[#0a1435]" : "text-white"
                 }`}
               >
                 {link.label}
@@ -121,7 +125,7 @@ export default function Navbar() {
                     <LayoutDashboard size={18} /> Dashboard
                   </Link>
 
-                  {/* 💡 প্রোফাইল সেকশন রিমুভ করা হয়েছে, শুধু লগআউট বাটন রাখা হয়েছে */}
+                  {/* 💡 প্রোফাইল সেকশন রিমুভ করা হয়েছে, শুধু লগআউট বাটন রাখা হয়েছে */}
                   <button
                     onClick={handleLogout}
                     className="text-gray-500 font-medium hover:text-red-500 flex items-center gap-1.5 transition-colors text-sm border-l pl-5 border-gray-200"
