@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
-const ONBOARDING_FEE = 10;
+// ── One-time onboarding fee (must match the frontend) ──
+const ONBOARDING_FEE = 3000;
 
 export async function POST(req: Request) {
   try {
@@ -12,10 +13,10 @@ export async function POST(req: Request) {
       contact_person_number,
       business_type,
       business_email,
-      page_name,
+      page_link,
     } = body;
 
-    // ── Validate required fields (all come from the onboarding form) ──
+    // ── Validate required fields (page_link is optional) ──
     const missing: string[] = [];
     if (!client_id) missing.push("client_id");
     if (!name) missing.push("name");
@@ -23,7 +24,6 @@ export async function POST(req: Request) {
     if (!contact_person_number) missing.push("contact_person_number");
     if (!business_type) missing.push("business_type");
     if (!business_email) missing.push("business_email");
-    if (!page_name) missing.push("page_name");
 
     if (missing.length) {
       return NextResponse.json(
@@ -76,7 +76,7 @@ export async function POST(req: Request) {
       cus_country: "Bangladesh",
       value_a: client_id,
       value_b: "onboarding",
-      value_c: page_name,
+      value_c: page_link || "",
       // Extra company fields that SSLCommerz doesn't carry natively
       value_d: JSON.stringify({ name, business_type }),
     };

@@ -18,12 +18,12 @@ const companySchema = z.object({
     .regex(/^01[0-9]{9}$/, "Enter a valid 11-digit number (e.g. 017XXXXXXXX)"),
   business_type: z.string().min(1, "Please select a business type"),
   business_email: z.string().email("Enter a valid email address"),
-  page_name: z.string().min(1, "Page name is required"),
+  page_link: z.string().optional().or(z.literal("")),
 });
 
 type CompanyForm = z.infer<typeof companySchema>;
 
-const BUSINESS_TYPES = ["E-commerce", "Restaurant / Food", "Service Provider"];
+const BUSINESS_TYPES = ["E-commerce","Service Based"];
 
 export default function OnboardingPage() {
   const [clientId, setClientId] = useState("");
@@ -201,20 +201,20 @@ export default function OnboardingPage() {
             )}
           </div>
 
-          {/* Page Name */}
+          {/* Page link */}
           <div>
-            <label htmlFor="page_name" className={labelClass}>
-              Facebook Page Name <span className="text-red-500">*</span>
+            <label htmlFor="page_link" className={labelClass}>
+              Facebook Page URL
             </label>
             <input
-              id="page_name"
+              id="page_link"
               type="text"
-              placeholder="Your Facebook/Instagram page name"
+              placeholder="Your Facebook/Instagram page url"
               className={inputClass}
-              {...register("page_name")}
+              {...register("page_link")}
             />
-            {errors.page_name && (
-              <p className={errClass}>{errors.page_name.message}</p>
+            {errors.page_link && (
+              <p className={errClass}>{errors.page_link.message}</p>
             )}
           </div>
 
