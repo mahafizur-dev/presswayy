@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const ONBOARDING_FEE = 3000;
+const ONBOARDING_FEE = 10;
 
 export async function POST(req: Request) {
   try {
