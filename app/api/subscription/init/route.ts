@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 // ── Monthly subscription plan (must match the frontend) ──
 const PLANS: Record<string, { name: string; amount: number }> = {
-  monthly: { name: "Monthly Subscription", amount: 10 },
+  monthly: { name: "Monthly Subscription", amount: 3000 },
 };
 
 export async function POST(req: Request) {
