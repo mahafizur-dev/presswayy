@@ -1,189 +1,212 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 type ChatMessage = {
   from: "user" | "ai";
   text?: string;
-  image?: string; // customer-er pathano product screenshot
+  image?: string;
 };
 
 const MESSAGES: ChatMessage[] = [
-  {
-    from: "user",
-    image: "/product.jpeg", // public folder-e apnar product image din
-    text: "Eta ki available?",
-  },
+  { from: "user", text: "hi" },
   {
     from: "ai",
-    text: "Yes! This one is in stock ✅ Price is ৳1,250 with free delivery inside Dhaka.",
+    text: "hello, how can I help you",
+  },
+  { from: "user", image: "/product.jpeg", text: "Eta ki available?" },
+  {
+    from: "ai",
+    text: "Yes! This one is in stock.",
   },
   { from: "user", text: "Great! Cash on delivery ache?" },
   {
     from: "ai",
-    text: "Of course! COD available all over Bangladesh. Just share your address to confirm the order 😊",
+    text: "Of course! COD available all over Bangladesh😊",
   },
 ];
 
-export default function Hero() {
-  const containerRef = useRef<HTMLElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+const TIMING = {
+  typing: 900,
+  read: 1300,
+  hold: 2500,
+  fade: 500,
+} as const;
 
-  // Each message = 2 steps: typing → message shown
-  // step 0 = empty, step 2*i+1 = typing for msg i, step 2*i+2 = msg i shown
+function TypingDots() {
+  return (
+    <span className="flex items-center gap-1.5 px-1 py-1">
+      <span className="typing-dot h-1.5 w-1.5 rounded-full bg-white [animation-delay:0ms]" />
+      <span className="typing-dot h-1.5 w-1.5 rounded-full bg-white [animation-delay:200ms]" />
+      <span className="typing-dot h-1.5 w-1.5 rounded-full bg-white [animation-delay:400ms]" />
+    </span>
+  );
+}
+
+export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
   const totalSteps = MESSAGES.length * 2;
   const [chatStep, setChatStep] = useState(0);
   const [fadingOut, setFadingOut] = useState(false);
+  const [inView, setInView] = useState(true);
 
   useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView) return;
     if (chatStep >= totalSteps) {
-      // pause → fade out → restart, so the loop feels continuous
-      const pause = setTimeout(() => setFadingOut(true), 2500);
+      const pause = setTimeout(() => setFadingOut(true), TIMING.hold);
       return () => clearTimeout(pause);
     }
-    // odd step = typing duration, even step = read delay before next typing
-    const delay = chatStep % 2 === 0 ? 900 : 1300;
+    const delay = chatStep % 2 === 0 ? TIMING.typing : TIMING.read;
     const t = setTimeout(() => setChatStep((s) => s + 1), delay);
     return () => clearTimeout(t);
-  }, [chatStep, totalSteps]);
+  }, [chatStep, totalSteps, inView]);
 
   useEffect(() => {
     if (!fadingOut) return;
     const t = setTimeout(() => {
       setChatStep(0);
       setFadingOut(false);
-    }, 500);
+    }, TIMING.fade);
     return () => clearTimeout(t);
   }, [fadingOut]);
 
-  const TypingDots = () => (
-    <span className="flex gap-1.5 items-center px-1 py-1">
-      <span className="typing-dot w-1.5 h-1.5 rounded-full bg-white [animation-delay:0ms]" />
-      <span className="typing-dot w-1.5 h-1.5 rounded-full bg-white [animation-delay:200ms]" />
-      <span className="typing-dot w-1.5 h-1.5 rounded-full bg-white [animation-delay:400ms]" />
-    </span>
-  );
-
   return (
     <section
-      ref={containerRef}
-      className="relative bg-black min-h-screen flex flex-col overflow-hidden"
+      ref={sectionRef}
+      className="relative flex min-h-dvh flex-col overflow-hidden bg-black"
     >
-      {/* Bubble + typing animations */}
-      <style>{`
-        @keyframes bubbleIn {
-          0% { opacity: 0; transform: translateY(14px) scale(0.85); }
-          55% { opacity: 1; transform: translateY(-3px) scale(1.03); }
-          75% { transform: translateY(1px) scale(0.99); }
-          100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .bubble-in {
-          animation: bubbleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-        }
-        @keyframes typingPulse {
-          0%, 60%, 100% { opacity: 0.35; transform: translateY(0); }
-          30% { opacity: 1; transform: translateY(-3px); }
-        }
-        .typing-dot {
-          animation: typingPulse 1.2s ease-in-out infinite;
-        }
-      `}</style>
-
-      {/* Background image + dark overlay (Manychat style) */}
+      {/* Background Images */}
       <div className="absolute inset-0 z-0">
-        {/* Apnar nijer hero image ekhane boshan */}
-        <img
-          src="/hero.png"
+        <Image
+          src="/hero-mobile.png"
           alt=""
-          className="w-full h-full object-cover object-center opacity-90"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-90 lg:hidden"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
-      </div>
 
-      {/* Content */}
-      <div
-        ref={textRef}
-        className="relative z-10 flex-1 flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 md:px-12 pt-28 md:pt-32 pb-20"
-      >
-        <div className="max-w-2xl">
-          {/* Main Heading — big, extra-bold, left aligned */}
-          <h1 className="text-white font-extrabold tracking-tight text-[36px] leading-[1.1] md:text-[60px] lg:text-[70px] mb-6 md:mb-8">
-            Your business inbox, empowered
-            <br className="hidden md:block" /> &amp; automated with AI
-          </h1>
+        {/* Background Layer */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/hero.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="hidden object-cover object-[80%_center] opacity-90 lg:block"
+          />
 
-          {/* Subheading */}
-          <p className="text-white/90 text-[17px] md:text-[20px] leading-relaxed max-w-xl mb-8 md:mb-10 font-medium">
-            Works with Facebook pages, Instagram pages &amp; WhatsApp.
-          </p>
-
-          {/* CTA Button */}
-          <button
-            onClick={() => window.dispatchEvent(new Event("openAuthModal"))}
-            className="inline-block w-full sm:w-auto bg-[#ff4e33] hover:bg-[#e63e26] text-white text-[16px] font-medium px-8 py-3.5 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg"
-          >
-            Connect with Presswayy
-          </button>
+          <div
+            className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent"
+            style={{
+              background:
+                "radial-gradient(circle at 75% 50%, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 60%)",
+            }}
+          />
         </div>
       </div>
 
-      {/* Floating chat bubbles — animated conversation */}
-      <div
-        className={`hidden md:flex flex-col gap-3 absolute right-[8%] bottom-[12%] z-10 min-h-[380px] w-[340px] justify-end transition-opacity duration-500 ${
-          fadingOut ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        {MESSAGES.map((msg, i) => {
-          const typingStep = 2 * i + 1;
-          if (chatStep < typingStep) return null;
-          const isTyping = chatStep === typingStep;
-          const isUser = msg.from === "user";
+      {/* Content */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-12 pt-28 sm:px-6 md:px-12 md:pt-32">
+        <div className="flex w-full max-w-[950px] flex-col lg:flex-row lg:items-center lg:gap-10 xl:gap-16">
+          <div className="w-full max-w-[540px] shrink-0">
+            <h1 className="mb-6 text-[36px] font-extrabold leading-[1.1] tracking-tight text-white md:mb-8 md:text-[54px] lg:text-[60px]">
+              Your business inbox, empowered
+              <br className="hidden lg:block" /> &amp; automated with AI
+            </h1>
 
-          return isUser ? (
-            <div key={i} className="flex items-end gap-2 bubble-in self-start">
-              <div className="w-9 h-9 rounded-full bg-gray-500 shrink-0 overflow-hidden flex items-end justify-center">
-                {/* User avatar icon */}
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="#e5e7eb"
-                  className="w-7 h-7"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="8.5" r="4" />
-                  <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7v1H4v-1z" />
-                </svg>
-              </div>
-              <div className="bg-[#3a3a3c] text-white text-[15px] rounded-2xl rounded-bl-sm max-w-[260px] overflow-hidden">
-                {isTyping ? (
-                  <span className="block px-4 py-3">
-                    <TypingDots />
-                  </span>
-                ) : (
-                  <>
-                    {/* Customer-er pathano product screenshot */}
-                    {msg.image && (
-                      <img
-                        src={msg.image}
-                        alt="Product screenshot"
-                        className="w-full h-[140px] object-cover"
-                      />
-                    )}
-                    {msg.text && (
-                      <span className="block px-4 py-3">{msg.text}</span>
-                    )}
-                  </>
-                )}
-              </div>
+            <p className="mb-8 max-w-xl text-[17px] font-medium leading-relaxed text-white/90 md:mb-10 md:text-[20px]">
+              Works with Facebook pages, Instagram pages &amp; WhatsApp.
+            </p>
+
+            <div>
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event("openAuthModal"))}
+                className="w-full rounded-lg bg-[#ff4e33] px-8 py-3.5 text-base font-medium text-white shadow-md transition-colors duration-300 hover:bg-[#e63e26] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff4e33] focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:w-auto"
+              >
+                Connect with Presswayy
+              </button>
             </div>
-          ) : (
+          </div>
+
+          {/* Chat Block - Strictly follows the text, cannot float away */}
+          <div className="mt-12 flex w-full max-w-[340px] shrink-0 flex-col justify-end gap-3 transition-opacity duration-500 lg:mt-0">
             <div
-              key={i}
-              className="self-end bg-[#7c3aed] text-white text-[15px] px-4 py-3 rounded-2xl rounded-br-sm max-w-[280px] bubble-in"
+              aria-hidden="true"
+              className={`flex min-h-[380px] w-full flex-col justify-end gap-3 ${
+                fadingOut ? "opacity-0" : "opacity-100"
+              }`}
             >
-              {isTyping ? <TypingDots /> : msg.text}
+              {MESSAGES.map((msg, i) => {
+                const typingStep = 2 * i + 1;
+                if (chatStep < typingStep) return null;
+                const isTyping = chatStep === typingStep;
+                const isUser = msg.from === "user";
+
+                return isUser ? (
+                  <div
+                    key={i}
+                    className="bubble-in flex items-end gap-2 self-start"
+                  >
+                    <div className="flex h-9 w-9 shrink-0 items-end justify-center overflow-hidden rounded-full bg-gray-500">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="#e5e7eb"
+                        className="h-7 w-7"
+                      >
+                        <circle cx="12" cy="8.5" r="4" />
+                        <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7v1H4v-1z" />
+                      </svg>
+                    </div>
+                    <div className="max-w-[260px] overflow-hidden rounded-2xl rounded-bl-sm bg-[#3a3a3c] text-[15px] text-white">
+                      {isTyping ? (
+                        <span className="block px-4 py-3">
+                          <TypingDots />
+                        </span>
+                      ) : (
+                        <>
+                          {msg.image && (
+                            <Image
+                              src={msg.image}
+                              alt=""
+                              width={260}
+                              height={140}
+                              className="h-[140px] w-full object-cover"
+                            />
+                          )}
+                          {msg.text && (
+                            <span className="block px-4 py-3">{msg.text}</span>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    key={i}
+                    className="bubble-in max-w-[280px] self-end rounded-2xl rounded-br-sm bg-[#7c3aed] px-4 py-3 text-[15px] text-white"
+                  >
+                    {isTyping ? <TypingDots /> : msg.text}
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
+          </div>
+        </div>
       </div>
     </section>
   );
