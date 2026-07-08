@@ -162,15 +162,14 @@ export default function Hero() {
                     key={i}
                     className="bubble-in flex items-end gap-2 self-start"
                   >
-                    <div className="flex h-9 w-9 shrink-0 items-end justify-center overflow-hidden rounded-full bg-gray-500">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="#e5e7eb"
-                        className="h-7 w-7"
-                      >
-                        <circle cx="12" cy="8.5" r="4" />
-                        <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7v1H4v-1z" />
-                      </svg>
+                    <div className="h-9 w-9 shrink-0 overflow-hidden rounded-full">
+                      <Image
+                        src="/user-avatar.jpg"
+                        alt=""
+                        width={36}
+                        height={36}
+                        className="h-full w-full object-cover"
+                      />
                     </div>
                     <div className="max-w-[260px] overflow-hidden rounded-2xl rounded-bl-sm bg-[#3a3a3c] text-[15px] text-white">
                       {isTyping ? (
