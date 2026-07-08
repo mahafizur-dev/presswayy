@@ -123,9 +123,8 @@ export default function Hero() {
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-12 pt-28 sm:px-6 md:px-12 md:pt-32">
         <div className="flex w-full max-w-[950px] flex-col lg:flex-row lg:items-center lg:gap-10 xl:gap-16">
           <div className="w-full max-w-[540px] shrink-0">
-            <h1 className="font-['Times_New_Roman',_sans-serif] mb-6 text-[32px] font-extrabold leading-[1.15] tracking-tight text-white md:mb-8 md:text-[54px] md:leading-[1.1] lg:text-[72px]">
-              Your business inbox, empowered <br className="hidden lg:block" />
-              &amp; automated with AI
+            <h1 className="font-['Times_New_Roman',_sans-serif] mb-6 text-[32px] font-extrabold leading-[1.15] tracking-tight text-white md:mb-8 md:text-[54px] md:leading-[1.1] lg:text-[64px]">
+              Your business inbox, empowered &amp; automated with AI
             </h1>
 
             <p className="mb-8 max-w-xl text-[14px] leading-relaxed text-white/90 md:mb-10 md:text-[18px]">
