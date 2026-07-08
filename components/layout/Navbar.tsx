@@ -144,7 +144,9 @@ export default function Navbar() {
             </div>
 
             <button
-              className="md:hidden text-[#0a1435] p-2 hover:text-[#ff4e33] transition-colors"
+              className={`md:hidden p-2 transition-colors hover:text-[#ff4e33] ${
+                showDark ? "text-[#0a1435]" : "text-white"
+              }`}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >

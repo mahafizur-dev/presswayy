@@ -87,8 +87,8 @@ export default function Hero() {
       ref={sectionRef}
       className="relative flex min-h-dvh flex-col overflow-hidden bg-black"
     >
-      {/* Background Images */}
-      <div className="absolute inset-0 z-0">
+      {/* Background Images — viewport-anchored (h-dvh) so content growth never restretches/shifts it */}
+      <div className="absolute inset-x-0 top-0 z-0 h-dvh">
         <Image
           src="/hero-mobile.png"
           alt=""
@@ -136,18 +136,18 @@ export default function Hero() {
               <button
                 type="button"
                 onClick={() => window.dispatchEvent(new Event("openAuthModal"))}
-                className="w-full rounded-lg bg-[#ff4e33] px-8 py-3.5 text-base font-medium text-white shadow-md transition-colors duration-300 hover:bg-[#e63e26] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff4e33] focus-visible:ring-offset-2 focus-visible:ring-offset-black sm:w-auto"
+                className="w-auto rounded-lg bg-[#ff4e33] px-5 py-2.5 text-sm font-medium text-white shadow-md transition-colors duration-300 hover:bg-[#e63e26] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff4e33] focus-visible:ring-offset-2 focus-visible:ring-offset-black md:px-8 md:py-3.5 md:text-base"
               >
                 Connect with Presswayy
               </button>
             </div>
           </div>
 
-          {/* Chat Block - Strictly follows the text, cannot float away */}
+          {/* Chat Block - fixed height so bubbles never reflow the section */}
           <div className="mt-12 flex w-full max-w-[340px] shrink-0 flex-col justify-end gap-3 transition-opacity duration-500 lg:mt-0">
             <div
               aria-hidden="true"
-              className={`flex min-h-[380px] w-full flex-col justify-end gap-3 ${
+              className={`flex h-[460px] w-full flex-col justify-end gap-3 overflow-hidden ${
                 fadingOut ? "opacity-0" : "opacity-100"
               }`}
             >
