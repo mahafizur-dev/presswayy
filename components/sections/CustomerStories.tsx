@@ -10,9 +10,6 @@ import {
   StatCardProps,
 } from "@/types";
 
-// ==========================================
-// DATA: Flattened for a single, continuous grid
-// ==========================================
 const allCards: CardData[] = [
   // Block 1
   {

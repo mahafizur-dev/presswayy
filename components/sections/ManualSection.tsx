@@ -81,7 +81,6 @@ const ManualSection = () => {
   };
 
   return (
-    // এখানে pt-28 এবং lg:pt-36 যুক্ত করে উপরের স্পেসিং বাড়ানো হয়েছে
     <div className="min-h-screen bg-slate-50 pt-28 pb-12 lg:pt-36 lg:pb-16 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-md mx-auto bg-white p-8 rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-slate-100">
         <div className="mb-8 text-center">
