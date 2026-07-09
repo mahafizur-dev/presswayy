@@ -18,8 +18,8 @@ export default function NotunDinerPothe() {
             Presswayy Presents
           </span>
 
-          <h2 className="text-[32px] md:text-[56px] font-['Times_New_Roman',_sans-serif] font-bold text-[#00063D] leading-[1.1] md:leading-tight mb-6 tracking-tight">
-            Bangladesh’s First <br className="hidden sm:block" /> Entrepreneur
+          <h2 className="text-[32px] md:text-[56px] font-bold text-[#00063D] leading-[1.1] md:leading-tight mb-6 tracking-tight">
+            Bangladesh's First <br className="hidden sm:block" /> Entrepreneur
             Anthem
           </h2>
 

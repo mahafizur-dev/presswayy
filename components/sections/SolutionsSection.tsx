@@ -1,89 +1,73 @@
 "use client";
 
-import type { Metadata } from "next";
-import Image from "next/image";
-
-// 💡 Next.js Tip: "use client" file-e metadata export kora jay na (build error asbe).
-// Eita page.tsx ba layout.tsx (server component)-e rakhte hobe.
-export const metadata: Metadata = {
-  title: "Industry Solutions | Presswayy",
-  description: "Tailored solutions for E-commerce, SaaS, Agencies, and more.",
-};
-
 export default function SolutionsSection() {
-  const categories = [
+  const chips = [
     "Service Providers",
-    "Hotels",
-    "Resorts",
+    "Hotels & Resorts",
     "Restaurants",
     "Travel Agencies",
-    "Event Managements",
-    "E-Commerce",
-  ];
-
-  const hoverColors = [
-    "hover:bg-[#FF4D2E]",
-    "hover:bg-[#3B82F6]",
-    "hover:bg-[#10B981]",
-    "hover:bg-[#8B5CF6]",
-    "hover:bg-[#EAB308]",
-    "hover:bg-[#EC4899]",
-    "hover:bg-[#06B6D4]",
+    "Event Management",
+    "E‑Commerce",
   ];
 
   return (
-    <div id="solutions" className="bg-white">
-      <section className="pt-12 sm:pt-20 md:pt-24 pb-10 sm:pb-12 px-4 overflow-hidden relative">
-        <div className="container mx-auto">
-          {/* Badge */}
-          <div className="flex justify-center mb-6 sm:mb-6 relative z-10">
-            <span className="bg-[#e4ffdb] text-[#00063D] px-4 sm:px-4 py-1.5 sm:py-1 text-[13px] sm:text-sm md:text-base font-medium font-sans rounded-sm">
-              Solutions for every Business
-            </span>
+    <section
+      id="solutions"
+      aria-labelledby="solutions-heading"
+      className="bg-[#F2F1ED] py-16 md:py-24 px-4"
+    >
+      <div className="max-w-6xl mx-auto">
+        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center overflow-hidden rounded-[28px] border border-black/5 bg-white p-8 md:p-14 shadow-[0_10px_40px_-15px_rgba(0,6,61,0.15)]">
+         
+
+          {/* Left */}
+          <div className="relative z-10">
+            <p className="inline-flex items-center gap-2 rounded-full bg-[#FF4D2E]/10 px-3 py-1 text-sm font-medium text-[#FF4D2E] mb-5">
+              <span className="h-2 w-2 rounded-full bg-[#FF4D2E]" />
+              Solutions
+            </p>
+
+            <h2
+              id="solutions-heading"
+              className="text-[28px] md:text-[42px] font-bold text-[#00063D] leading-[1.15] tracking-tight mb-5"
+            >
+              Built for the businesses that never stop getting messages.
+            </h2>
+
+            <p className="text-[16px] md:text-[18px] text-slate-600 leading-relaxed mb-8 max-w-md">
+              From a single Instagram shop to a multi‑branch service business,
+              Presswayy adapts to your catalogue and workflow.
+            </p>
+
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event("openAuthModal"))}
+              className="inline-flex items-center gap-2 rounded-lg bg-[#FF4D2E] px-7 py-3.5 text-sm md:text-base font-medium text-white shadow-md transition-all duration-300 hover:bg-[#e63e26] hover:shadow-lg hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF4D2E] focus-visible:ring-offset-2"
+            >
+              Connect with Presswayy
+              <span
+                aria-hidden
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </button>
           </div>
 
-          {/* Heading */}
-          <h1
-            className="font-semibold text-[#00063D] text-center mb-6 sm:mb-8 md:mb-10 relative z-10 tracking-tight md:tracking-[-3px] text-[32px] sm:text-[48px] md:text-[74px] leading-[1.2] md:leading-[1.1]"
-            style={{
-              fontFamily: '"Times New Roman", sans-serif',
-            }}
-          >
-            Smart replies - Happy customers
-            <br className="hidden sm:block" /> More sales.
-          </h1>
-
-          {/* Category buttons */}
-          <div className="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-10 sm:mb-16 md:mb-20 max-w-4xl mx-auto relative z-10">
-            {categories.map((category, idx) => (
-              <button
+          {/* Right — chips */}
+          <div className="relative z-10 grid grid-cols-2 gap-3">
+            {chips.map((chip, idx) => (
+              <span
                 key={idx}
-                className={`px-4 sm:px-5 py-2 sm:py-2.5 text-[14px] sm:text-sm font-medium rounded-md shadow-sm transition-all duration-300 ${
-                  idx === 0
-                    ? "bg-[#FF4D2E] text-white"
-                    : `bg-[#e2e4e9] text-[#0a1435] ${hoverColors[idx % hoverColors.length]} hover:text-white hover:-translate-y-1 hover:shadow-md`
-                }`}
+                className="group inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-[#0a1435] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#FF4D2E] hover:text-[#FF4D2E] hover:shadow-md"
               >
-                {category}
-              </button>
+                <span className="h-1.5 w-1.5 rounded-full bg-slate-300 transition-colors duration-300 group-hover:bg-[#FF4D2E]" />
+                {chip}
+              </span>
             ))}
           </div>
-
-          
-          {/* <div className="w-full max-w-5xl mx-auto flex justify-center items-center px-4 sm:px-4 md:px-8">
-            <Image
-              src={
-                "https://res.cloudinary.com/drchxbdit/image/upload/v1774606339/solution_wuwsem.png"
-              }
-              alt="Solution Presentation"
-              width={1200}
-              height={800}
-              className="w-full h-auto object-contain"
-              priority
-            />
-          </div> */}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

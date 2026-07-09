@@ -12,7 +12,7 @@ export default function LiveDemo() {
       <div className="max-w-7xl mx-auto text-center">
         {/* Section Heading */}
         <div className="mb-10 md:mb-16">
-          <h2 className="text-[30px] md:text-[48px] font-['Times_New_Roman',_sans-serif] font-bold text-[#00063D] leading-[1.2] md:leading-tight mb-4 tracking-tight">
+          <h2 className="text-[30px] md:text-[48px] font-bold text-[#00063D] leading-[1.2] md:leading-tight mb-4 tracking-tight">
             See Our Live Demo
           </h2>
           <div className="w-20 h-1 bg-[#FF5733] mx-auto mb-6 rounded-full"></div>{" "}

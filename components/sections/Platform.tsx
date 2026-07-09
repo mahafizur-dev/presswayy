@@ -1,106 +1,149 @@
-"use client";
-
-import React, { useState, useEffect } from "react";
-
-const animatedWords = [
-  "Customer Support",
-  "Product Suggestions",
-  "Order Collection",
-  "Courier Tracking",
+const features = [
+  {
+    title: "Instant replies, 24/7",
+    desc: "Responds in under a minute, day or night, weekends and holidays included.",
+    icon: (
+      <>
+        <path d="M12 2a10 10 0 1 0 10 10" />
+        <path d="M12 6v6l4 2" />
+      </>
+    ),
+  },
+  {
+    title: "Trained on your business",
+    desc: "Accurate answers based on your real catalogue, prices and tone — not generic scripts.",
+    icon: (
+      <>
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+      </>
+    ),
+  },
+  {
+    title: "Reads images & voice notes",
+    desc: "Understands product photos, payment screenshots and voice messages customers send.",
+    icon: (
+      <>
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <circle cx="9" cy="9" r="2" />
+        <path d="M21 15l-5-5L5 21" />
+      </>
+    ),
+  },
+  {
+    title: "Orders synced automatically",
+    desc: "Every confirmed order is saved straight to Google Sheets — no manual copy‑paste.",
+    icon: (
+      <>
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+      </>
+    ),
+  },
+  {
+    title: "Courier tracking ",
+    desc: "Customers get status updates on their delivery without messaging your team.",
+    icon: (
+      <>
+        <rect x="1" y="6" width="15" height="12" rx="1" />
+        <path d="M16 10h4l3 3v3h-7z" />
+        <circle cx="6" cy="19" r="1.6" />
+        <circle cx="18" cy="19" r="1.6" />
+      </>
+    ),
+  },
+  {
+    title: "Seamless human hand‑off",
+    desc: "Pause the AI and take over any conversation instantly, whenever you want to step in.",
+    icon: (
+      <>
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </>
+    ),
+  },
+  {
+    title: "100+ chats at once",
+    desc: "Handles concurrent conversations at scale, so no customer waits in a queue.",
+    icon: (
+      <>
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </>
+    ),
+  },
+  {
+    title: "Speaks their language",
+    desc: "বাংলা, English or Banglish — Presswayy replies naturally in whichever your customer used.",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M2 12h20" />
+        <path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z" />
+      </>
+    ),
+  },
 ];
 
 export default function Platform() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % animatedWords.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div
+    <section
       id="platform"
-      className="sm:min-h-screen bg-[#f5f6f8] flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 font-sans overflow-hidden py-12 md:py-20"
+      aria-labelledby="platform-heading"
+      className="bg-[#f5f6f8] py-16 md:py-24 px-4 sm:px-6 lg:px-8"
     >
-      <style>{`
-        @keyframes slideFade {
-          0%   { opacity: 0; transform: translateY(30px) rotateX(-20deg); }
-          10%, 90% { opacity: 1; transform: translateY(0) rotateX(0deg); }
-          100% { opacity: 0; transform: translateY(-30px) rotateX(20deg); }
-        }
-        .animate-word {
-          display: inline-block;
-          animation: slideFade 2.8s ease-in-out forwards;
-        }
-        .font-serif-custom {
-          font-family: "Times New Roman", sans-serif;
-        }
-      `}</style>
-
-      <div className="w-full max-w-[1300px] mx-auto flex flex-col items-center text-center">
-        {/* Badge */}
-        <div className="mb-6 sm:mb-8 px-4 py-2 bg-white text-[#0a1128] text-[14px] sm:text-sm md:text-base font-medium rounded-sm shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] border border-gray-100 tracking-wide">
-          Presswayy Platform
+      <div className="max-w-6xl mx-auto">
+        {/* Section head */}
+        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+          <p className="inline-flex items-center gap-2 rounded-full bg-[#ff5a36]/10 px-3 py-1 text-sm font-medium text-[#ff5a36] mb-5">
+            <span className="h-2 w-2 rounded-full bg-[#ff5a36]" />
+            Platform
+          </p>
+          <h2
+            id="platform-heading"
+            className="font-googlesans text-[28px] md:text-[42px] lg:text-[54px] font-bold text-[#0a1128] leading-[1.15] tracking-tight mb-4"
+          >
+            Everything included
+          </h2>
+          <p className="font-googlesans text-[16px] md:text-[18px] text-slate-600 leading-relaxed">
+            Every plan ships with the full platform from day one — no upsells.
+          </p>
         </div>
 
-        {/* Headline */}
-        <h1
-          className="font-serif-custom text-center font-semibold text-[#0a1128] tracking-tight md:tracking-tight md:leading-[1.3] w-full px-2
-          text-[32px] sm:text-[38px] md:text-[50px] lg:text-[60px]"
-        >
-          {/* Desktop Version */}
-          <span className="hidden md:block">
-            Presswayy is the AI platform that helps you
-          </span>
-          <span className="hidden md:flex md:items-center md:justify-center md:gap-3">
-            <span>automate</span>
-            <span
-              className="relative inline-flex justify-center text-[#ff5a36] items-center"
-              style={{ height: "1.25em", minWidth: "max-content" }}
+        {/* Feature grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {features.map((f, idx) => (
+            <div
+              key={idx}
+              className="group rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#ff5a36]/30 hover:shadow-md"
             >
-              <span key={index} className="animate-word">
-                {animatedWords[index]}
-              </span>
-            </span>
-            <span>and more,</span>
-          </span>
-          <span className="hidden md:block">all without hiring.</span>
-
-          {/* Mobile Version */}
-          <span className="md:hidden leading-[1.4]">
-            Presswayy is the AI platform that helps you automate <br />
-            <span
-              className="inline-flex relative justify-center text-[#ff5a36] mx-1 items-center align-middle"
-              style={{ height: "1.25em" }}
-            >
-              <span
-                key={`m-${index}`}
-                className="animate-word absolute whitespace-nowrap"
-              >
-                {animatedWords[index]}
-              </span>
-              <span className="invisible pointer-events-none whitespace-nowrap">
-                Product Suggestions
-              </span>
-            </span>{" "}
-            <br /> and more, all without hiring.
-          </span>
-        </h1>
-
-        <p className="mt-8 sm:mt-8 text-[16px] sm:text-base md:text-lg lg:text-xl text-[#1e293b] max-w-xs sm:max-w-xl md:max-w-2xl font-medium leading-[1.5] md:leading-relaxed px-2">
-          Scale faster, support smarter, and automate everything from first
-          message to final sale with Presswayy all-in-one AI platform.
-        </p>
-
-        <button
-          onClick={() => window.dispatchEvent(new Event("openAuthModal"))}
-          className="mt-10 sm:mt-10 px-7 sm:px-8 py-3.5 sm:py-3.5 bg-[#ff5a36] hover:bg-[#e84d2b] text-white text-[16px] sm:text-base md:text-lg font-semibold rounded-[2px] shadow-lg shadow-[#ff5a36]/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-[#ff5a36]/40 focus:outline-none focus:ring-2 focus:ring-[#ff5a36] focus:ring-offset-2 focus:ring-offset-[#f5f6f8] border-none cursor-pointer w-full sm:w-auto max-w-xs sm:max-w-none"
-        >
-          Connect with Presswayy
-        </button>
+              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#ff5a36]/10 text-[#ff5a36] transition-colors duration-300 group-hover:bg-[#ff5a36] group-hover:text-white">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-5 w-5"
+                >
+                  {f.icon}
+                </svg>
+              </div>
+              <h3 className="text-[17px] font-bold text-[#0a1128] mb-2 leading-snug">
+                {f.title}
+              </h3>
+              <p className="text-[14px] text-slate-600 leading-relaxed">
+                {f.desc}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

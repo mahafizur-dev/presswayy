@@ -11,16 +11,13 @@ export default function ConnectFeature() {
       </div>
 
       {/* Main Heading */}
-      <h2
-        className="font-semibold text-[28px] sm:text-[42px] md:text-[52px] lg:text-[57px] leading-[1.2] md:leading-[1.1] tracking-[-0.5px] sm:tracking-[-2px] md:tracking-[-3px] text-[#00063D] mb-4 md:mb-6 max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto"
-        style={{ fontFamily: '"Times New Roman", sans-serif' }}
-      >
-        Connects with your website, <span className="inline">landing page</span>{" "}
-        <span className="inline md:block">&amp; database</span>
+      <h2 className="font-googlesans font-semibold text-[28px] sm:text-[42px] md:text-[54px] lg:text-[57px] leading-[1.2] md:leading-[1.1] tracking-[-0.5px] sm:tracking-[-2px] md:tracking-[-3px] text-[#00063D] mb-4 md:mb-6 max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto">
+        Connects with your website,{" "}
+        <span className="inline">landing page &amp; database</span>{" "}
       </h2>
 
       {/* Subheading */}
-      <p className="text-[16px] md:text-[17px] lg:text-[18px] text-[#1a2b5e] mb-8 md:mb-10 max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto leading-[1.5] md:leading-relaxed font-sans">
+      <p className="font-googlesans text-[16px] md:text-[17px] lg:text-[18px] text-[#1a2b5e] mb-8 md:mb-10 max-w-sm sm:max-w-xl md:max-w-2xl lg:max-w-3xl mx-auto leading-[1.5] md:leading-relaxed">
         Answers product queries, sends product photos and detects incoming
         screenshots that your customers send.
       </p>

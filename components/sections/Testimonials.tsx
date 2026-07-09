@@ -12,10 +12,10 @@ export default function Testimonials() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const testimonials = [
-    { id: "Mp-BLqapneQ", title: "Client Testimonial 1" },
-    { id: "rhpAwRLvegQ", title: "Client Testimonial 2" },
-    { id: "75qukJQbkHs", title: "Client Testimonial 3" },
-    { id: "vb1KiuZuFnQ", title: "Client Testimonial 4" },
+    { id: "Mp-BLqapneQ", title: "People Testimonial" },
+    { id: "rhpAwRLvegQ", title: "People Testimonial" },
+    { id: "75qukJQbkHs", title: "People Testimonial" },
+    { id: "vb1KiuZuFnQ", title: "People Testimonial" },
   ];
 
   return (
@@ -25,7 +25,7 @@ export default function Testimonials() {
         {/* Mobile-এ সাইড প্যাডিং ০ যাতে সোয়াইপ ফিল ভালো আসে */}
         {/* Section Heading */}
         <div className="text-center mb-8 md:mb-16 px-4">
-          <h2 className="font-serif text-[28px] md:text-4xl lg:text-5xl font-bold text-[#00063D] mb-3 tracking-tight leading-tight">
+          <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold text-[#00063D] mb-3 tracking-tight leading-tight">
             People Say About Presswayy
           </h2>
           <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">

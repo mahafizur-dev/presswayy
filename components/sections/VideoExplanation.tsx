@@ -12,10 +12,9 @@ export default function VideoExplanation() {
       <div className="max-w-7xl mx-auto text-center">
         {/* Section Heading */}
         <div className="mb-10 md:mb-16">
-          <h2 className="text-[30px] md:text-[48px] font-['Times_New_Roman',_sans-serif] font-bold text-[#00063D] leading-[1.2] md:leading-tight mb-4 tracking-tight">
+          <h2 className="text-[30px] md:text-[48px] font-bold text-[#00063D] leading-[1.2] md:leading-tight mb-4 tracking-tight">
             Presswayy Explained Simply
           </h2>
-
           {/* Subheading */}
           <p className="text-[17px] md:text-[20px] text-slate-600 mb-0 font-sans font-medium leading-[1.5] md:leading-normal">
             We built Presswayy keeping{" "}

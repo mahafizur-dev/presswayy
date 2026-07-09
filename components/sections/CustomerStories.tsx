@@ -146,7 +146,7 @@ const StatCard: React.FC<StatCardProps> = ({
   textColor,
 }) => (
   <div className={`${bgColor} p-6 md:p-8 flex flex-col min-h-[320px]`}>
-    <h3 className="font-['Times_New_Roman',_sans-serif] text-[24px] md:text-[32px] font-semibold text-[#103A00] mb-3 md:mb-4">
+    <h3 className="font-googlesans text-[28px] md:text-[42px] lg:text-[54px] font-semibold text-[#103A00] mb-3 md:mb-4">
       {title}
     </h3>
     <div className={`w-full h-[1px] ${dividerColor} mb-5 md:mb-6`}></div>
@@ -166,12 +166,12 @@ export default function CustomerStories() {
   return (
     <section className="bg-white py-12 md:py-24 px-4 sm:px-6">
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto flex flex-col items-center justify-center text-center mb-12 md:mb-20">
+      <div className="font-googlesans max-w-7xl mx-auto flex flex-col items-center justify-center text-center mb-12 md:mb-20">
         <div className="inline-block bg-[#fff9ce] text-[#0d1c44] text-[11px] md:text-[12px] px-3 py-1.5 md:py-1 mb-6 md:mb-8 font-medium rounded-sm uppercase tracking-wider">
           Customer Stories
         </div>
 
-        <h2 className="font-['Times_New_Roman',_sans-serif] text-[32px] md:text-[72px] font-semibold leading-[1.2] md:leading-[71px] tracking-[-1px] md:tracking-[-3px] text-[#00063D] mb-8 md:mb-12 max-w-5xl mx-auto">
+        <h2 className="font-googlesans text-[32px] md:text-[42px] lg:text-[54px] font-semibold leading-[1.2] md:leading-[71px] tracking-[-1px] md:tracking-[-3px] text-[#00063D] mb-8 md:mb-12 max-w-5xl mx-auto">
           Our clients don&apos;t just use it, <br className="hidden md:block" />
           they <span className="italic">rely</span> on it.
         </h2>
