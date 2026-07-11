@@ -153,9 +153,9 @@ export default function TrustedCompanies() {
           </span>
           <span className="block w-8 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
         </div>
-        <h2 className="font-googlesans font-bold text-[32px] sm:text-[42px] md:text-[54px] lg:text-[53px] leading-[1.2] md:leading-[1.1] tracking-[-0.5px] sm:tracking-[-2px] md:tracking-[-3px] text-[#00063D] mb-4 md:mb-6 max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto">
+        <h1 className="font-googlesans font-bold text-[32px] md:text-[48px] lg:text-[56px] leading-[1.2] md:leading-[1.1] tracking-[-0.5px] sm:tracking-[-2px] md:tracking-[-3px] text-[#00063D] mb-4 md:mb-6 max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto">
           Trusted by 112+ companies across Bangladesh
-        </h2>
+        </h1>
       </div>
 
       {/* Two Row Circular Marquee - Reduced Size */}

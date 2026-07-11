@@ -47,9 +47,9 @@ export default function FAQ() {
       <div className="max-w-4xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-6 sm:mb-12 md:mb-16">
-          <h2 className="font-googlesans text-[24px] sm:text-[34px] md:text-[44px] font-bold text-[#0d1c44] mb-3 leading-tight">
+          <h1 className="font-googlesans text-[32px] md:text-[48px] lg:text-[56px] font-bold text-[#0d1c44] mb-3 leading-tight">
             Frequently Asked Questions
-          </h2>
+          </h1>
           <p className="font-googlesans text-[16px] sm:text-[16px] md:text-[18px] text-[#324578] font-medium opacity-80 leading-[1.5] md:leading-relaxed">
             Get answers to common questions about Presswayy
           </p>

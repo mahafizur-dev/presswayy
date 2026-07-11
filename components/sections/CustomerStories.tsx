@@ -123,7 +123,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   logoStyle,
 }) => (
   <div className="bg-white p-6 md:p-8 flex flex-col justify-center md:justify-between min-h-[320px] border border-gray-100 shadow-sm">
-    <p className="text-[15px] md:text-[15px] text-[#0d1c44] leading-[1.5] md:leading-relaxed font-sans font-medium">
+    <p className="font-googlesans text-[15px] md:text-[15px] text-[#0d1c44] leading-[1.5] md:leading-relaxed font-medium">
       {text}
     </p>
     <div className="mt-6 md:mt-0">
@@ -151,7 +151,7 @@ const StatCard: React.FC<StatCardProps> = ({
     </h3>
     <div className={`w-full h-[1px] ${dividerColor} mb-5 md:mb-6`}></div>
     <p
-      className={`text-[15px] md:text-[15px] ${textColor} leading-[1.5] md:leading-relaxed font-sans font-medium`}
+      className={`font-googlesans text-[15px] md:text-[15px] ${textColor} leading-[1.5] md:leading-relaxed font-medium`}
     >
       {text}
     </p>
@@ -171,10 +171,10 @@ export default function CustomerStories() {
           Customer Stories
         </div>
 
-        <h2 className="font-googlesans text-[32px] md:text-[42px] lg:text-[54px] font-semibold leading-[1.2] md:leading-[71px] tracking-[-1px] md:tracking-[-3px] text-[#00063D] mb-8 md:mb-12 max-w-5xl mx-auto">
+        <h1 className="font-googlesans text-[32px] md:text-[48px] lg:text-[56px] font-bold leading-[1.2] md:leading-[71px] tracking-[-1px] md:tracking-[-3px] text-[#00063D] mb-8 md:mb-12 max-w-5xl mx-auto">
           Our clients don&apos;t just use it, <br className="hidden md:block" />
           they <span className="italic">rely</span> on it.
-        </h2>
+        </h1>
 
         <div className="relative z-10 mb-12 md:mb-20">
           <button

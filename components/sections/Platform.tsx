@@ -105,7 +105,7 @@ export default function Platform() {
           </p>
           <h2
             id="platform-heading"
-            className="font-googlesans text-[28px] md:text-[42px] lg:text-[54px] font-bold text-[#0a1128] leading-[1.15] tracking-tight mb-4"
+            className="font-googlesans text-[32px] md:text-[48px] lg:text-[56px] font-bold text-[#0a1128] leading-[1.15] tracking-tight mb-4"
           >
             Everything included
           </h2>

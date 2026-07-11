@@ -18,8 +18,6 @@ export default function SolutionsSection() {
     >
       <div className="max-w-6xl mx-auto">
         <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center overflow-hidden rounded-[28px] border border-black/5 bg-white p-8 md:p-14 shadow-[0_10px_40px_-15px_rgba(0,6,61,0.15)]">
-         
-
           {/* Left */}
           <div className="relative z-10">
             <p className="inline-flex items-center gap-2 rounded-full bg-[#FF4D2E]/10 px-3 py-1 text-sm font-medium text-[#FF4D2E] mb-5">
@@ -27,14 +25,14 @@ export default function SolutionsSection() {
               Solutions
             </p>
 
-            <h2
+            <h1
               id="solutions-heading"
-              className="text-[28px] md:text-[42px] font-bold text-[#00063D] leading-[1.15] tracking-tight mb-5"
+              className="font-googlesans font-bold text-[32px] md:text-[48px] lg:text-[56px] text-[#00063D] leading-[1.15] tracking-tight mb-5"
             >
               Built for the businesses that never stop getting messages.
-            </h2>
+            </h1>
 
-            <p className="text-[16px] md:text-[18px] text-slate-600 leading-relaxed mb-8 max-w-md">
+            <p className="font-googlesans text-[16px] md:text-[18px] text-slate-600 leading-relaxed mb-8 max-w-md">
               From a single Instagram shop to a multi‑branch service business,
               Presswayy adapts to your catalogue and workflow.
             </p>

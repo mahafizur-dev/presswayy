@@ -62,7 +62,7 @@ export default function PricingSection() {
 
       <div className="w-full max-w-[1080px]">
         {/* Pricing Title */}
-        <h1 className="font-googlesans text-[32px] md:text-[42] lg:text-[54] font-bold text-[#00063D] text-center mb-4 md:mb-6 leading-[1.2] md:leading-tight tracking-tight">
+        <h1 className="font-googlesans font-bold text-center mb-6 text-[32px] leading-[1.15] tracking-tight text-black md:mb-8 md:text-[48px] md:leading-[1.1] lg:text-[56px]">
           Simple, transparent pricing
         </h1>
 

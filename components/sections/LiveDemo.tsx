@@ -12,13 +12,13 @@ export default function LiveDemo() {
       <div className="max-w-7xl mx-auto text-center">
         {/* Section Heading */}
         <div className="mb-10 md:mb-16">
-          <h2 className="text-[30px] md:text-[48px] font-bold text-[#00063D] leading-[1.2] md:leading-tight mb-4 tracking-tight">
+          <h1 className="font-googlesans text-[32px] md:text-[48px] lg:text-[56px] font-bold text-[#00063D] leading-[1.2] md:leading-tight mb-4 tracking-tight">
             See Our Live Demo
-          </h2>
+          </h1>
           <div className="w-20 h-1 bg-[#FF5733] mx-auto mb-6 rounded-full"></div>{" "}
           {/* 💡 Added a small decorative line */}
           {/* Subheading */}
-          <p className="text-[17px] md:text-[20px] text-slate-600 max-w-2xl mx-auto font-sans leading-relaxed opacity-90">
+          <p className="font-googlesans text-[17px] md:text-[20px] text-slate-600 max-w-2xl mx-auto font-sans leading-relaxed opacity-90">
             Discover how our AI-driven workflow can scale your business
             operations effortlessly.
           </p>

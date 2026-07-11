@@ -22,13 +22,11 @@ export default function Testimonials() {
     <section className="bg-gradient-to-b from-slate-50 to-slate-100 py-10 md:py-28 overflow-hidden font-sans">
       <div className="max-w-[1400px] mx-auto px-0 md:px-4">
         {" "}
-        {/* Mobile-এ সাইড প্যাডিং ০ যাতে সোয়াইপ ফিল ভালো আসে */}
-        {/* Section Heading */}
         <div className="text-center mb-8 md:mb-16 px-4">
-          <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold text-[#00063D] mb-3 tracking-tight leading-tight">
+          <h1 className="font-googlesans text-[32px] md:text-[48px] lg:text-[56px] font-bold text-[#00063D] mb-3 tracking-tight leading-tight">
             People Say About Presswayy
-          </h2>
-          <p className="text-slate-500 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
+          </h1>
+          <p className="font-googlesans text-slate-500 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
             Hear directly from our partners about how our AI solutions have
             transformed their workflow.
           </p>
