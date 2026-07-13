@@ -4,11 +4,6 @@ import Image from "next/image";
 
 export default function TrustedCompanies() {
   const companyLogos = [
-    // {
-    //   id: 1,
-    //   name: "Lever n Gear",
-    //   src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774606337/lng_vtgxm5.jpg",
-    // },
     {
       id: 2,
       name: "FLEX",
@@ -39,16 +34,6 @@ export default function TrustedCompanies() {
       name: "Clarex Tech",
       src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774606336/clrextech_nrb0c4.jpg",
     },
-    // {
-    //   id: 8,
-    //   name: "Bizstori",
-    //   src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774608210/biztori_u3tppv.png",
-    // },
-    // {
-    //   id: 9,
-    //   name: "Clarex Accounting",
-    //   src: "https://res.cloudinary.com/drchxbdit/image/upload/v1774608210/CLAREx-accounting_bdaqtc.png",
-    // },
     {
       id: 10,
       name: "Arno Fashion",
@@ -168,16 +153,13 @@ export default function TrustedCompanies() {
           </span>
           <span className="block w-8 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
         </div>
-        <h2
-          className="font-semibold text-[28px] sm:text-[36px] md:text-[44px] lg:text-[53px] leading-[1.2] md:leading-[1.1] tracking-[-0.5px] sm:tracking-[-2px] md:tracking-[-3px] text-[#00063D] mb-4 md:mb-6 max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto"
-          style={{ fontFamily: '"Times New Roman", sans-serif' }}
-        >
-          Trusted by <span className="font-bold text-[#FF5733]">112+</span> Companies
-        </h2>
+        <h1 className="font-googlesans font-bold text-[32px] md:text-[48px] lg:text-[56px] leading-[1.2] md:leading-[1.1] tracking-[-0.5px] sm:tracking-[-2px] md:tracking-[-3px] text-[#00063D] mb-4 md:mb-6 max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto">
+          Trusted by 112+ companies across Bangladesh
+        </h1>
       </div>
 
       {/* Two Row Circular Marquee - Reduced Size */}
-      <div className="space-y-12 md:space-y-14">
+      <div className="space-y-10 md:space-y-12">
         {/* Row 1 */}
         <div className="relative">
           <div className="logo-mask">
@@ -188,8 +170,8 @@ export default function TrustedCompanies() {
                     <Image
                       src={logo.src}
                       alt={logo.name}
-                      width={140}
-                      height={140}
+                      width={110}
+                      height={110}
                       className="logo-image"
                       loading="lazy"
                     />
@@ -210,8 +192,8 @@ export default function TrustedCompanies() {
                     <Image
                       src={logo.src}
                       alt={logo.name}
-                      width={140}
-                      height={140}
+                      width={110}
+                      height={110}
                       className="logo-image"
                       loading="lazy"
                     />
@@ -263,33 +245,33 @@ export default function TrustedCompanies() {
           display: flex;
           width: max-content;
           align-items: center;
-          gap: 48px; /* Reduced Gap */
+          gap: 42px;
         }
 
         .track1 {
-          animation: scrollLeft 52s linear infinite;
+          animation: scrollLeft 50s linear infinite;
         }
         .track2 {
-          animation: scrollRight 45s linear infinite;
+          animation: scrollRight 44s linear infinite;
         }
 
         .logo-track:hover {
           animation-play-state: paused;
         }
 
-        /* Reduced Circular Size */
+        /* Reduced Logo Size */
         .logo-item {
           flex-shrink: 0;
-          width: 120px;
-          height: 120px;
+          width: 100px;
+          height: 100px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
         .circle-wrapper {
-          width: 105px;
-          height: 105px;
+          width: 87px;
+          height: 87px;
           border-radius: 9999px;
           overflow: hidden;
           border: 3px solid #f3f3f3;
@@ -299,7 +281,7 @@ export default function TrustedCompanies() {
         }
 
         .logo-item:hover .circle-wrapper {
-          transform: scale(1.14);
+          transform: scale(1.15);
           border-color: #e5e5e5;
           box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         }
@@ -309,7 +291,7 @@ export default function TrustedCompanies() {
           height: 100%;
           object-fit: contain;
           object-position: center;
-          padding: 12px;
+          padding: 10px;
           filter: grayscale(85%) opacity(78%);
           transition: all 0.4s ease;
         }
@@ -321,15 +303,15 @@ export default function TrustedCompanies() {
         /* Responsive */
         @media (min-width: 768px) {
           .logo-item {
-            width: 138px;
-            height: 138px;
+            width: 118px;
+            height: 118px;
           }
           .circle-wrapper {
-            width: 122px;
-            height: 122px;
+            width: 104px;
+            height: 104px;
           }
           .logo-track {
-            gap: 64px; /* Reduced desktop gap */
+            gap: 54px;
           }
         }
       `}</style>

@@ -15,9 +15,7 @@ const Testimonials = dynamic(
 const VideoExplanation = dynamic(
   () => import("@/components/sections/VideoExplanation"),
 );
-const FeaturesSection = dynamic(
-  () => import("@/components/sections/FeaturesGrid"),
-);
+
 const SolutionsSection = dynamic(
   () => import("@/components/sections/SolutionsSection"),
 );
@@ -46,7 +44,7 @@ export default function Home() {
       {/* Lazy Loaded Sections */}
       <ConnectFeature />
       <Testimonials />
-      <FeaturesSection />
+     
       <VideoExplanation />
       <SolutionsSection />
       <LiveDemo />

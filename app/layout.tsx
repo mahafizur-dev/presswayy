@@ -1,14 +1,35 @@
 import type { Metadata } from "next";
 import { Inter, Geist } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-const inter = Inter({ subsets: ["latin"] });
+const googlesans = localFont({
+  src: [
+    {
+      path: "./fonts/GoogleSans_17pt-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/GoogleSans_17pt-SemiBold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "./fonts/GoogleSans_17pt-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-googlesans",
+});
 
 export const metadata: Metadata = {
   title: "Presswayy | Your business inbox empowered",
@@ -24,7 +45,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
+    <html
+      lang="en"
+      className={cn(geist.variable, inter.variable, googlesans.variable)}
+    >
       <Script id="google-tag-manager" strategy="afterInteractive">
         {`
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -35,10 +59,7 @@ export default function RootLayout({
         `}
       </Script>
 
-      <body
-        className={`${inter.className} bg-white text-gray-900`}
-        suppressHydrationWarning
-      >
+      <body className="bg-white text-gray-900" suppressHydrationWarning>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NPBBD33T"

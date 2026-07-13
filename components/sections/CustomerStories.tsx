@@ -123,7 +123,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   logoStyle,
 }) => (
   <div className="bg-white p-6 md:p-8 flex flex-col justify-center md:justify-between min-h-[320px] border border-gray-100 shadow-sm">
-    <p className="text-[15px] md:text-[15px] text-[#0d1c44] leading-[1.5] md:leading-relaxed font-sans font-medium">
+    <p className="font-googlesans text-[15px] md:text-[15px] text-[#0d1c44] leading-[1.5] md:leading-relaxed font-medium">
       {text}
     </p>
     <div className="mt-6 md:mt-0">
@@ -146,12 +146,12 @@ const StatCard: React.FC<StatCardProps> = ({
   textColor,
 }) => (
   <div className={`${bgColor} p-6 md:p-8 flex flex-col min-h-[320px]`}>
-    <h3 className="font-['Times_New_Roman',_sans-serif] text-[24px] md:text-[32px] font-semibold text-[#103A00] mb-3 md:mb-4">
+    <h3 className="font-googlesans text-[16px] md:text-[16px] lg:text-[17px] font-semibold text-[#103A00] mb-3 md:mb-4">
       {title}
     </h3>
     <div className={`w-full h-[1px] ${dividerColor} mb-5 md:mb-6`}></div>
     <p
-      className={`text-[15px] md:text-[15px] ${textColor} leading-[1.5] md:leading-relaxed font-sans font-medium`}
+      className={`font-googlesans text-[15px] md:text-[15px] ${textColor} leading-[1.5] md:leading-relaxed font-medium`}
     >
       {text}
     </p>
@@ -166,15 +166,15 @@ export default function CustomerStories() {
   return (
     <section className="bg-white py-12 md:py-24 px-4 sm:px-6">
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto flex flex-col items-center justify-center text-center mb-12 md:mb-20">
+      <div className="font-googlesans max-w-7xl mx-auto flex flex-col items-center justify-center text-center mb-12 md:mb-20">
         <div className="inline-block bg-[#fff9ce] text-[#0d1c44] text-[11px] md:text-[12px] px-3 py-1.5 md:py-1 mb-6 md:mb-8 font-medium rounded-sm uppercase tracking-wider">
           Customer Stories
         </div>
 
-        <h2 className="font-['Times_New_Roman',_sans-serif] text-[32px] md:text-[72px] font-semibold leading-[1.2] md:leading-[71px] tracking-[-1px] md:tracking-[-3px] text-[#00063D] mb-8 md:mb-12 max-w-5xl mx-auto">
+        <h1 className="font-googlesans text-[32px] md:text-[48px] lg:text-[56px] font-bold leading-[1.2] md:leading-[71px] tracking-[-1px] md:tracking-[-3px] text-[#00063D] mb-8 md:mb-12 max-w-5xl mx-auto">
           Our clients don&apos;t just use it, <br className="hidden md:block" />
           they <span className="italic">rely</span> on it.
-        </h2>
+        </h1>
 
         <div className="relative z-10 mb-12 md:mb-20">
           <button

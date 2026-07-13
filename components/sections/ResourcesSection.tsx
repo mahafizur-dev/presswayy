@@ -63,11 +63,11 @@ export default function ResourcesSection() {
                   : "opacity-0 translate-y-8"
               }`}
             >
-              <h1 className="font-['Times_New_Roman',_sans-serif] text-[30px] sm:text-5xl lg:text-6xl font-bold text-[#0B1221] tracking-tight leading-[1.2] sm:leading-[1.15]">
+              <h1 className="font-googlesans text-[30px] sm:text-5xl lg:text-6xl font-bold text-[#0B1221] tracking-tight leading-[1.2] sm:leading-[1.15]">
                 Resources to help you automate faster and grow smarter.
               </h1>
 
-              <p className="text-[17px] sm:text-xl text-slate-600 max-w-2xl leading-[1.6] sm:leading-relaxed">
+              <p className="font-googlesans text-[17px] sm:text-xl text-slate-600 max-w-2xl leading-[1.6] sm:leading-relaxed">
                 Explore our expert guides, video tutorials, templates, and tools
                 everything you need to launch, automate, and scale your business
                 with AI.
@@ -113,11 +113,11 @@ export default function ResourcesSection() {
                   : "opacity-0 translate-y-8"
               }`}
             >
-              <h2 className="font-['Times_New_Roman',_sans-serif] text-[30px] sm:text-5xl lg:text-6xl font-bold text-[#0B1221] tracking-tight leading-[1.2] sm:leading-[1.15]">
+              <h1 className="font-googlesans text-[30px] sm:text-5xl lg:text-6xl font-bold text-[#0B1221] tracking-tight leading-[1.2] sm:leading-[1.15]">
                 Seamless integration with your workflow.
-              </h2>
+              </h1>
 
-              <p className="text-[17px] sm:text-xl text-slate-600 max-w-2xl leading-[1.6] sm:leading-relaxed">
+              <p className="font-googlesans text-[17px] sm:text-xl text-slate-600 max-w-2xl leading-[1.6] sm:leading-relaxed">
                 Connect effortlessly with the tools you already use. Our
                 platform is designed to fit right into your ecosystem.
               </p>
@@ -173,17 +173,16 @@ export default function ResourcesSection() {
           aria-hidden="true"
         />
         <div className="relative z-10 max-w-4xl mx-auto px-6 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-          <h2
-            className={`font-['Times_New_Roman',_sans-serif] text-[32px] sm:text-4xl lg:text-5xl font-bold text-[#0B1221] tracking-tight leading-[1.2] mb-6 transition-all duration-1000 ease-out ${
-              // 💡 Mobile text-[28px] -> [32px], mb-6
+          <h1
+            className={`font-googlesans text-[30px] sm:text-5xl lg:text-6xl font-bold text-[#0B1221] tracking-tight leading-[1.2] mb-6 transition-all duration-1000 ease-out ${
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             Speak into their language automatically
-          </h2>
+          </h1>
 
           <p
-            className={`text-[18px] sm:text-xl lg:text-2xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed transition-all duration-1000 delay-300 ease-out ${
+            className={`font-googlesans text-[18px] sm:text-xl lg:text-2xl text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed transition-all duration-1000 delay-300 ease-out ${
               // 💡 mb-8 -> mb-12
               mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
