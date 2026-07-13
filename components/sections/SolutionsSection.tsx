@@ -1,13 +1,22 @@
 "use client";
 
+import {
+  Briefcase,
+  Building2,
+  UtensilsCrossed,
+  Plane,
+  PartyPopper,
+  ShoppingBag,
+} from "lucide-react";
+
 export default function SolutionsSection() {
   const chips = [
-    "Service Providers",
-    "Hotels & Resorts",
-    "Restaurants",
-    "Travel Agencies",
-    "Event Management",
-    "E‑Commerce",
+    { label: "Service Providers", icon: Briefcase },
+    { label: "Hotels & Resorts", icon: Building2 },
+    { label: "Restaurants", icon: UtensilsCrossed },
+    { label: "Travel Agencies", icon: Plane },
+    { label: "Event Management", icon: PartyPopper },
+    { label: "E‑Commerce", icon: ShoppingBag },
   ];
 
   return (
@@ -52,16 +61,20 @@ export default function SolutionsSection() {
             </button>
           </div>
 
-          {/* Right — chips */}
-          <div className="relative z-10 grid grid-cols-2 gap-3">
-            {chips.map((chip, idx) => (
-              <span
+          {/* Right — solutions grid */}
+          <div className="relative z-10 grid grid-cols-2 gap-4">
+            {chips.map(({ label, icon: Icon }, idx) => (
+              <div
                 key={idx}
-                className="group inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-5 py-3 text-sm font-medium text-[#0a1435] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#FF4D2E] hover:text-[#FF4D2E] hover:shadow-md"
+                className="group flex flex-col items-start gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#FF4D2E] hover:shadow-lg"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-slate-300 transition-colors duration-300 group-hover:bg-[#FF4D2E]" />
-                {chip}
-              </span>
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#FF4D2E]/10 text-[#FF4D2E] transition-colors duration-300 group-hover:bg-[#FF4D2E] group-hover:text-white">
+                  <Icon className="h-5 w-5" strokeWidth={2} />
+                </span>
+                <span className="font-googlesans text-sm md:text-base font-semibold text-[#0a1435] leading-snug">
+                  {label}
+                </span>
+              </div>
             ))}
           </div>
         </div>

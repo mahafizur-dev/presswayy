@@ -24,7 +24,7 @@ export default function Testimonials() {
         {" "}
         <div className="text-center mb-8 md:mb-16 px-4">
           <h1 className="font-googlesans text-[32px] md:text-[48px] lg:text-[56px] font-bold text-[#00063D] mb-3 tracking-tight leading-tight">
-            People Say About Presswayy
+            People's Perspectives on Presswayy
           </h1>
           <p className="font-googlesans text-slate-500 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
             Hear directly from our partners about how our AI solutions have

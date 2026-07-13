@@ -146,7 +146,7 @@ const StatCard: React.FC<StatCardProps> = ({
   textColor,
 }) => (
   <div className={`${bgColor} p-6 md:p-8 flex flex-col min-h-[320px]`}>
-    <h3 className="font-googlesans text-[28px] md:text-[42px] lg:text-[54px] font-semibold text-[#103A00] mb-3 md:mb-4">
+    <h3 className="font-googlesans text-[16px] md:text-[16px] lg:text-[17px] font-semibold text-[#103A00] mb-3 md:mb-4">
       {title}
     </h3>
     <div className={`w-full h-[1px] ${dividerColor} mb-5 md:mb-6`}></div>
