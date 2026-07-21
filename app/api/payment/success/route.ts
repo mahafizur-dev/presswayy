@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { createSessionToken, verifySessionToken, SESSION_COOKIE } from "@/lib/session";
 
 export async function POST(req: Request) {
   try {
@@ -64,10 +66,37 @@ export async function POST(req: Request) {
         console.error("Database save error (n8n Issue):", dbError);
       }
 
-      return NextResponse.redirect(
+      const redirectResponse = NextResponse.redirect(
         `${baseUrl}/payment/success?tran_id=${verifyData.tran_id}&amount=${verifyData.amount}`,
         303,
       );
+
+      // Refresh the caller's own session (if any) to reflect the payment that
+      // was just verified against SSLCommerz above. This is what actually
+      // unlocks "isPaid" — the ?payment=success query param is cosmetic only.
+      const store = await cookies();
+      const existingSession = await verifySessionToken(
+        store.get(SESSION_COOKIE)?.value,
+      );
+      if (existingSession) {
+        const refreshedToken = await createSessionToken({
+          phone: existingSession.phone,
+          userName: existingSession.userName,
+          businessName: existingSession.businessName,
+          isPaid: true,
+          meetingStatus: existingSession.meetingStatus,
+          meetingDesc: existingSession.meetingDesc,
+        });
+        redirectResponse.cookies.set(SESSION_COOKIE, refreshedToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          sameSite: "lax",
+          path: "/",
+          maxAge: 60 * 60 * 24 * 7,
+        });
+      }
+
+      return redirectResponse;
     } else {
       console.error("Payment Validation Failed (Fraud Attempt):", verifyData);
       return NextResponse.redirect(`${baseUrl}/dashboard?payment=failed`, 303);

@@ -19,7 +19,6 @@ import {
   EyeOff,
   ArrowLeft,
 } from "lucide-react";
-import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -246,7 +245,10 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     setIsLoading(true);
     setErrorMessage("");
     try {
-      const res = await fetch(`${API_BASE}/login`, {
+      // Routed through our own server so the real login check happens
+      // server-side and the session cookie it issues is httpOnly/signed —
+      // never something the client sets itself.
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -256,14 +258,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       });
       const data = await res.json();
       if (data.success) {
-        completeLogin(
-          data.userName,
-          data.businessName,
-          data.paymentStatus,
-          data.meetingStatus,
-          data.meetingDesc,
-          "/dashboard",
-        );
+        completeLogin(data.userName, "/dashboard");
       } else {
         throw new Error(data.message || "Incorrect password.");
       }
@@ -350,7 +345,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
       return setErrorMessage("Password must be 6+ characters.");
     setIsLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/user-register`, {
+      const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -359,16 +354,10 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           password: formData.password.trim(),
         }),
       });
-      if (!res.ok) throw new Error("Signup failed.");
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error("Signup failed.");
 
-      completeLogin(
-        formData.name,
-        formData.businessName,
-        "Unpaid",
-        "Pending",
-        "",
-        "/welcome",
-      );
+      completeLogin(formData.name, "/welcome");
     } catch (err) {
       setErrorMessage(
         err instanceof Error ? err.message : "Signup failed. Try again.",
@@ -380,26 +369,10 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
   const completeLogin = (
     userName: string,
-    bizName: string,
-    paymentStatus: string = "Unpaid",
-    meetingStatus: string = "Pending",
-    meetingDesc: string = "",
     redirectUrl: string = "/dashboard",
   ) => {
-    Cookies.set("is_logged_in", "true", { expires: 7 });
-    Cookies.set("user_name", userName, { expires: 7 });
-    Cookies.set("user_phone", formData.phone, { expires: 7 });
-    if (bizName) Cookies.set("business_name", bizName, { expires: 7 });
-    if (paymentStatus === "Paid") {
-      Cookies.set("payment_status", "Paid", { expires: 30 });
-    }
-    Cookies.set("meeting_status", meetingStatus, { expires: 30 });
-    if (
-      (meetingStatus === "Scheduled" || meetingStatus === "Approved") &&
-      meetingDesc
-    ) {
-      Cookies.set("meeting_desc", meetingDesc, { expires: 30 });
-    }
+    // The httpOnly session cookie was already set by the server
+    // (/api/auth/login or /api/auth/register) — nothing to store here.
     toast.success(`Welcome, ${userName}!`);
     onClose();
     setTimeout(() => {

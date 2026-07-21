@@ -1,20 +1,19 @@
-// proxy.ts
-
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { verifySessionToken, SESSION_COOKIE } from "@/lib/session";
 
-export function proxy(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith("/dashboard")) {
-    const isLoggedIn = request.cookies.get("is_logged_in")?.value;
+export async function proxy(request: NextRequest) {
+  const session = await verifySessionToken(
+    request.cookies.get(SESSION_COOKIE)?.value,
+  );
 
-    if (!isLoggedIn) {
-      return NextResponse.redirect(new URL("/", request.url));
-    }
+  if (!session) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard/:path*", "/welcome/:path*"],
 };
