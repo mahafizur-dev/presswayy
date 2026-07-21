@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/constants";
 import { Menu, X, LogOut, LayoutDashboard } from "lucide-react";
 import AuthModal from "@/components/ui/AuthModal";
-import Cookies from "js-cookie";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -30,18 +29,22 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ২. Auth Check Handler
+  // ২. Auth Check Handler — verified server-side, not read from a client cookie
   useEffect(() => {
-    const checkAuth = () => {
-      const storedName = Cookies.get("user_name");
-      if (storedName) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-      setIsMounted(true);
+    let cancelled = false;
+    fetch("/api/auth/me")
+      .then((res) => {
+        if (!cancelled) setIsLoggedIn(res.ok);
+      })
+      .catch(() => {
+        if (!cancelled) setIsLoggedIn(false);
+      })
+      .finally(() => {
+        if (!cancelled) setIsMounted(true);
+      });
+    return () => {
+      cancelled = true;
     };
-    checkAuth();
   }, []);
 
   useEffect(() => {
@@ -51,13 +54,8 @@ export default function Navbar() {
   }, []);
 
   // Logout Handler
-  const handleLogout = () => {
-    Cookies.remove("is_logged_in");
-    Cookies.remove("user_name");
-    Cookies.remove("user_phone");
-    Cookies.remove("payment_status");
-    Cookies.remove("meeting_scheduled");
-    Cookies.remove("meeting_desc");
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
 
     setIsLoggedIn(false);
     setIsMobileMenuOpen(false);

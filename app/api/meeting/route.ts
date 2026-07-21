@@ -1,16 +1,39 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { verifySessionToken, SESSION_COOKIE } from "@/lib/session";
 
 export async function POST(req: Request) {
   try {
+    const store = await cookies();
+    const session = await verifySessionToken(store.get(SESSION_COOKIE)?.value);
+
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: "Unauthorized" },
+        { status: 401 },
+      );
+    }
+
+    if (!session.isPaid) {
+      return NextResponse.json(
+        { success: false, error: "Onboarding payment is required before scheduling a meeting." },
+        { status: 403 },
+      );
+    }
+
     const body = await req.json();
-    const { phone, date, time } = body;
+    const { date, time } = body;
+
+    // The phone number is taken from the verified session, never from the
+    // request body, so a caller cannot book a meeting under someone else's number.
+    const phone = session.phone;
 
     // 1. Validate required fields
-    if (!phone || !date || !time) {
+    if (!date || !time) {
       return NextResponse.json(
         {
           success: false,
-          error: "Missing required fields (phone, date, time)",
+          error: "Missing required fields (date, time)",
         },
         { status: 400 },
       );

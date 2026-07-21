@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import Cookies from "js-cookie";
 import { INITIAL_STEPS } from "@/constants/portal";
 
 
@@ -32,10 +31,10 @@ interface PortalState {
   steps: Step[];
   openStepIndex: number | null;
 
-  initializeData: (payStatus: string | null) => void;
+  initializeData: (payStatus: string | null) => Promise<boolean>;
   toggleStep: (index: number) => void;
   handleMeetingSuccess: (desc: string) => void;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 const initialState = {
@@ -52,21 +51,24 @@ const initialState = {
 export const usePortalStore = create<PortalState>((set, get) => ({
   ...initialState,
 
-  initializeData: (payStatus) => {
-    const storedName = Cookies.get("user_name") || "Client";
-    const storedPhone = Cookies.get("user_phone") || "";
-    const alreadyPaid = Cookies.get("payment_status") === "Paid";
-    const mStatus = Cookies.get("meeting_status") || MEETING_STATUS.PENDING;
-    const storedMeetingDesc = Cookies.get("meeting_desc") || "";
-
-    let currentPaidStatus = alreadyPaid;
-
-    if (payStatus === "success") {
-      Cookies.set("payment_status", "Paid", { expires: 30 });
-      currentPaidStatus = true;
+  initializeData: async () => {
+    // Source of truth is the server-verified, httpOnly session — never a
+    // client-writable cookie. `/api/auth/me` returns 401 if there is no
+    // valid signed session.
+    const res = await fetch("/api/auth/me");
+    if (!res.ok) {
+      set(initialState);
+      return false;
     }
+    const data = await res.json();
 
-    
+    const storedName = data.userName || "Client";
+    const storedPhone = data.userPhone || "";
+    const mStatus = data.meetingStatus || MEETING_STATUS.PENDING;
+    const storedMeetingDesc = data.meetingDesc || "";
+    const currentPaidStatus = Boolean(data.isPaid);
+
+
     const updatedSteps = INITIAL_STEPS.map((step, index) => {
       // Step 0: Payment
       if (index === 0) {
@@ -127,6 +129,7 @@ export const usePortalStore = create<PortalState>((set, get) => ({
       steps: updatedSteps,
       openStepIndex: openIndex,
     });
+    return true;
   },
 
   toggleStep: (index) => {
@@ -136,9 +139,8 @@ export const usePortalStore = create<PortalState>((set, get) => ({
   },
 
   handleMeetingSuccess: (desc) => {
-    Cookies.set("meeting_status", MEETING_STATUS.SCHEDULED, { expires: 30 });
-    Cookies.set("meeting_desc", desc, { expires: 30 });
-
+    // The n8n "schedule-meeting" webhook (called by /api/meeting) is the
+    // authoritative record; this only updates local UI state for feedback.
     set((state) => {
       const updatedSteps = state.steps.map((step, index) => {
         if (index === 1) {
@@ -160,17 +162,8 @@ export const usePortalStore = create<PortalState>((set, get) => ({
     });
   },
 
-  logout: () => {
-    const cookiesToRemove = [
-      "is_logged_in",
-      "user_name",
-      "user_phone",
-      "payment_status",
-      "meeting_status",
-      "meeting_desc",
-    ];
-    cookiesToRemove.forEach((cookie) => Cookies.remove(cookie));
-
+  logout: async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
     set(initialState);
   },
 }));

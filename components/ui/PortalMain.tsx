@@ -4,7 +4,6 @@ import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-import Cookies from "js-cookie";
 
 import { usePortalStore } from "@/store/usePortalStore";
 import PaymentPanel from "@/components/portal/PaymentPanel";
@@ -42,16 +41,18 @@ function DashboardContent() {
   useEffect(() => {
     if (!isMounted) return;
 
-    // Route Guard
-    if (!Cookies.get("is_logged_in")) {
-      router.push("/");
-      return;
-    }
-
     const payStatus = searchParams.get("payment");
+    let cancelled = false;
 
-    const timeoutId = setTimeout(() => {
-      initializeData(payStatus);
+    (async () => {
+      // Route Guard — verified server-side via the httpOnly session cookie,
+      // not a client-writable one.
+      const authenticated = await initializeData(payStatus);
+      if (cancelled) return;
+      if (!authenticated) {
+        router.push("/");
+        return;
+      }
 
       const activeStepIndex = steps.findIndex(
         (step) => step.status === "active",
@@ -59,7 +60,7 @@ function DashboardContent() {
       if (activeStepIndex !== -1) {
         usePortalStore.setState({ openStepIndex: activeStepIndex });
       }
-    }, 0);
+    })();
 
     // Handle Toasts and URL Cleaning
     if (payStatus === "success") {
@@ -72,12 +73,14 @@ function DashboardContent() {
       router.replace(pathname);
     }
 
-    return () => clearTimeout(timeoutId);
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted, searchParams, pathname, initializeData]);
 
-  const onLogoutClick = () => {
-    logout();
+  const onLogoutClick = async () => {
+    await logout();
     toast.success("Logged out successfully");
     window.location.href = "/";
   };

@@ -41,6 +41,7 @@ node_modules/
 
 # vercel
 .vercel
+.claude
 
 # typescript
 *.tsbuildinfo
