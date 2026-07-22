@@ -11,6 +11,11 @@ BRANCH="main"                        # branch to deploy
 
 cd "$PROJECT_DIR"
 
+# Non-interactive SSH sessions (e.g. GitHub Actions) don't source ~/.bashrc,
+# so nvm's node/npm/pm2 never make it onto PATH unless we load it ourselves.
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
 echo "==> Pulling latest code ($BRANCH)"
 git fetch origin "$BRANCH"
 git reset --hard "origin/$BRANCH"
