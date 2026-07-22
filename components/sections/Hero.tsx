@@ -34,6 +34,15 @@ const TIMING = {
   fade: 500,
 } as const;
 
+// Faster pacing on mobile — the chat feels sluggish on small screens
+// where it's the main visual focus.
+const MOBILE_TIMING = {
+  typing: 450,
+  read: 650,
+  hold: 1500,
+  fade: 350,
+} as const;
+
 function TypingDots() {
   return (
     <span className="flex items-center gap-1.5 px-1 py-1">
@@ -50,6 +59,8 @@ export default function Hero() {
   const [chatStep, setChatStep] = useState(0);
   const [fadingOut, setFadingOut] = useState(false);
   const [inView, setInView] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const timing = isMobile ? MOBILE_TIMING : TIMING;
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -63,24 +74,34 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    // Tailwind's `lg` breakpoint (1024px) is where this component switches
+    // to the desktop background/layout.
+    const mql = window.matchMedia("(max-width: 1023px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
     if (!inView) return;
     if (chatStep >= totalSteps) {
-      const pause = setTimeout(() => setFadingOut(true), TIMING.hold);
+      const pause = setTimeout(() => setFadingOut(true), timing.hold);
       return () => clearTimeout(pause);
     }
-    const delay = chatStep % 2 === 0 ? TIMING.typing : TIMING.read;
+    const delay = chatStep % 2 === 0 ? timing.typing : timing.read;
     const t = setTimeout(() => setChatStep((s) => s + 1), delay);
     return () => clearTimeout(t);
-  }, [chatStep, totalSteps, inView]);
+  }, [chatStep, totalSteps, inView, timing]);
 
   useEffect(() => {
     if (!fadingOut) return;
     const t = setTimeout(() => {
       setChatStep(0);
       setFadingOut(false);
-    }, TIMING.fade);
+    }, timing.fade);
     return () => clearTimeout(t);
-  }, [fadingOut]);
+  }, [fadingOut, timing]);
 
   return (
     <section
