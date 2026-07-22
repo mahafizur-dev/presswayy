@@ -12,10 +12,10 @@ export default function Testimonials() {
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const testimonials = [
-    { id: "Mp-BLqapneQ", title: "People Testimonial" },
-    { id: "rhpAwRLvegQ", title: "People Testimonial" },
-    { id: "75qukJQbkHs", title: "People Testimonial" },
-    { id: "vb1KiuZuFnQ", title: "People Testimonial" },
+    { id: "Mp-BLqapneQ", title: "Perspective Testimonial" },
+    { id: "rhpAwRLvegQ", title: "Perspective Testimonial" },
+    { id: "75qukJQbkHs", title: "Perspective Testimonial" },
+    { id: "vb1KiuZuFnQ", title: "Perspective Testimonial" },
   ];
 
   return (
