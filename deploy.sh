@@ -4,8 +4,8 @@
 set -euo pipefail
 
 # --- EDIT THESE TWO TO MATCH YOUR VPS SETUP ---
-PROJECT_DIR="/var/www/presswayy"     # path to this repo on the VPS
-PM2_APP_NAME="presswayy"             # name shown in `pm2 list`
+PROJECT_DIR="/root/web/presswayy"    # path to this repo on the VPS
+PM2_APP_NAME="presswayy-web"         # name shown in `pm2 list`
 BRANCH="main"                        # branch to deploy
 # -----------------------------------------------
 
